@@ -74,27 +74,39 @@ const demo = (dir: string, file: string, label: string, tag: string, summary: st
   href: `/demos/${dir}/${file}.html`,
 })
 
-const SITE_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on the site and who it is for.'
+const SITE_SUMMARY1 = 'Voice AI answers incoming calls, responds to common questions, collects caller details, and books appointments based on calendar availability. Requests it can’t handle can be passed to a person for follow-up.'
+const SITE_SUMMARY2= 'Organizes new leads in Asana, creates follow-up tasks, and helps the team keep track of each lead’s status so inquiries are less likely to be missed.'
+const SITE_SUMMARY3 = 'Answers Messenger questions using information from the business’s documents, such as services, pricing, and policies. It can capture lead details and refer questions to a person when it can’t find a reliable answer.'
+const SITE_SUMMARY4 = 'Adds available company details to incoming leads, then routes them for follow-up based on set criteria. Leads with missing information can be flagged for review.'
+const SITE_SUMMARY5 = 'Saves email attachments to the right Google Drive folders using rules such as sender, file type, or subject, making documents easier to find.'
+const SITE_SUMMARY6 = 'Turns existing material, such as a video or transcript, into draft posts for different social platforms. A person reviews the drafts before publishing.'
+const SITE_SUMMARY7 = 'Organizes selected Xero transaction information into a format that can be used to create or update Asana tasks, helping teams coordinate related work.'
+const SITE_SUMMARY8 = 'PLACEHOLDER - Helps prepare job posts and organize candidate information against role requirements. It supports the review process; a person remains responsible for evaluating candidates and making hiring decisions.'
 const FUNNEL_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on what this funnel page does.'
 const BOOKING_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on the booking page and its audience.'
 
 export const sampleSites: Demo[] = [
-  demo('sites', 'site-1', 'Sample Site 1', 'Website', SITE_SUMMARY),
-  demo('sites', 'site-2', 'Sample Site 2', 'Website', SITE_SUMMARY),
-  demo('sites', 'site-3', 'Sample Site 3', 'Website', SITE_SUMMARY),
-  demo('sites', 'site-4', 'Sample Site 4', 'Website', SITE_SUMMARY),
+  demo('sites', 'site-1', 'AI Receptionist', 'Case Study', SITE_SUMMARY1),
+  demo('sites', 'site-2', 'Asana CRM Lead Engagement', 'Case Study', SITE_SUMMARY2),
+  demo('sites', 'site-3', 'Social Media AI Agent with RAG', 'Case Study', SITE_SUMMARY3),
+  demo('sites', 'site-4', 'Automated Lead Enrichment', 'Case Study', SITE_SUMMARY4),
+  demo('sites', 'site-5', 'Gmail Attachment Organizer', 'Case Study', SITE_SUMMARY5),
+  demo('sites', 'site-6', 'Social Media Content Repurposing', 'Case Study', SITE_SUMMARY6),
+  demo('sites', 'site-7', 'Xero Transaction Export to Asana', 'Case Study', SITE_SUMMARY7),
+  demo('sites', 'site-8', 'HR Job Posting and Candidate Review Assistant', 'Case Study', SITE_SUMMARY8),
+
 ]
 
 export const funnelPages: Demo[] = [
-  demo('funnels', 'funnel-1', 'Funnel Page 1', 'Funnel', FUNNEL_SUMMARY),
-  demo('funnels', 'funnel-2', 'Funnel Page 2', 'Funnel', FUNNEL_SUMMARY),
-  demo('funnels', 'funnel-3', 'Funnel Page 3', 'Funnel', FUNNEL_SUMMARY),
-  demo('funnels', 'funnel-4', 'Funnel Page 4', 'Funnel', FUNNEL_SUMMARY),
+  // demo('funnels', 'funnel-1', 'Funnel Page 1', 'Funnel', FUNNEL_SUMMARY),
+  // demo('funnels', 'funnel-2', 'Funnel Page 2', 'Funnel', FUNNEL_SUMMARY),
+  // demo('funnels', 'funnel-3', 'Funnel Page 3', 'Funnel', FUNNEL_SUMMARY),
+  // demo('funnels', 'funnel-4', 'Funnel Page 4', 'Funnel', FUNNEL_SUMMARY),
 ]
 
 export const bookingPages: Demo[] = [
-  demo('funnels', 'booking-1', 'Booking Page 1', 'Booking', BOOKING_SUMMARY),
-  demo('funnels', 'booking-2', 'Booking Page 2', 'Booking', BOOKING_SUMMARY),
+  // demo('funnels', 'booking-1', 'Booking Page 1', 'Booking', BOOKING_SUMMARY),
+  // demo('funnels', 'booking-2', 'Booking Page 2', 'Booking', BOOKING_SUMMARY),
 ]
 
 /* ---------- Apps and extensions ---------- */

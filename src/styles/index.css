@@ -84,12 +84,32 @@
     scrollbar-gutter: stable;
   }
 
-  body {
-    min-height: 100dvh;
-    background: var(--bg);
-    font-size: 1rem;
-    line-height: 1.6;
-  }
+body {
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+  background: var(--bg);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  z-index: -1;
+  inset: -14px;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--bg) 84%, transparent),
+      color-mix(in srgb, var(--bg) 84%, transparent)
+    ),
+    url('/images/nature-bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(1px);
+}
 
   h1, h2, h3, h4 {
     color: var(--ink);

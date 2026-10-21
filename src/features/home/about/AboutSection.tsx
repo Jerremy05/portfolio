@@ -101,11 +101,12 @@ export function AboutSection() {
         </ul>
       </div>
 
-      <div className="ab__creds">
+      {/* <div className="ab__creds">
         {credentials.map((c) => (
           <Credential key={c.id} c={c} />
         ))}
-      </div>
+      </div> */}
+
     </section>
   )
 }

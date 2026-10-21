@@ -5,13 +5,13 @@
 export const contactPage = {
   eyebrow: 'Contact',
   titleThin: 'Tell me what',
-  titleBold: 'you need built.',
-  lede: 'Read the answers first. If your question is still open, write and I will reply with a plan or a straight no.',
+  titleBold: 'you want to improve.',
+  lede: 'Thinking about automating a task or improving your lead follow-up? Tell me what you’re trying to solve, and I’ll reply with a practical next step.',
   faqEyebrow: 'FAQs',
   faqTitle: 'Quick answers',
-  faqSub: 'Still have one? Write below.',
-  cardTitle: 'Send me a message',
-  cardBody: 'What do you need? What are you using today? Two or three lines is enough.',
+  faqSub: 'Still have a question? Write below.',
+  cardTitle: 'Let’s talk about your project',
+  cardBody: 'Share the task you want to improve, the tools you use, and what a good result would look like. A few sentences is enough.',
 }
 
 /** The form. Until a backend is wired, Send opens the visitor's own mail app with the message laid out. */

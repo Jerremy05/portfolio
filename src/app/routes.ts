@@ -67,7 +67,7 @@ export const pages: PageRoute[] = [
     id: 'work',
     draft: true,
     path: '/work',
-    label: 'Work',
+    label: 'Projects',
     title: `Work | ${SUFFIX}`,
     description: 'PLACEHOLDER - tell me what to put here: one line on the kinds of work you show.',
     icon: Briefcase,
@@ -99,17 +99,17 @@ export const pages: PageRoute[] = [
     group: 'menu',
     section: 'about',
   },
-  {
-    kind: 'page',
-    id: 'proof',
-    path: '/proof',
-    label: 'Proof',
-    title: `Proof | ${SUFFIX}`,
-    description: 'PLACEHOLDER - tell me what to put here: one line on the clients, testimonials and feedback this page shows.',
-    icon: SealCheck,
-    group: 'discover',
-    section: 'proof',
-  },
+  // {
+  //   kind: 'page',
+  //   id: 'proof',
+  //   path: '/proof',
+  //   label: 'Proof',
+  //   title: `Proof | ${SUFFIX}`,
+  //   description: 'PLACEHOLDER - tell me what to put here: one line on the clients, testimonials and feedback this page shows.',
+  //   icon: SealCheck,
+  //   group: 'discover',
+  //   section: 'proof',
+  // },
   {
     kind: 'page',
     id: 'showcase',
@@ -165,10 +165,21 @@ export const externals: ExternalRoute[] = [
 ]
 
 /** Sidebar entries per group, in registry order (pages first, then external links). */
-export function navEntries(group: NavGroupId): NavEntry[] {
-  return [...pages.filter((p) => p.group === group), ...externals.filter((e) => e.group === group)]
-}
 
+/** enable this to show in sidebar
+export function navEntries(group: NavGroupId): NavEntry[] {
+  return [
+    ...pages.filter((p) => p.group === group && !p.hidden),
+    ...externals.filter((e) => e.group === group && !e.hidden),
+  ]
+} */
+
+export function navEntries(group: NavGroupId): NavEntry[] {
+  return [
+    ...pages.filter((p) => p.group === group && p.id !== 'proof'),
+    ...externals.filter((e) => e.group === group && e.id !== 'resource'),
+  ]
+}
 /** Where a nav entry goes: its Home section when it has one, else its page. */
 export function navTarget(page: PageRoute): string {
   return page.section ? `/#${page.section}` : page.path

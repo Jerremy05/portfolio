@@ -67,11 +67,12 @@
   padding: 0;
   list-style: none;
 }
-.wb__cell[data-area='websites'] { grid-area: web; }
+/* .wb__cell[data-area='websites'] { grid-area: web; } */
 .wb__cell[data-area='apps'] { grid-area: app; }
 .wb__cell[data-area='featured'] { grid-area: tic; }
 .wb__cell[data-area='screens'] { grid-area: aut; }
-.wb__cell[data-area='case-studies'] { grid-area: fw; }
+/* .wb__cell[data-area='case-studies'] { grid-area: fw; } */
+.wb__cell[data-area='case-studies'] { grid-area: web; }
 .wb__cell[data-area='process'] { grid-area: bp; }
 .wb__cell[data-area='side-projects'] { grid-area: ai; }
 .wb__cell[data-area='experiments'] { grid-area: bot; }

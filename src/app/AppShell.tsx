@@ -3,7 +3,7 @@ import { Outlet, ScrollRestoration } from 'react-router'
 import { Sidebar } from '@/components/sidebar/Sidebar'
 import { MobileNav } from '@/components/drawer/MobileNav'
 import { SearchPalette } from '@/components/search/SearchPalette'
-import { SignalFlowBackground } from '@/components/background/SignalFlowBackground'
+// import { SignalFlowBackground } from '@/components/background/SignalFlowBackground'
 import { SiteFooter } from '@/components/page/SiteFooter'
 import { DESKTOP_QUERY, useMediaQuery } from '@/hooks/use-media-query'
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll'
@@ -41,7 +41,7 @@ function Shell() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SignalFlowBackground layout={!isDesktop ? 'full-width' : collapsed ? 'sidebar-collapsed' : 'sidebar-expanded'} />
+      {/* <SignalFlowBackground layout={!isDesktop ? 'full-width' : collapsed ? 'sidebar-collapsed' : 'sidebar-expanded'} /> */}
       {/* Render one navigation, not both, so screen readers meet a single "Main" nav. */}
       {isDesktop ? <Sidebar /> : <MobileNav />}
       <main id="main" className="app-main" tabIndex={-1}>

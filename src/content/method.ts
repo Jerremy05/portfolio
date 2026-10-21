@@ -2,12 +2,24 @@ import type { MethodStep } from './schema'
 
 /** Your method: the three jobs your service does for a client, in order. It names the steps of the Home automation diagram. */
 export const method = {
-  eyebrow: 'Your Method',
-  title: 'Attract. Nurture. Convert.',
-  summary: 'PLACEHOLDER - tell me what to put here: one line on the three jobs your work does for a client, in order.',
+  eyebrow: 'Voice AI Appointment Setter',
+  title: 'Talk. Schedule. Manage.',
+  summary: 'A voice agent speaks with callers, checks Google Calendar, and helps book, reschedule, or cancel appointments.',
   steps: [
-    { name: 'Attract', body: 'PLACEHOLDER - tell me what to put here: one short line on step one.', inputs: ['Input A', 'Input B', 'Input C', 'Input D'] },
-    { name: 'Nurture', body: 'PLACEHOLDER - tell me what to put here: one short line on step two.', inputs: ['Input A', 'Input B', 'Input C'] },
-    { name: 'Convert', body: 'PLACEHOLDER - tell me what to put here: one short line on step three.', inputs: ['Input A', 'Input B', 'Input C'] },
+    {
+      name: 'Talk',
+      body: 'Voice AI speaks with the caller, identifies their appointment request, and collects the details needed.',
+      inputs: ['Incoming call', 'Caller intent', 'Contact details', 'Appointment request'],
+    },
+    {
+      name: 'Schedule',
+      body: 'n8n checks Google Calendar for available times or locates the caller’s existing appointment.',
+      inputs: ['Google Calendar', 'Available times', 'Existing appointment'],
+    },
+    {
+      name: 'Manage',
+      body: 'The workflow books, reschedules, or cancels the appointment, then confirms the result by voice.',
+      inputs: ['Book', 'Reschedule', 'Cancel'],
+    },
   ] satisfies MethodStep[],
 }

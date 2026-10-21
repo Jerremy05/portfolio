@@ -12,83 +12,90 @@ export type LegalDoc = {
 /** What this site actually stores and loads. Keep in sync with src/lib/storage.ts and src/lib/analytics.ts. */
 export const privacyPolicy: LegalDoc = {
   title: 'Privacy Policy',
-  updated: 'January 1, 2026',
-  intro: `This policy covers ${site.url.replace('https://', '')}, the portfolio of ${site.name} trading as ${site.brand}. PLACEHOLDER - tell me what to put here: one line saying this page is a template and not legal advice, and that you have had it checked for where you operate.`,
+  updated: 'October 20, 2026',
+  intro: `This policy covers ${site.url.replace('https://', '')}, the portfolio of ${site.name} trading as ${site.brand}. This is a general template, not legal advice. It has not been reviewed by a lawyer; please have it checked for the laws that apply where you operate.`,
   sections: [
     {
       heading: 'What this site collects',
       paragraphs: [
-        'PLACEHOLDER - tell me what to put here: what the site collects about visitors (the contact form only opens the visitor\'s own mail app and sends nothing to this site, unless you add a backend).',
-        'PLACEHOLDER - tell me what to put here: what happens to an email a visitor sends you, how long you keep it and how they can ask you to delete it.',
+        'The contact link opens your own email app. It does not submit information to this website. If you choose to send an email, I receive the information in your message, such as your name, email address, and details about your inquiry.',
+        'I use your email to respond and discuss your inquiry. I keep it only as long as needed for that purpose or to meet legal obligations. To ask what information I hold or request its deletion, contact me at the email address below. Copies may remain in my email provider’s systems or backups according to that provider’s retention practices.',
       ],
     },
     {
       heading: 'What your browser stores',
       paragraphs: [
-        'PLACEHOLDER - tell me what to put here: what this site stores in the visitor\'s browser (the theme choice and whether the sidebar is collapsed, in localStorage, nothing else unless you add analytics).',
+        'This site stores your theme preference and whether the sidebar is collapsed in your browser’s local storage. These settings stay on your device and are not sent to me. They remain until you clear this site’s stored data in your browser.',
       ],
     },
     {
       heading: 'Analytics',
       paragraphs: [
-        'PLACEHOLDER - tell me what to put here: whether analytics runs, which provider, and that it only loads after the visitor agrees (the consent notice is built in).',
+        'If analytics is enabled, it loads only after you agree through the site’s consent notice. The analytics provider is [name of provider]. If analytics is not enabled, this site does not load an analytics service. You can decline analytics in the consent notice.',
       ],
     },
     {
       heading: 'Hosting',
       paragraphs: [
-        'PLACEHOLDER - tell me what to put here: where the site is hosted and what the host logs (usually IP address, page requested and time).',
+        'This website is hosted by [name of hosting provider]. To deliver and secure the site, the hosting provider may process technical information such as your IP address, the page requested, the time of the request, and browser or device details. The provider’s own privacy policy explains its handling and retention of hosting logs.',
       ],
     },
     {
       heading: 'Your rights',
       paragraphs: [
-        `PLACEHOLDER - tell me what to put here: how a visitor asks what you hold about them or asks you to delete it, and the rights that apply where you operate. Contact: ${site.email}.`,
+        `You may contact me at ${site.email} to ask about your personal information or, where applicable, request access, correction, deletion or blocking, object to processing, or request a copy of your information. I may need to verify your identity before responding. These rights are subject to applicable laws and exceptions. You may also lodge a complaint with the National Privacy Commission of the Philippines.`,
       ],
     },
     {
       heading: 'Changes',
-      paragraphs: ['PLACEHOLDER - tell me what to put here: how you announce a change to this policy (for example, the date at the top changes).'],
+      paragraphs: [
+        'If this policy changes, I will post the revised version on this page and update the date at the top.',
+      ],
     },
   ],
 }
 
 export const termsOfService: LegalDoc = {
   title: 'Terms of Service',
-  updated: 'January 1, 2026',
-  intro: `These terms cover your use of this portfolio site, run by ${site.name} trading as ${site.brand}. PLACEHOLDER - tell me what to put here: one line saying this page is a template and not legal advice, and that you have had it checked for where you operate.`,
+  updated: 'October 20, 2026',
+  intro: `These terms cover your use of this portfolio site, run by ${site.name} trading as ${site.brand}. This is a general template, not legal advice. It has not been reviewed by a lawyer; please have it checked for the laws that apply where you operate.`,
   sections: [
     {
       heading: 'Using this site',
       paragraphs: [
-        'PLACEHOLDER - tell me what to put here: what visitors may do on the site, and a note that the sample pages and demos use made-up names and details.',
+        'You may browse this site, learn about my services, view the project examples, and contact me about potential work. You may share links to the site, but you may not copy, republish, sell, or present its content or project materials as your own without permission, except where allowed by law. Names, companies, messages, and other details shown in sample pages or demos are fictional or made up for demonstration purposes.',
       ],
     },
     {
       heading: 'Working together',
       paragraphs: [
-        'PLACEHOLDER - tell me what to put here: that nothing on the site is a binding offer and how client work starts (a call, a written proposal, a signed agreement).',
+        'Information on this site is for general information and does not constitute a binding offer to provide services. A conversation or call does not by itself create a client engagement. Work begins only after we agree in writing on the scope, deliverables, fees, timing, and other applicable terms in a proposal or service agreement.',
       ],
     },
     {
       heading: 'Intellectual property',
       paragraphs: [
-        'PLACEHOLDER - tell me what to put here: who owns the site design, copy and your own work, how third-party logos are used, and how client work is shown.',
+        'Unless otherwise stated, the original text, graphics, and project materials on this site are owned by me or used with permission. The site may also include templates, software, fonts, images, or other materials owned by third parties and used under their applicable licenses. Third-party names and logos are used only to identify the relevant products or services; they remain the property of their respective owners and do not imply endorsement.',
+        'Ownership and permitted use of work created for a client will be set out in the applicable written agreement. I will display or describe client work in this portfolio only with the client’s permission and subject to that agreement.',
       ],
     },
     {
       heading: 'No warranties',
       paragraphs: [
-        'PLACEHOLDER - tell me what to put here: that the site is provided as is, and what you do and do not promise about accuracy and availability.',
+        'This site and its sample projects are provided for general information and demonstration purposes. I do not guarantee that the site or its content will always be available, error-free, complete, or up to date. Software, integrations, and platform features may change. Demo workflows are not production-ready services, and examples do not guarantee particular business results. Any warranties or rights that cannot legally be excluded remain unaffected.',
       ],
     },
     {
       heading: 'External links',
-      paragraphs: ['PLACEHOLDER - tell me what to put here: that links to other sites are for convenience and what you take no responsibility for.'],
+      paragraphs: [
+        'This site may link to third-party websites or services for convenience. I do not control those sites and am not responsible for their content, availability, or practices. Your use of them is subject to their own terms and policies.',
+      ],
     },
     {
       heading: 'Governing law',
-      paragraphs: ['PLACEHOLDER - tell me what to put here: which country or state\'s law governs these terms.'],
+      paragraphs: [
+        'These terms are governed by the laws of the Philippines, subject to any mandatory legal protections that apply to you. Disputes will be handled by the courts with proper jurisdiction.',
+      ],
     },
     {
       heading: 'Contact',

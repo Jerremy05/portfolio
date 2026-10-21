@@ -25,7 +25,8 @@
   overflow: hidden auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
-  background: var(--surface);
+background: var(--surface);
+  box-shadow: var(--shadow-float);
   border-radius: var(--radius-xl);
   color: var(--ink);
 }

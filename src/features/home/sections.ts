@@ -6,7 +6,7 @@ import { ManifestoSection } from './manifesto/ManifestoSection'
 import { ServicesSection } from './services/ServicesSection'
 import { WorkSection } from './work/WorkSection'
 import { ShowcaseSection } from '@/features/showcase/ShowcasePage'
-import { ProofSection } from '@/features/proof/ProofPage'
+// import { ProofSection } from '@/features/proof/ProofPage'
 import { ContactSection } from '@/features/contact/ContactPage'
 
 /**
@@ -24,7 +24,7 @@ export const homeSectionList: HomeSection[] = [
   { id: 'services', Component: ServicesSection },
   { id: 'about', Component: AboutSection },
   // Proof, Showcase and Contact keep their own pages too (/proof, /showcase, /contact); here they run as sections.
-  { id: 'proof', Component: ProofSection },
+  // { id: 'proof', Component: ProofSection },
   { id: 'showcase', Component: ShowcaseSection },
   // Contact is the last section, after Showcase. /contact stays a page too.
   { id: 'contact', Component: ContactSection },

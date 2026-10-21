@@ -23,7 +23,9 @@ export function WorkSection() {
         </h2>
       </header>
       <ul className="wb__grid">
+      {/* <ul className="wb__grid wb__grid--case-studies-only"> */}
         {workChapters.map((chapter) => {
+        {/* {workChapters.filter((chapter) => chapter.id === 'case-studies').map((chapter) => { */}
           const pic = chapterPicture(chapter)
           return (
             <li key={chapter.id} className="wb__cell" data-area={chapter.id}>

@@ -9,14 +9,14 @@ import { tools } from './tools'
 export const aboutSection = {
   eyebrow: 'About',
   titleThin: "Hi, I'm",
-  titleBold: `${site.name}.`,
-  lede: 'PLACEHOLDER - tell me what to put here: one sentence on what you do and for whom.',
-  lead: 'PLACEHOLDER - tell me what to put here: your background.',
-  leadQuiet: 'PLACEHOLDER - tell me what to put here: what you do now.',
+  titleBold: `Jerremy.`,
+  lede: 'I build AI workflows that help businesses manage leads, appointments, and repetitive tasks.',
+  lead: 'I look for gaps in everyday workflows,',
+  leadQuiet: 'then build and test automations to make those processes more reliable.',
   note: {
-    company: `${site.brand} is my company`,
-    product: { label: 'Your Product', href: externalLinks.showcase },
-    rest: 'PLACEHOLDER - tell me what to put here: one sentence on how the product relates to your company, or delete this note.',
+    company: `I’m building hands-on projects in AI automation`,
+    product: { label: 'my project showcase', href: externalLinks.showcase },
+    rest: 'features demos of AI agents, connected workflows, and appointment booking.',
   },
   picture: {
     src: '/images/profile/desk.webp',
@@ -28,10 +28,10 @@ export const aboutSection = {
 }
 
 export const capabilities: { title: string; tools: ToolMark[] }[] = [
-  { title: 'Role One', tools: [tools.toolA, tools.toolB, tools.toolC] },
-  { title: 'Role Two', tools: [tools.toolD, tools.toolE, tools.toolF, tools.toolG, tools.toolH] },
-  { title: 'Role Three', tools: [tools.toolD, tools.toolI, tools.toolJ, tools.toolK, tools.toolL] },
-  { title: 'Role Four', tools: [tools.toolF, tools.toolG, tools.toolH] },
+  { title: 'Voice AI & Appointment Scheduling', tools: [tools.toolA, tools.toolB, tools.toolC] },
+  { title: 'AI Agents & Knowledge Bases', tools: [tools.toolB, tools.toolD, tools.toolR, tools.toolF, tools.toolT] },
+  { title: 'Lead Enrichment & CRM Automation', tools: [tools.toolG, tools.toolH, tools.toolI, tools.toolL] },
+  { title: 'Business App Integrations', tools: [tools.toolF, tools.toolI, tools.toolJ, tools.toolK] },
 ]
 
 export type AboutCredential = {

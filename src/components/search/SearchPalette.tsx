@@ -6,7 +6,10 @@ import { externals, navTarget, pages, type NavEntry } from '@/app/routes'
 import { scrollToSection } from '@/lib/motion/smooth-scroll'
 import './search.css'
 
-const ENTRIES: NavEntry[] = [...pages, ...externals]
+const ENTRIES: NavEntry[] = [
+  ...pages.filter((page) => !page.hidden),
+  ...externals.filter((entry) => !entry.hidden),
+]
 
 function matches(entry: NavEntry, query: string): boolean {
   const haystack = `${entry.label} ${entry.description}`.toLowerCase()
