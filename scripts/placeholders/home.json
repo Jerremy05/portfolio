@@ -26,6 +26,29 @@
   {"path": "images/covers/480/site-4.webp", "width": 480, "height": 300, "kind": "resize", "from": "images/covers/site-4.webp"},
   {"path": "images/covers/640/site-4.webp", "width": 640, "height": 400, "kind": "resize", "from": "images/covers/site-4.webp"},
   {"path": "images/covers/960/site-4.webp", "width": 960, "height": 600, "kind": "resize", "from": "images/covers/site-4.webp"},
+  
+
+  {"path": "images/covers/site-4.webp", "width": 1800, "height": 1125, "kind": "capture", "from": "demos/sites/site-5.html"},
+  {"path": "images/covers/480/site-4.webp", "width": 480, "height": 300, "kind": "resize", "from": "images/covers/site-5.webp"},
+  {"path": "images/covers/640/site-4.webp", "width": 640, "height": 400, "kind": "resize", "from": "images/covers/site-5.webp"},
+  {"path": "images/covers/960/site-4.webp", "width": 960, "height": 600, "kind": "resize", "from": "images/covers/site-5.webp"},
+
+  {"path": "images/covers/site-4.webp", "width": 1800, "height": 1125, "kind": "capture", "from": "demos/sites/site-6.html"},
+  {"path": "images/covers/480/site-4.webp", "width": 480, "height": 300, "kind": "resize", "from": "images/covers/site-6.webp"},
+  {"path": "images/covers/640/site-4.webp", "width": 640, "height": 400, "kind": "resize", "from": "images/covers/site-6.webp"},
+  {"path": "images/covers/960/site-4.webp", "width": 960, "height": 600, "kind": "resize", "from": "images/covers/site-6.webp"},
+
+  {"path": "images/covers/site-4.webp", "width": 1800, "height": 1125, "kind": "capture", "from": "demos/sites/site-7.html"},
+  {"path": "images/covers/480/site-4.webp", "width": 480, "height": 300, "kind": "resize", "from": "images/covers/site-7.webp"},
+  {"path": "images/covers/640/site-4.webp", "width": 640, "height": 400, "kind": "resize", "from": "images/covers/site-7.webp"},
+  {"path": "images/covers/960/site-4.webp", "width": 960, "height": 600, "kind": "resize", "from": "images/covers/site-7.webp"},
+
+  {"path": "images/covers/site-4.webp", "width": 1800, "height": 1125, "kind": "capture", "from": "demos/sites/site-8.html"},
+  {"path": "images/covers/480/site-4.webp", "width": 480, "height": 300, "kind": "resize", "from": "images/covers/site-8.webp"},
+  {"path": "images/covers/640/site-4.webp", "width": 640, "height": 400, "kind": "resize", "from": "images/covers/site-8.webp"},
+  {"path": "images/covers/960/site-4.webp", "width": 960, "height": 600, "kind": "resize", "from": "images/covers/site-8.webp"},
+
+  
   {"path": "images/covers/funnel-1.webp", "width": 1800, "height": 1125, "kind": "capture", "from": "demos/funnels/funnel-1.html"},
   {"path": "images/covers/480/funnel-1.webp", "width": 480, "height": 300, "kind": "resize", "from": "images/covers/funnel-1.webp"},
   {"path": "images/covers/640/funnel-1.webp", "width": 640, "height": 400, "kind": "resize", "from": "images/covers/funnel-1.webp"},

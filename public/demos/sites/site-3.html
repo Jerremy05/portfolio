@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Social Media AI Agent with RAG (Retrieval-Augmented Generation) | Case Study</title>
+    <title>Social Media AI Assistant | Automation Project</title>
+
     <style>
       :root {
         --bg: #f0f3e8;
@@ -18,6 +19,7 @@
         --line: rgb(58 59 57 / 0.12);
         --line-strong: rgb(58 59 57 / 0.2);
         --shadow: 0 18px 40px -26px rgb(35 53 42 / 0.25);
+        --sidebar-width: 240px;
         --radius-md: 12px;
         --radius-lg: 18px;
         --radius-xl: 24px;
@@ -43,6 +45,88 @@
       a {
         color: inherit;
         text-decoration: none;
+      }
+
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        display: flex;
+        width: var(--sidebar-width);
+        flex-direction: column;
+        padding: 24px 20px;
+        border-right: 1px solid var(--line);
+        background: var(--surface-2);
+      }
+
+      .identity {
+        display: grid;
+        gap: 3px;
+        padding: 0 8px 20px;
+        border-bottom: 1px solid var(--line-strong);
+      }
+
+      .identity-mark {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        margin-bottom: 9px;
+        place-items: center;
+        border-radius: 14px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .identity strong {
+        font-size: 15px;
+      }
+
+      .identity span,
+      .sidebar-bottom {
+        color: var(--ink-3);
+        font-size: 13px;
+      }
+
+      .nav-label,
+      .eyebrow {
+        color: var(--ink-3);
+        font-family: ui-monospace, Menlo, Consolas, monospace;
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .nav-label {
+        margin: 22px 8px 9px;
+      }
+
+      .nav-links {
+        display: grid;
+        gap: 5px;
+      }
+
+      .nav-links a {
+        padding: 9px 11px;
+        border-radius: var(--radius-md);
+        color: var(--ink-2);
+        font-size: 14px;
+      }
+
+      .nav-links a:hover,
+      .nav-links a[aria-current="page"] {
+        background: var(--accent-soft);
+        color: var(--accent-deep);
+      }
+
+      .sidebar-bottom {
+        display: grid;
+        gap: 8px;
+        margin-top: auto;
+      }
+
+      .sidebar-bottom a {
+        color: var(--accent-deep);
+        font-weight: 650;
       }
 
       main {
@@ -72,16 +156,8 @@
         margin-bottom: 26px;
       }
 
-      .eyebrow {
-        color: var(--ink-3);
-        font-family: ui-monospace, Menlo, Consolas, monospace;
-        font-size: 11px;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-      }
-
       h1 {
-        max-width: 40ch;
+        max-width: 18ch;
         margin-top: 8px;
         font-size: clamp(34px, 5vw, 58px);
         line-height: 1.04;
@@ -120,12 +196,7 @@
         box-shadow: var(--shadow);
       }
 
-      .calculator,
-      .workflow,
-      .process,
-      .outcome,
-      .tools,
-      .evidence {
+      .calculator {
         margin-bottom: 20px;
       }
 
@@ -168,13 +239,9 @@
         background: var(--surface-2);
       }
 
-      .result-label,
-      .result-note {
+      .result-label {
         display: block;
         color: var(--ink-3);
-      }
-
-      .result-label {
         font-size: 13px;
       }
 
@@ -187,7 +254,9 @@
       }
 
       .result-note {
+        display: block;
         margin-top: 2px;
+        color: var(--ink-3);
         font-size: 12px;
       }
 
@@ -236,6 +305,10 @@
         margin-top: 8px;
       }
 
+      .workflow {
+        margin-bottom: 20px;
+      }
+
       .workflow-placeholder {
         display: grid;
         min-height: 260px;
@@ -254,17 +327,14 @@
       }
 
       .workflow-placeholder span {
-        max-width: 44ch;
-        padding: 10px 14px;
-        border-radius: var(--radius-md);
+        max-width: 35ch;
+        padding: 9px 13px;
+        border-radius: 999px;
         background: var(--surface);
         box-shadow: 0 0 0 1px var(--line);
         font-size: 13px;
       }
 
-      /* Replace this placeholder with a screenshot when ready:
-         <img class="workflow-image" src="your-workflow-screenshot.png"
-              alt="Messenger question answered using retrieved business document information" /> */
       .workflow-image {
         display: block;
         width: 100%;
@@ -291,6 +361,13 @@
       .outcome p,
       .evidence p {
         color: var(--ink-2);
+      }
+
+      .process,
+      .outcome,
+      .tools,
+      .evidence {
+        margin-bottom: 20px;
       }
 
       .steps {
@@ -346,8 +423,8 @@
       }
 
       .tool {
-        border: 0;
         background: var(--accent-soft);
+        border: 0;
         color: var(--accent-deep);
         font-weight: 650;
       }
@@ -373,12 +450,12 @@
       .conversation {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
       }
 
       .message {
         width: fit-content;
-        max-width: 72%;
+        max-width: 70%;
         align-self: flex-start;
         padding: 10px 12px;
         border-radius: 14px;
@@ -391,20 +468,6 @@
         align-self: flex-end;
         background: var(--accent);
         color: #fff;
-      }
-
-      .doc-note {
-        margin-top: 14px;
-        padding: 12px 14px;
-        border-left: 3px solid var(--accent);
-        border-radius: 0 var(--radius-md) var(--radius-md) 0;
-        background: var(--surface);
-        color: var(--ink-2);
-        font-size: 13px;
-      }
-
-      .doc-note strong {
-        color: var(--ink);
       }
 
       .test-list {
@@ -445,8 +508,61 @@
         font-size: 13px;
       }
 
-      @media (max-width: 700px) {
+      @media (max-width: 900px) {
+        :root {
+          --sidebar-width: 205px;
+        }
+
         main {
+          padding-right: 26px;
+          padding-left: 26px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .sidebar {
+          position: static;
+          width: auto;
+          padding: 16px 18px;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .identity {
+          grid-template-columns: 40px 1fr;
+          align-items: center;
+          padding: 0 0 12px;
+          border-bottom: 0;
+        }
+
+        .identity-mark {
+          grid-row: span 2;
+          width: 36px;
+          height: 36px;
+          margin: 0;
+          border-radius: 12px;
+        }
+
+        .nav-label,
+        .sidebar-bottom {
+          display: none;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 4px;
+          overflow-x: auto;
+        }
+
+        .nav-links a {
+          flex: 0 0 auto;
+          padding: 8px 10px;
+          font-size: 13px;
+        }
+
+        main {
+          width: 100%;
+          margin-left: 0;
           padding: 22px 18px 36px;
         }
 
@@ -461,33 +577,29 @@
         .evidence-grid {
           grid-template-columns: 1fr;
         }
-
-        .message {
-          max-width: 88%;
-        }
       }
     </style>
   </head>
 
   <body>
     <main>
-      <a class="back-link" href="/work">← Back to projects</a>
+      <a class="back-link" href="/work/case-studies">← Back to projects</a>
 
       <header class="page-heading">
-        <p class="eyebrow">Case study · Demo</p>
-        <h1>Social Media AI Agent with RAG (Retrieval-Augmented Generation)</h1>
+        <p class="eyebrow">Automation project · Demo</p>
+        <h1>Social Media AI Assistant</h1>
         <p class="subtitle">
-          Answers Messenger questions using information from the business’s documents, such as
-          services, pricing, and policies. It can capture lead details and refer questions to a
-          person when it can’t find a reliable answer.
+          Responds to incoming social media messages using information from a connected
+          knowledge source. It filters incoming requests, retrieves relevant documents,
+          and uses an AI agent to prepare a helpful response, with conversation memory
+          to support follow-up messages.
         </p>
+
         <div class="tags">
-          <span class="tag">Facebook Messenger</span>
           <span class="tag">n8n</span>
-          <span class="tag">Supabase Vector Store</span>
-          <span class="tag">Ollama</span>
-          <span class="tag">Demo workflow</span>
-          <span class="tag">Open router</span>
+          <span class="tag">OpenRouter</span>
+          <span class="tag">Google Docs</span>
+          <span class="tag">Javascript</span>
         </div>
       </header>
 
@@ -495,7 +607,7 @@
         <div class="calculator-heading">
           <div>
             <p class="eyebrow">Illustrative monthly savings</p>
-            <h2 id="calculator-title">Estimate time returned from routine messages</h2>
+            <h2 id="calculator-title">Estimate time returned to the team</h2>
           </div>
           <span class="estimate-badge">Estimate · not measured results</span>
         </div>
@@ -503,37 +615,41 @@
         <div class="results" aria-live="polite">
           <div class="result">
             <span class="result-label">Estimated staff time returned</span>
-            <strong class="result-value" id="hours-result">6 hours</strong>
+            <strong class="result-value" id="hours-result">10 hours</strong>
             <span class="result-note">per month</span>
           </div>
+
           <div class="result">
             <span class="result-label">Potential labor value</span>
-            <strong class="result-value" id="value-result">$90</strong>
+            <strong class="result-value" id="value-result">$150</strong>
             <span class="result-note">per month, based on the hourly rate entered</span>
           </div>
         </div>
 
         <div class="inputs">
           <div class="input-group">
-            <label for="messages">Messages handled by the agent per month</label>
-            <input id="messages" type="number" min="0" step="10" value="120" />
+            <label for="calls">Messages handled by the assistant per month</label>
+            <input id="calls" type="number" min="0" step="10" value="120" />
           </div>
+
           <div class="input-group">
             <label for="minutes">Staff minutes avoided per handled message</label>
-            <input id="minutes" type="number" min="0" step="1" value="3" />
+            <input id="minutes" type="number" min="0" step="1" value="5" />
           </div>
+
           <div class="input-group">
             <label for="hourly-rate">Staff hourly rate (USD)</label>
             <input id="hourly-rate" type="number" min="0" step="1" value="15" />
           </div>
         </div>
 
-        <p class="formula" id="formula">120 messages × 3 minutes ÷ 60 × $15/hour</p>
+        <p class="formula" id="formula">
+          120 messages × 5 minutes ÷ 60 × $15/hour
+        </p>
         <p class="disclaimer">
-          Illustrative estimate only. It assumes the agent handles the messages entered and that
-          each one replaces the staff time entered. Actual results depend on message volume,
-          retrieval quality, the documents provided, and how often staff need to step in. Labor
-          value is not a guaranteed cash saving.
+          Illustrative estimate only. Actual time and labor value depend on message
+          volume, how many requests the assistant handles, and the business’s staffing
+          costs. Labor value is not a guaranteed cash saving.
         </p>
       </section>
 
@@ -541,25 +657,22 @@
         <p class="eyebrow">Stack</p>
         <h2 class="section-heading">Tools used</h2>
         <div class="tool-list">
-          <span class="tool">Facebook Messenger</span>
           <span class="tool">n8n</span>
-          <span class="tool">Supabase Vector Store</span>
-          <span class="tool">Ollama Chat Model</span>
-          <span class="tool">Ollama Embeddings</span>
-          <span class="tool">Google Drive</span>
-          <span class="tool">Open router</span>
+          <span class="tool">OpenRouter</span>
+          <span class="tool">Google Docs</span>
+          <span class="tool">Simple Memory</span>
+          <span class="tool">Javascript</span>
         </div>
       </section>
 
       <section class="panel workflow">
         <p class="eyebrow">Workflow overview</p>
-        <h2 class="section-heading">See how a Messenger question gets an informed response</h2>
-        <!-- Replace this placeholder with your workflow screenshot when ready. -->
+        <h2 class="section-heading">See how incoming messages get a response</h2>
+
         <div class="workflow-placeholder">
           <span>
             Add your workflow screenshot here<br />
-            Suggested: business documents → embeddings and Supabase index → Messenger question →
-            relevant passages → answer or human handoff
+            Suggested: message → filter → retrieve document → AI response
           </span>
         </div>
       </section>
@@ -569,9 +682,9 @@
           <p class="eyebrow">Context</p>
           <h2>The challenge</h2>
           <p>
-            Customers often ask the same questions about services, prices, and policies through
-            Messenger. Finding the right answer across business documents takes staff time, and
-            inconsistent or outdated information can make replies harder to manage.
+            Social media questions can arrive at any time, and answering repeated
+            inquiries manually can take staff away from other work. Responses can also
+            vary when useful business information is spread across different documents.
           </p>
         </section>
 
@@ -579,10 +692,10 @@
           <p class="eyebrow">Approach</p>
           <h2>The solution</h2>
           <p>
-            The demo retrieves relevant passages from indexed business documents and gives them
-            to the AI agent as context for its reply. It can collect a customer’s details and
-            route a question to a person when the available information does not support a
-            reliable answer.
+            The workflow filters incoming requests, retrieves relevant information from
+            a connected knowledge source, and gives it to an AI agent to prepare a
+            helpful response. Conversation memory helps the assistant follow the thread
+            of a continuing conversation.
           </p>
         </section>
       </div>
@@ -595,89 +708,90 @@
           <article class="step">
             <div class="step-number">1</div>
             <div>
-              <h3>Prepare business documents</h3>
-              <p>Service details, pricing, and policies are added as the agent’s knowledge sources.</p>
+              <h3>Receive a message</h3>
+              <p>
+                A social media message reaches the workflow through its webhook.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">2</div>
             <div>
-              <h3>Index the information</h3>
-              <p>Documents are split into searchable sections and stored with their embeddings in Supabase.</p>
+              <h3>Filter the request</h3>
+              <p>
+                The workflow checks the incoming request and continues along the
+                appropriate path.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">3</div>
             <div>
-              <h3>Retrieve relevant passages</h3>
-              <p>When a Messenger question arrives, the workflow searches for document sections related to it.</p>
+              <h3>Retrieve helpful information</h3>
+              <p>
+                Relevant information is fetched from a connected document or knowledge
+                source.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">4</div>
             <div>
-              <h3>Reply or refer to a person</h3>
-              <p>The agent responds using retrieved context, or asks a team member to help if it lacks reliable information.</p>
+              <h3>Prepare a response</h3>
+              <p>
+                The AI agent uses the retrieved information and conversation memory to
+                prepare a reply.
+              </p>
             </div>
           </article>
         </div>
       </section>
 
       <section class="panel outcome">
-        <p class="eyebrow">Intended outcome</p>
-        <h2>Give customers quicker access to documented answers</h2>
+        <p class="eyebrow">Outcome</p>
+        <h2>More consistent replies to common social media questions</h2>
         <p>
-          This demo shows how a Messenger agent can use business documents to answer common
-          questions, collect lead details, and pass uncertain requests to staff. Retrieval helps
-          ground the reply in available information, but it does not guarantee every answer is
-          complete or correct. Keep the source documents current and review the agent’s behavior
-          before using it with customers.
+          This demo shows how incoming messages can be matched with relevant information
+          and answered with AI support. The connected knowledge source helps ground
+          responses, while conversation memory supports follow-up messages.
         </p>
       </section>
 
-      <!-- <section class="panel evidence">
+      <section class="panel evidence">
         <p class="eyebrow">Demo</p>
         <h2>Example conversation and test scenarios</h2>
 
-        <div class="evidence-grid">
-          <div class="evidence-box">
-            <h3>Illustrative sample conversation</h3>
-            <div class="conversation">
-              <p class="message">What time are you open on Friday?</p>
-              <p class="message agent">
-                The business hours document lists Friday hours as 9:00 a.m. to 5:00 p.m.
-              </p>
-              <p class="message">Can you guarantee my order will arrive tomorrow?</p>
-              <p class="message agent">
-                I can’t confirm that from the information I have. I can pass your question to a team member.
-              </p>
-            </div>
-            <div class="doc-note">
-              <strong>Example source note:</strong> “Friday: 9:00 a.m.–5:00 p.m.” This sample is
-              illustrative; replace it with details from your own test documents.
-            </div>
-          </div>
-
-          <div class="evidence-box">
-            <h3>Suggested test scenarios</h3>
-            <ul class="test-list">
-              <li>Ask a question that is answered directly in an indexed document.</li>
-              <li>Ask a question using different wording from the source document.</li>
-              <li>Ask about a detail missing from the documents and check that it is referred to a person.</li>
-              <li>Update a source document and confirm the indexed answer reflects the current information.</li>
-              <li>Provide contact details and verify that the lead information reaches the intended destination.</li>
-            </ul>
+      <div class="evidence">
+        <div class="evidence-box">
+          <h3>Illustrative sample conversation</h3>
+          <div class="conversation">
+            <p class="message">
+              Hi, could you tell me what services you offer?
+            </p>
+            <p class="message agent">
+              We offer workflow automation, AI chat assistants, and CRM setup. What kind
+              of support are you looking for?
+            </p>
+            <p class="message">
+              Do you also have information about your pricing?
+            </p>
+            <p class="message agent">
+              Our workflow automation packages start at $250. AI chat assistant setup
+              starts at $500, and CRM setup starts at $300. The final price depends on
+              the project’s requirements.
+            </p>
           </div>
         </div>
+      </div>
 
         <p class="evidence-note">
-          The conversation and source note are illustrative, not a customer transcript. Replace
-          them with screenshots, recordings, or test results from your working demo when available.
+          The conversation is illustrative, not a message transcript. Replace it with
+          test results from your working demo when available.
         </p>
-      </section> -->
+      </section>
 
       <footer>
         <span>© 2026 Jerremy Beron</span>
@@ -686,7 +800,7 @@
     </main>
 
     <script>
-      const messagesInput = document.getElementById("messages");
+      const callsInput = document.getElementById("calls");
       const minutesInput = document.getElementById("minutes");
       const rateInput = document.getElementById("hourly-rate");
 
@@ -700,30 +814,31 @@
         maximumFractionDigits: 0,
       });
 
-      const numberFormatter = new Intl.NumberFormat("en-US", {
-        maximumFractionDigits: 1,
-      });
-
       function getNumber(input) {
         return Math.max(0, Number(input.value) || 0);
       }
 
       function updateEstimate() {
-        const messages = getNumber(messagesInput);
+        const messages = getNumber(callsInput);
         const minutes = getNumber(minutesInput);
         const hourlyRate = getNumber(rateInput);
 
         const hoursSaved = (messages * minutes) / 60;
         const laborValue = hoursSaved * hourlyRate;
 
-        hoursResult.textContent = `${numberFormatter.format(hoursSaved)} hours`;
+        hoursResult.textContent =
+          `${new Intl.NumberFormat("en-US", {
+            maximumFractionDigits: 1,
+          }).format(hoursSaved)} hours`;
+
         valueResult.textContent = currencyFormatter.format(laborValue);
+
         formula.textContent =
           `${messages} messages × ${minutes} minutes ÷ 60 × ` +
           `${currencyFormatter.format(hourlyRate)}/hour`;
       }
 
-      [messagesInput, minutesInput, rateInput].forEach((input) => {
+      [callsInput, minutesInput, rateInput].forEach((input) => {
         input.addEventListener("input", updateEstimate);
       });
 

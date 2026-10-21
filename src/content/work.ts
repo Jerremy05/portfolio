@@ -76,24 +76,26 @@ const demo = (dir: string, file: string, label: string, tag: string, summary: st
 
 const SITE_SUMMARY1 = 'Voice AI answers incoming calls, responds to common questions, collects caller details, and books appointments based on calendar availability. Requests it can’t handle can be passed to a person for follow-up.'
 const SITE_SUMMARY2= 'Organizes new leads in Asana, creates follow-up tasks, and helps the team keep track of each lead’s status so inquiries are less likely to be missed.'
-const SITE_SUMMARY3 = 'Answers Messenger questions using information from the business’s documents, such as services, pricing, and policies. It can capture lead details and refer questions to a person when it can’t find a reliable answer.'
+const SITE_SUMMARY3 = 'Responds to incoming social media messages using information from a connected knowledge source. It filters incoming requests, retrieves relevant documents, and uses an AI agent to prepare a helpful response, with conversation memory to support follow-up messages.'
 const SITE_SUMMARY4 = 'Adds available company details to incoming leads, then routes them for follow-up based on set criteria. Leads with missing information can be flagged for review.'
 const SITE_SUMMARY5 = 'Saves email attachments to the right Google Drive folders using rules such as sender, file type, or subject, making documents easier to find.'
 const SITE_SUMMARY6 = 'Turns existing material, such as a video or transcript, into draft posts for different social platforms. A person reviews the drafts before publishing.'
 const SITE_SUMMARY7 = 'Organizes selected Xero transaction information into a format that can be used to create or update Asana tasks, helping teams coordinate related work.'
 const SITE_SUMMARY8 = 'Collects applications and resumes, compares candidate information with the job requirements, and organizes applicant statuses. For potential candidates, it prepares questionnaires, sends personalized emails, and helps schedule interviews and screening—supporting the hiring team’s review process.'
+const SITE_SUMMARY9 = 'Answers questions using information from documents stored in Google Drive. When files are added, updated, or deleted, the workflow keeps the knowledge base in Supabase up to date. The AI agent retrieves relevant information to respond to chat messages.'
 // const FUNNEL_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on what this funnel page does.'
 // const BOOKING_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on the booking page and its audience.'
 
 export const sampleSites: Demo[] = [
   demo('sites', 'site-1', 'AI Receptionist', 'Case Study', SITE_SUMMARY1),
   demo('sites', 'site-2', 'Asana CRM Lead Engagement', 'Case Study', SITE_SUMMARY2),
-  demo('sites', 'site-3', 'Social Media AI Agent with RAG', 'Case Study', SITE_SUMMARY3),
+  demo('sites', 'site-3', 'Social Media AI Assistant', 'Case Study', SITE_SUMMARY3),
   demo('sites', 'site-4', 'Automated Lead Enrichment', 'Case Study', SITE_SUMMARY4),
   demo('sites', 'site-5', 'Gmail Attachment Organizer', 'Case Study', SITE_SUMMARY5),
   demo('sites', 'site-6', 'Social Media Content Repurposing', 'Case Study', SITE_SUMMARY6),
   demo('sites', 'site-7', 'Xero Transaction Export to Asana', 'Case Study', SITE_SUMMARY7),
   demo('sites', 'site-8', 'HR Job Posting and Candidate Review Assistant', 'Case Study', SITE_SUMMARY8),
+  demo('sites', 'site-9', 'RAG-Powered AI Assistant', 'Case Study', SITE_SUMMARY9),
 
 ]
 
