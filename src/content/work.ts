@@ -81,9 +81,9 @@ const SITE_SUMMARY4 = 'Adds available company details to incoming leads, then ro
 const SITE_SUMMARY5 = 'Saves email attachments to the right Google Drive folders using rules such as sender, file type, or subject, making documents easier to find.'
 const SITE_SUMMARY6 = 'Turns existing material, such as a video or transcript, into draft posts for different social platforms. A person reviews the drafts before publishing.'
 const SITE_SUMMARY7 = 'Organizes selected Xero transaction information into a format that can be used to create or update Asana tasks, helping teams coordinate related work.'
-const SITE_SUMMARY8 = 'PLACEHOLDER - Helps prepare job posts and organize candidate information against role requirements. It supports the review process; a person remains responsible for evaluating candidates and making hiring decisions.'
-const FUNNEL_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on what this funnel page does.'
-const BOOKING_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on the booking page and its audience.'
+const SITE_SUMMARY8 = 'Collects applications and resumes, compares candidate information with the job requirements, and organizes applicant statuses. For potential candidates, it prepares questionnaires, sends personalized emails, and helps schedule interviews and screening—supporting the hiring team’s review process.'
+// const FUNNEL_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on what this funnel page does.'
+// const BOOKING_SUMMARY = 'PLACEHOLDER - tell me what to put here: one sentence on the booking page and its audience.'
 
 export const sampleSites: Demo[] = [
   demo('sites', 'site-1', 'AI Receptionist', 'Case Study', SITE_SUMMARY1),

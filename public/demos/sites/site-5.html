@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gmail Attachment Organizer | Automation Project</title>
+
+  <style>
+    :root {
+      --bg: #f0f3e8;
+      --surface: #f9fbf5;
+      --surface-2: #e2ebdd;
+      --ink: #23352a;
+      --ink-2: #425b48;
+      --ink-3: #5c705e;
+      --accent: #477a50;
+      --accent-deep: #2f5839;
+      --accent-soft: rgb(71 122 80 / 0.15);
+      --line: rgb(58 59 57 / 0.12);
+      --line-strong: rgb(58 59 57 / 0.2);
+      --shadow: 0 18px 40px -26px rgb(35 53 42 / 0.25);
+      --sidebar-width: 240px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      display: flex;
+      width: var(--sidebar-width);
+      flex-direction: column;
+      padding: 24px 20px;
+      border-right: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .identity {
+      display: grid;
+      gap: 3px;
+      padding: 0 8px 20px;
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .identity-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 9px;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .identity strong {
+      font-size: 15px;
+    }
+
+    .identity span,
+    .sidebar-bottom {
+      color: var(--ink-3);
+      font-size: 13px;
+    }
+
+    .nav-label,
+    .eyebrow {
+      color: var(--ink-3);
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .nav-label {
+      margin: 22px 8px 9px;
+    }
+
+    .nav-links {
+      display: grid;
+      gap: 5px;
+    }
+
+    .nav-links a {
+      padding: 9px 11px;
+      border-radius: var(--radius-md);
+      color: var(--ink-2);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+    }
+
+    .sidebar-bottom {
+      display: grid;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .sidebar-bottom a {
+      color: var(--accent-deep);
+      font-weight: 650;
+    }
+
+    main {
+      width: min(100%, 1200px);
+      margin: 0 auto;
+      padding: 32px 40px 56px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      color: var(--ink-2);
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: var(--accent-deep);
+    }
+
+    .page-heading {
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      max-width: 18ch;
+      margin-top: 8px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 65ch;
+      margin-top: 12px;
+      color: var(--ink-3);
+      font-size: 16px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 17px;
+    }
+
+    .tag,
+    .tool {
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink-2);
+      font-size: 12px;
+    }
+
+    .panel {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .calculator {
+      margin-bottom: 20px;
+    }
+
+    .calculator-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .calculator-heading h2,
+    .section-heading {
+      margin-top: 5px;
+      font-size: clamp(21px, 2.5vw, 28px);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    .estimate-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .result {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-2);
+    }
+
+    .result-label {
+      display: block;
+      color: var(--ink-3);
+      font-size: 13px;
+    }
+
+    .result-value {
+      display: block;
+      margin-top: 3px;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 750;
+      letter-spacing: -0.04em;
+    }
+
+    .result-note {
+      display: block;
+      margin-top: 2px;
+      color: var(--ink-3);
+      font-size: 12px;
+    }
+
+    .inputs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink-2);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .input-group input {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-md);
+      outline: none;
+      background: var(--surface);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .input-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .formula,
+    .disclaimer {
+      color: var(--ink-3);
+      font-size: 12px;
+    }
+
+    .formula {
+      margin-top: 14px;
+    }
+
+    .disclaimer {
+      margin-top: 8px;
+    }
+
+    .workflow {
+      margin-bottom: 20px;
+    }
+
+    .workflow-placeholder {
+      display: grid;
+      min-height: 260px;
+      margin-top: 16px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        var(--surface-2);
+      background-size: 32px 32px;
+      color: var(--ink-3);
+      text-align: center;
+    }
+
+    .workflow-placeholder span {
+      max-width: 35ch;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: 0 0 0 1px var(--line);
+      font-size: 13px;
+    }
+
+    /* When your screenshot is ready, replace the placeholder <div> with:
+       <img class="workflow-image" src="your-workflow-screenshot.png"
+            alt="Gmail attachment workflow from email to Google Drive" />
+    */
+    .workflow-image {
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-card h2 {
+      margin: 6px 0 12px;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    .section-card p,
+    .outcome p,
+    .evidence p {
+      color: var(--ink-2);
+    }
+
+    .process,
+    .outcome,
+    .tools,
+    .evidence {
+      margin-bottom: 20px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 22px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .step-number {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
+    .step h3 {
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .step p {
+      color: var(--ink-3);
+      font-size: 14px;
+    }
+
+    .outcome {
+      background: linear-gradient(135deg, var(--surface), var(--surface-2));
+    }
+
+    .outcome h2,
+    .evidence h2 {
+      margin: 6px 0 10px;
+      font-size: 23px;
+    }
+
+    .tool-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tool {
+      background: var(--accent-soft);
+      border: 0;
+      color: var(--accent-deep);
+      font-weight: 650;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .evidence-box {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-2);
+    }
+
+    .evidence-box h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .conversation {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .message {
+      width: fit-content;
+      max-width: 70%;
+      align-self: flex-start;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--ink-2);
+      font-size: 13px;
+    }
+
+    .message.agent {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .test-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .test-list li {
+      display: flex;
+      align-items: start;
+      gap: 9px;
+      color: var(--ink-2);
+      font-size: 13px;
+    }
+
+    .test-list li::before {
+      content: "□";
+      color: var(--accent-deep);
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .evidence-note {
+      margin-top: 14px;
+      color: var(--ink-3) !important;
+      font-size: 12px;
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-3);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --sidebar-width: 205px;
+      }
+
+      main {
+        padding-right: 26px;
+        padding-left: 26px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar {
+        position: static;
+        width: auto;
+        padding: 16px 18px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .identity {
+        grid-template-columns: 40px 1fr;
+        align-items: center;
+        padding: 0 0 12px;
+        border-bottom: 0;
+      }
+
+      .identity-mark {
+        grid-row: span 2;
+        width: 36px;
+        height: 36px;
+        margin: 0;
+        border-radius: 12px;
+      }
+
+      .nav-label,
+      .sidebar-bottom {
+        display: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+      }
+
+      .nav-links a {
+        flex: 0 0 auto;
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+
+      main {
+        width: 100%;
+        margin-left: 0;
+        padding: 22px 18px 36px;
+      }
+
+      .panel {
+        padding: 20px;
+      }
+
+      .inputs,
+      .results,
+      .two-column,
+      .steps,
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <a class="back-link" href="http://localhost:5190/work/case-studies">← Back to projects</a>
+
+    <header class="page-heading">
+      <p class="eyebrow">Automation project · Demo</p>
+      <h1>Gmail Attachment Organizer</h1>
+      <p class="subtitle">
+        Saves email attachments to the right Google Drive folders using rules such as sender, file type, or subject, making documents easier to find.
+      </p>
+
+      <div class="tags">
+        <span class="tag">Make.com</span>
+        <span class="tag">Gmail</span>
+        <span class="tag">Google Drive</span>
+        <span class="tag">Google sheets</span>
+        <span class="tag">Gemini</span>
+      </div>
+    </header>
+
+    <section class="panel calculator" aria-labelledby="calculator-title">
+      <div class="calculator-heading">
+        <div>
+          <p class="eyebrow">Illustrative monthly time savings</p>
+          <h2 id="calculator-title">Estimate time saved organizing attachments</h2>
+        </div>
+        <span class="estimate-badge">Estimate · not measured results</span>
+      </div>
+
+      <div class="results" aria-live="polite">
+        <div class="result">
+          <span class="result-label">Estimated sorting time saved</span>
+          <strong class="result-value" id="hours-result">4 hours</strong>
+          <span class="result-note">per month</span>
+        </div>
+
+        <div class="result">
+          <span class="result-label">Potential labor value</span>
+          <strong class="result-value" id="value-result">$60</strong>
+          <span class="result-note">per month, based on the hourly rate entered</span>
+        </div>
+      </div>
+
+      <div class="inputs">
+        <div class="input-group">
+          <label for="attachments">Attachments organized per month</label>
+          <input id="attachments" type="number" min="0" step="10" value="120" />
+        </div>
+
+        <div class="input-group">
+          <label for="minutes">Staff minutes saved per attachment</label>
+          <input id="minutes" type="number" min="0" step="1" value="2" />
+        </div>
+
+        <div class="input-group">
+          <label for="hourly-rate">Staff hourly rate (USD)</label>
+          <input id="hourly-rate" type="number" min="0" step="1" value="15" />
+        </div>
+      </div>
+
+      <p class="formula" id="formula">
+        120 attachments × 2 minutes ÷ 60 × $15/hour
+      </p>
+      <p class="disclaimer">
+        Illustrative estimate only. Actual time saved depends on attachment volume,
+        the time staff would otherwise spend sorting files, and the hourly rate entered.
+        Labor value is not a guaranteed cash saving.
+      </p>
+    </section>
+
+    <section class="panel tools">
+      <p class="eyebrow">Stack</p>
+      <h2 class="section-heading">Tools used</h2>
+      <div class="tool-list">
+        <span class="tool">Gmail</span>
+        <span class="tool">Make.com</span>
+        <span class="tool">Google Drive</span>
+        <span class="tool">Google Drive</span>
+        <span class="tool">Gemini</span>
+      </div>
+    </section>
+
+    <section class="panel workflow">
+      <p class="eyebrow">Workflow overview</p>
+      <h2 class="section-heading">See how an email attachment reaches Google Drive</h2>
+      <!-- Replace this placeholder with your workflow screenshot when it is ready. -->
+      <div class="workflow-placeholder">
+        <span>
+          Add your Make.com workflow screenshot here<br />
+          Suggested: new email → check sender, file type, or subject → choose folder → save to Drive
+        </span>
+      </div>
+    </section>
+
+    <div class="two-column">
+      <section class="panel section-card">
+        <p class="eyebrow">Context</p>
+        <h2>The challenge</h2>
+        <p>
+          Email attachments can arrive throughout the day and may need to be downloaded and sorted by hand. Without clear rules, important files can be difficult to find in a busy inbox or Drive.
+        </p>
+      </section>
+
+      <section class="panel section-card">
+        <p class="eyebrow">Approach</p>
+        <h2>The solution</h2>
+        <p>
+          The workflow checks incoming email and applies rules based on sender, file type, or subject. It saves each attachment to the matching Google Drive folder so documents are easier to locate.
+        </p>
+      </section>
+    </div>
+
+    <section class="panel process">
+      <p class="eyebrow">Process</p>
+      <h2 class="section-heading">How it works</h2>
+
+      <div class="steps">
+        <article class="step">
+          <div class="step-number">1</div>
+          <div>
+            <h3>Receive an email</h3>
+            <p>The workflow checks for an incoming message that includes an attachment.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <div class="step-number">2</div>
+          <div>
+            <h3>Check the sorting rules</h3>
+            <p>It checks details such as the sender, attachment type, and email subject.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <div class="step-number">3</div>
+          <div>
+            <h3>Choose the Drive folder</h3>
+            <p>The matching rule determines which Google Drive folder should receive the file.</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <div class="step-number">4</div>
+          <div>
+            <h3>Save the attachment</h3>
+            <p>The attachment is saved in the selected folder, where it can be found later without sorting it manually.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel outcome">
+      <p class="eyebrow">Outcome</p>
+      <h2>Attachments are sorted into the right Drive folders</h2>
+      <p>
+        This demo shows how email attachments can be organized automatically using rules for sender, file type, or subject. Files are saved to the corresponding Google Drive folders, making them easier to find.
+      </p>
+    </section>
+
+    <!-- <section class="panel evidence">
+      <p class="eyebrow">Demo</p>
+      <h2>Example attachment routing</h2>
+
+      <div class="evidence">
+        <div class="evidence-box">
+          <h3>Illustrative email example</h3>
+          <div class="conversation">
+            <p class="message">Incoming email: Vendor invoice attached as a PDF.</p>
+            <p class="message agent">
+              The workflow checks the sender, file type, and subject against its rules.
+            </p>
+            <p class="message">
+              Rule match: sender and PDF attachment match the invoice filing rule.
+            </p>
+            <p class="message agent">
+              Action: save the PDF to the matching Google Drive folder.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="evidence-note">
+        This example is illustrative. Replace it with a real email test and result from your working demo when available.
+      </p>
+    </section> -->
+
+    <footer>
+      <span>© 2026 Jerremy Beron</span>
+      <a href="/#contact">Contact me →</a>
+    </footer>
+  </main>
+
+  <script>
+    const attachmentsInput = document.getElementById("attachments");
+    const minutesInput = document.getElementById("minutes");
+    const rateInput = document.getElementById("hourly-rate");
+
+    const hoursResult = document.getElementById("hours-result");
+    const valueResult = document.getElementById("value-result");
+    const formula = document.getElementById("formula");
+
+    const currencyFormatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    });
+
+    function getNumber(input) {
+      return Math.max(0, Number(input.value) || 0);
+    }
+
+    function updateEstimate() {
+      const attachments = getNumber(attachmentsInput);
+      const minutes = getNumber(minutesInput);
+      const hourlyRate = getNumber(rateInput);
+
+      const hoursSaved = (attachments * minutes) / 60;
+      const laborValue = hoursSaved * hourlyRate;
+
+      hoursResult.textContent =
+        `${new Intl.NumberFormat("en-PH", {
+          maximumFractionDigits: 1,
+        }).format(hoursSaved)} hours`;
+
+      valueResult.textContent = currencyFormatter.format(laborValue);
+
+      formula.textContent =
+        `${attachments} attachments × ${minutes} minutes ÷ 60 × ` +
+        `${currencyFormatter.format(hourlyRate)}/hour`;
+    }
+
+    [attachmentsInput, minutesInput, rateInput].forEach((input) => {
+      input.addEventListener("input", updateEstimate);
+    });
+
+    updateEstimate();
+  </script>
+</body>
+</html>
