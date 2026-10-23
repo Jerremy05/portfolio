@@ -1,0 +1,51 @@
+// Names-only search: mobile press feedback, keyboard navigation and pointer selection.
+import assert from 'node:assert/strict'
+import { chromium } from 'playwright'
+const base = process.env.BASE ?? 'http://localhost:5190'
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
+try {
+  for (const theme of ['light', 'dark']) {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' })
+    await context.addInitScript((theme) => localStorage.setItem('pv2-theme', theme), theme)
+    const page = await context.newPage()
+    await page.goto(`${base}/`)
+    await page.getByRole('button', { name: 'Search', exact: true }).tap()
+    await page.locator('dialog.search[open]').waitFor()
+    assert.equal(await page.locator('.search__item[aria-selected="true"]').count(), 0, 'Home is not permanently highlighted')
+    assert.equal(await page.locator('.search__desc').count(), 0)
+    const projects = page.locator('#search-work')
+    const box = await projects.boundingBox()
+    const touch = await context.newCDPSession(page)
+    await touch.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: box.x + box.width / 2, y: box.y + box.height / 2 }] })
+    await page.waitForFunction(() => document.querySelector('#search-work').getAttribute('aria-selected') === 'true')
+    assert.equal(await page.locator('.search__item[aria-selected="true"]').count(), 1)
+    assert.equal(await projects.locator('.search__go').evaluate((el) => getComputedStyle(el).opacity), '1')
+    assert.notEqual(await projects.evaluate((el) => getComputedStyle(el).boxShadow), 'none', 'touch has a pressed treatment')
+    await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
+    await page.waitForFunction(() => !document.querySelector('dialog.search').open && Math.abs(document.querySelector('#work').getBoundingClientRect().top) <= 64)
+    await page.getByRole('button', { name: 'Search', exact: true }).tap()
+    await page.locator('dialog.search[open]').waitFor()
+    assert.equal(await page.locator('.search__item[aria-selected="true"]').count(), 0, 'reopening resets the previous tap')
+    await context.close()
+    console.log(`PASS: ${theme} mobile: no stuck Home highlight, touch selection/arrow/pressed feedback, navigation, reset`)
+  }
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' })
+  await page.goto(`${base}/contact`)
+  await page.locator('.ct-form').waitFor()
+  await page.keyboard.press('Control+k')
+  await page.locator('dialog.search[open]').waitFor()
+  await page.keyboard.press('ArrowDown')
+  assert.equal(await page.locator('.search input').getAttribute('aria-activedescendant'), 'search-home')
+  await page.keyboard.press('ArrowDown')
+  assert.equal(await page.locator('.search input').getAttribute('aria-activedescendant'), 'search-work')
+  await page.locator('#search-services').hover()
+  assert.equal(await page.locator('#search-services').getAttribute('aria-selected'), 'true')
+  await page.locator('.search input').hover()
+  assert.equal(await page.locator('.search__item[aria-selected="true"]').count(), 0)
+  await page.locator('.search input').fill('Projects')
+  await page.keyboard.press('Enter')
+  await page.waitForFunction(() => location.pathname === '/' && location.hash === '#work')
+  console.log('PASS: desktop shortcut, keyboard selection, pointer highlight/leave, and filtered Enter navigation')
+} finally {
+  await browser.close()
+}

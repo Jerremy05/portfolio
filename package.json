@@ -12,6 +12,7 @@
     "placeholders": "node scripts/make-placeholders.mjs",
     "check:site-settings": "node scripts/check-site-settings.mjs",
     "check:case-studies": "node scripts/check-case-studies.mjs",
+    "check:search": "node scripts/check-search.mjs",
     "check:sidebar": "node scripts/check-sidebar.mjs",
     "check:home": "node scripts/check-home.mjs",
     "check:background": "node scripts/check-background.mjs",

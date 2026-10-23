@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { useNavigate } from 'react-router'
-import { ArrowUpRight, MagnifyingGlass } from '@phosphor-icons/react'
+import { ArrowRight, ArrowUpRight, MagnifyingGlass } from '@phosphor-icons/react'
 import { useShell } from '@/app/shell-context'
 import { externals, navTarget, pages, type NavEntry } from '@/app/routes'
 import { scrollToSection } from '@/lib/motion/smooth-scroll'
@@ -29,7 +29,9 @@ export function SearchPalette() {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState('')
-  const [cursor, setCursor] = useState(0)
+  const [cursor, setCursor] = useState(-1)
+  const [pressed, setPressed] = useState<string | null>(null)
+  const [navigation, setNavigation] = useState<'pointer' | 'keyboard' | null>(null)
 
   const results = useMemo(() => (query.trim() ? ENTRIES.filter((e) => matches(e, query.trim())) : ENTRIES), [query])
 
@@ -48,7 +50,9 @@ export function SearchPalette() {
   const close = () => {
     setSearchOpen(false)
     setQuery('')
-    setCursor(0)
+    setCursor(-1)
+    setNavigation(null)
+    setPressed(null)
   }
 
   const open = (entry: NavEntry) => {
@@ -62,9 +66,12 @@ export function SearchPalette() {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault()
       const step = event.key === 'ArrowDown' ? 1 : -1
-      setCursor((current) => (current + step + results.length) % Math.max(results.length, 1))
+      setNavigation('keyboard')
+      setCursor((current) => current < 0
+        ? (step > 0 ? 0 : results.length - 1)
+        : (current + step + results.length) % Math.max(results.length, 1))
     } else if (event.key === 'Enter') {
-      const entry = results[cursor]
+      const entry = results[cursor] ?? results[0]
       if (entry) open(entry)
     }
   }
@@ -87,35 +94,79 @@ export function SearchPalette() {
           value={query}
           onChange={(event) => {
             setQuery(event.target.value)
-            setCursor(0)
+            setCursor(-1)
+            setNavigation(null)
           }}
           onKeyDown={onKeyDown}
           placeholder="Search pages"
           aria-label="Search pages"
+          role="combobox"
+          aria-expanded={searchOpen}
+          aria-autocomplete="list"
           aria-controls="search-results"
           aria-activedescendant={results[cursor] ? `search-${results[cursor].id}` : undefined}
         />
         <kbd>Esc</kbd>
       </div>
 
-      <ul id="search-results" className="search__list" role="listbox" aria-label="Pages">
+      <ul
+        id="search-results"
+        className="search__list"
+        role="listbox"
+        aria-label="Pages"
+        onPointerLeave={() => {
+          if (navigation === 'pointer') {
+            setCursor(-1)
+            setNavigation(null)
+          }
+        }}
+      >
         {results.map((entry, index) => {
           const Icon = entry.icon
           return (
-            <li
-              key={entry.id}
-              id={`search-${entry.id}`}
-              role="option"
-              aria-selected={index === cursor}
-              className="search__item"
-              onPointerMove={() => setCursor(index)}
-              onClick={() => open(entry)}
-            >
-              <Icon size={18} weight={index === cursor ? 'fill' : 'regular'} aria-hidden />
-              <span className="search__text">
-                <span className="search__label">{entry.label}</span>
-              </span>
-              {entry.kind === 'external' ? <ArrowUpRight size={14} aria-hidden /> : null}
+            <li key={entry.id} role="presentation">
+              <button
+                type="button"
+                tabIndex={-1}
+                id={`search-${entry.id}`}
+                role="option"
+                aria-selected={index === cursor}
+                data-pressed={pressed === entry.id || undefined}
+                className="search__item"
+                onPointerEnter={(event) => {
+                  if (event.pointerType !== 'touch') {
+                    setNavigation('pointer')
+                    setCursor(index)
+                  }
+                }}
+                onPointerMove={(event) => {
+                  if (event.pointerType !== 'touch') {
+                    setNavigation('pointer')
+                    setCursor(index)
+                  }
+                }}
+                onPointerDown={() => {
+                  setPressed(entry.id)
+                  setNavigation('pointer')
+                  setCursor(index)
+                }}
+                onPointerUp={() => setPressed(null)}
+                onPointerLeave={() => setPressed(null)}
+                onPointerCancel={() => {
+                  setPressed(null)
+                  setCursor(-1)
+                  setNavigation(null)
+                }}
+                onClick={() => open(entry)}
+              >
+                <Icon size={18} weight={index === cursor ? 'fill' : 'regular'} aria-hidden />
+                <span className="search__text">
+                  <span className="search__label">{entry.label}</span>
+                </span>
+                {entry.kind === 'external'
+                  ? <ArrowUpRight className="search__go" size={16} aria-hidden />
+                  : <ArrowRight className="search__go" size={16} aria-hidden />}
+              </button>
             </li>
           )
         })}
