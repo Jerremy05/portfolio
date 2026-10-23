@@ -124,6 +124,52 @@
   color: var(--accent-ink);
 }
 
+/* The address and its copy action stay together as the social links wrap. */
+.ct-email {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+.ct-email .ct-mail > svg { flex: none; }
+.ct-email .ct-mail > span { overflow-wrap: anywhere; user-select: all; }
+.ct-copy-email {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.ct-copy-email:hover { background: var(--surface-2); color: var(--ink); }
+.ct-copy-email:active { transform: scale(0.96); }
+.ct-copy-email:focus-visible,
+.ct-mail:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ct-copy-status {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 1;
+  max-width: min(240px, 70vw);
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.ct-copy-status:not(:empty) {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-sm);
+}
+
 /* ---------- The form panel ---------- */
 
 .ct-panel__title {

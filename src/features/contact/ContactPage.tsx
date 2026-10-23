@@ -1,12 +1,12 @@
-import { CaretDown, EnvelopeSimple } from '@phosphor-icons/react'
+import { CaretDown } from '@phosphor-icons/react'
 import { PageMeta } from '@/app/PageMeta'
 import type { PageRoute } from '@/app/routes'
 import { PageHeader } from '@/components/page/PageHeader'
 import { SocialLinks } from '@/components/brand/SocialLinks'
 import { contactPage as c } from '@/content/contact'
 import { allFaqs } from '@/content/faqs'
-import { mailtoHref, site } from '@/content/site'
 import { contactJsonLd } from '@/lib/seo'
+import { EmailContact } from './EmailContact'
 import { ContactForm } from './ContactForm'
 import './contact.css'
 
@@ -35,10 +35,7 @@ function ContactSheet({ nested }: { nested: boolean }) {
           ))}
         </div>
         <div className="ct-direct">
-          <a className="ct-mail" href={mailtoHref()}>
-            <EnvelopeSimple size={16} weight="fill" aria-hidden />
-            {site.email}
-          </a>
+          <EmailContact />
           <SocialLinks />
         </div>
       </section>

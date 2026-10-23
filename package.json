@@ -23,6 +23,7 @@
     "check:showcase": "node scripts/check-showcase.mjs",
     "check:proof": "node scripts/check-proof.mjs",
     "check:about": "node scripts/check-about.mjs",
+    "check:email-contact": "node scripts/check-email-contact.mjs",
     "check:contact": "node scripts/check-contact.mjs",
     "postbuild": "node scripts/write-version.mjs"
   },

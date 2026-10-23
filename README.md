@@ -122,7 +122,7 @@ The sidebar and mobile drawer show PH time (`Asia/Manila`) and US Eastern time (
 
 No public domain is configured yet. Set `site.url` to the final HTTPS address, then add `og:url`, `og:image` and `twitter:image` in `index.html`. Until then, the app omits canonical tags, and the build emits an empty sitemap without placeholder domains. Rebuild after setting the URL to generate the real sitemap and robots sitemap declaration. The page title and description are already configured.
 
-Run `npm run build` and `npm run lint`. With the dev server running, the current browser checks are `check:home`, `check:sidebar`, `check:search`, `check:services`, `check:work-sheet`, `check:contact`, `check:case-studies`, and `check:site-settings`. For example:
+Run `npm run build` and `npm run lint`. With the dev server running, the current browser checks are `check:home`, `check:sidebar`, `check:search`, `check:services`, `check:work-sheet`, `check:contact`, `check:email-contact`, `check:case-studies`, and `check:site-settings`. For example:
 
 ```bash
 CHROMIUM_PATH=/usr/bin/chromium npm run check:case-studies
