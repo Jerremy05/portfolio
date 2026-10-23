@@ -114,7 +114,6 @@ export function SearchPalette() {
               <Icon size={18} weight={index === cursor ? 'fill' : 'regular'} aria-hidden />
               <span className="search__text">
                 <span className="search__label">{entry.label}</span>
-                <span className="search__desc">{entry.description}</span>
               </span>
               {entry.kind === 'external' ? <ArrowUpRight size={14} aria-hidden /> : null}
             </li>
