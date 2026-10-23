@@ -11,12 +11,12 @@ rmSync(OUT, { recursive: true, force: true })
 mkdirSync(OUT, { recursive: true })
 
 const WIDTHS = [320, 360, 375, 390, 414, 768, 834, 1024, 1280, 1440, 1920]
-const ROUTES = ['/', '/contact', '/proof', '/showcase', '/privacy', '/work/websites']
+const ROUTES = ['/', '/contact', '/privacy', '/terms', '/work/case-studies', ...Array.from({ length: 9 }, (_, i) => `/work/case-studies/site-${i + 1}`)]
 const SHOOT = [320, 768, 1024]
-const SECTIONS = ['hero', 'manifesto', 'automation', 'work', 'services', 'about', 'proof', 'showcase', 'contact']
+const SECTIONS = ['hero', 'manifesto', 'automation', 'work', 'services', 'about', 'contact']
 
 const failures = []
-const browser = await chromium.launch()
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
 
 for (const width of WIDTHS) {
   const phone = width < 1024

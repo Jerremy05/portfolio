@@ -16,7 +16,7 @@ const check = (ok, message) => {
 const shot = (page, name) => page.screenshot({ path: fileURLToPath(new URL(`${name}.png`, OUT)) })
 const settle = (page) => page.waitForTimeout(800) // longer than the slowest spring (587ms)
 
-const browser = await chromium.launch()
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
 
 /* ---------- First visit: dark by default ---------- */
 {
@@ -39,9 +39,9 @@ const browser = await chromium.launch()
   page.on('pageerror', (e) => errors.push(e.message))
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
 
-  await page.goto(`${BASE}/proof`)
+  await page.goto(`${BASE}/contact`)
   await settle(page)
-  check((await page.title()).startsWith('Proof | '), 'unique title on /proof (a page of its own; /work now redirects to /#work)')
+  check((await page.title()).startsWith('Contact | '), 'unique title on /contact (a page of its own; /work now redirects to /#work)')
   await shot(page, 'desktop-expanded')
 
   const indicatorY = () => page.$eval('.sb-float .sb-indicator', (el) => new DOMMatrix(getComputedStyle(el).transform).m42)
@@ -51,34 +51,32 @@ const browser = await chromium.launch()
   const litCount = () => page.$$eval('.sb-float [data-highlighted="true"]', (l) => l.length)
 
   check(!(await indicatorShown()) && (await litCount()) === 0, 'nothing highlighted at rest')
-  check((await page.$eval('.sb-float [data-nav-id="proof"]', (el) => getComputedStyle(el).color)) !== (await page.$eval('.sb-float [data-nav-id="home"]', (el) => getComputedStyle(el).color)), 'current page marked in blue text')
+  check((await page.$eval('.sb-float [data-nav-id="contact"]', (el) => getComputedStyle(el).color)) !== (await page.$eval('.sb-float [data-nav-id="home"]', (el) => getComputedStyle(el).color)), 'current page marked in blue text')
 
-  // Logo: the light-theme file is the one showing, and it actually loaded.
-  const logo = await page.$$eval('.sb-float .sb-logo__mark img', (imgs) =>
-    imgs.map((i) => ({ src: i.getAttribute('src'), shown: getComputedStyle(i).display !== 'none', loaded: i.naturalWidth > 0 })),
-  )
-  check(logo.length === 2 && logo[0].shown && logo[0].loaded && !logo[1].shown, `logo shows the light version (${JSON.stringify(logo)})`)
+  check((await page.locator('.sb-logo').count()) === 0, 'brand/logo row stays hidden until an identity is chosen')
+  check((await page.locator('.sb-pic__check').count()) === 0, 'certification badge stays hidden')
+  check((await page.locator('.sb-clock time').count()) === 2, 'PH and US Eastern clocks are both shown')
 
   // Socials replace search: the links from content/site.ts, in order, opening in a new tab.
   const social = await page.$$eval('.sb-float .social-key', (links) =>
     links.map((a) => ({ label: a.getAttribute('title'), href: a.getAttribute('href'), blank: a.target === '_blank', h: a.offsetHeight })),
   )
-  check(social.map((s) => s.label).join(',') === 'LinkedIn,GitHub,X,Facebook,Discord', `socials in order (${social.map((s) => s.label)})`)
+  check(social.map((s) => s.label).join(',') === 'LinkedIn,Facebook', `socials in order (${social.map((s) => s.label)})`)
   check(social.every((s) => s.blank && s.href && s.h >= 44), 'socials open in a new tab with 44px targets')
   check((await page.$('.sb-float .sb-search')) === null, 'search field is gone from the card')
   check((await page.$$('.sb-float .social-key svg')).length === social.length, 'every social key draws its mark')
 
   await page.hover('.sb-float [data-nav-id="services"]')
   await settle(page)
-  await page.hover('.sb-float [data-nav-id="proof"]')
+  await page.hover('.sb-float [data-nav-id="contact"]')
   await settle(page)
-  check((await indicatorShown()) && (await indicatorY()) === (await itemY('proof')), 'highlight glides to the hovered item')
+  check((await indicatorShown()) && (await indicatorY()) === (await itemY('contact')), 'highlight glides to the hovered item')
   await shot(page, 'desktop-hover')
 
   await page.mouse.move(900, 450)
   await settle(page)
   check(!(await indicatorShown()) && (await litCount()) === 0, 'highlight clears when the pointer leaves')
-  check((await indicatorY()) === (await itemY('proof')), 'highlight fades out in place (no slide on leave)')
+  check((await indicatorY()) === (await itemY('contact')), 'highlight fades out in place (no slide on leave)')
 
   await page.click('.sb-toggle')
   await settle(page)
@@ -89,10 +87,9 @@ const browser = await chromium.launch()
   const rail = await page.evaluate(() => {
     const panel = document.querySelector('.sb-float .sb-panel').getBoundingClientRect()
     const pic = document.querySelector('.sb-float .sb-pic').getBoundingClientRect()
-    const mark = document.querySelector('.sb-float .sb-logo__mark').getBoundingClientRect()
-    return { pic: Math.round(pic.x + pic.width / 2 - panel.x), size: Math.round(pic.width), mark: Math.round(mark.x + mark.width / 2 - panel.x) }
+    return { pic: Math.round(pic.x + pic.width / 2 - panel.x), size: Math.round(pic.width) }
   })
-  check(rail.pic === 38 && rail.size === 44 && rail.mark === 38, `picture shrinks to 44px and centers on the rail with the logo mark (${JSON.stringify(rail)})`)
+  check(rail.pic === 38 && rail.size === 44, `picture shrinks to 44px and centers on the rail without a placeholder logo (${JSON.stringify(rail)})`)
   // On the rail a visitor points at the icon (x = 38), not the clipped-away row center.
   await page.hover('.sb-float [data-nav-id="services"]', { position: { x: 38, y: 20 } })
   await settle(page)
@@ -118,11 +115,11 @@ const browser = await chromium.launch()
   await page.keyboard.press('Control+k')
   await settle(page)
   check(await page.$eval('dialog.search', (el) => el.open), 'Ctrl+K opens search')
-  await page.keyboard.type('showc')
+  await page.keyboard.type('serv')
   await page.keyboard.press('Enter')
   await settle(page)
   await page.waitForTimeout(800) // the Lenis glide to a section runs ~1.1s
-  check(new URL(page.url()).pathname === '/' && (await page.$eval('#showcase', (el) => Math.abs(el.getBoundingClientRect().top) < 4)), 'search + Enter scrolls Home to Showcase')
+  check(new URL(page.url()).pathname === '/' && (await page.$eval('#services', (el) => Math.abs(el.getBoundingClientRect().top) < 4)), 'search + Enter scrolls Home to Services')
 
   // Theme switch with a real mouse. The cross-fade overlay must not throw the highlight around.
   const themeBox = await (await page.$('.sb-float [data-nav-id="theme"]')).boundingBox()
@@ -138,8 +135,7 @@ const browser = await chromium.launch()
   }
   check(samples.every((y) => y === themeRowY) && (await indicatorShown()), `highlight holds on Dark mode through the fade (${samples.join(',')})`)
   check((await page.$eval('html', (el) => el.dataset.theme)) === 'dark', 'dark mode switch')
-  const darkLogoShown = await page.$$eval('.sb-float .sb-logo__mark img', (imgs) => getComputedStyle(imgs[1]).display !== 'none' && getComputedStyle(imgs[0]).display === 'none')
-  check(darkLogoShown, 'dark mode swaps to the light-cup logo')
+  check((await page.locator('.sb-logo').count()) === 0, 'theme switching keeps the unset brand hidden')
   await shot(page, 'desktop-dark')
 
   // Click, then leave the sidebar mid-fade: once the fade ends the highlight must be gone.
@@ -160,7 +156,7 @@ const browser = await chromium.launch()
 {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true })
   const page = await context.newPage()
-  await page.goto(`${BASE}/proof`)
+  await page.goto(`${BASE}/contact`)
   await settle(page)
   check((await page.$('.sb-float')) === null, 'no desktop sidebar on a phone')
   await shot(page, 'phone-closed')

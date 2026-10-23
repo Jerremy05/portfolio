@@ -1,3 +1,4 @@
+import { visibility } from './visibility'
 import type { AiGroup, AppBuild, Demo, Image, LinkRef } from './schema'
 
 export const workPage = {
@@ -197,7 +198,7 @@ export const experiments: AiGroup[] = [
 const buildsIn = (groups: AiGroup[]) => groups.reduce((n, g) => n + g.builds.length, 0)
 
 /** Number of builds across every Work chapter, shown as the sidebar badge. Derived, never typed in. */
-export const workCount =
+export const templateWorkCount =
   1 +
   caseStudies.length +
   1 +
@@ -208,3 +209,9 @@ export const workCount =
   apps.length +
   buildsIn(sideProjects) +
   buildsIn(experiments)
+
+/** Count only projects in published chapters. Template data above stays available for later. */
+export const workCount = sampleSites.length + (visibility.apps ? apps.length : 0)
+
+/** Internal portfolio URL for an automation case study. */
+export const caseStudyPath = (id: string) => `/work/case-studies/${id}`

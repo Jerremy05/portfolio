@@ -1,3 +1,4 @@
+import { visibility } from '@/content/visibility'
 import type { ComponentType } from 'react'
 import { AboutSection } from './about/AboutSection'
 import { HeroSection } from './hero/HeroSection'
@@ -25,7 +26,7 @@ export const homeSectionList: HomeSection[] = [
   { id: 'about', Component: AboutSection },
   // Proof, Showcase and Contact keep their own pages too (/proof, /showcase, /contact); here they run as sections.
   // { id: 'proof', Component: ProofSection },
-  { id: 'showcase', Component: ShowcaseSection },
+  ...(visibility.showcase ? [{ id: 'showcase', Component: ShowcaseSection }] : []),
   // Contact is the last section, after Showcase. /contact stays a page too.
   { id: 'contact', Component: ContactSection },
 ]

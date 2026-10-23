@@ -5,13 +5,14 @@
 // Phones and tablets: the same pile on native CSS sticky, without the sink. Reduced motion: a plain stack.
 // Usage: BASE=http://localhost:5190 node scripts/check-services.mjs   (screens -> scripts/out/services/)
 import { chromium } from 'playwright'
+import { fileURLToPath } from 'node:url'
 import { mkdirSync, rmSync } from 'node:fs'
 
 const BASE = process.env.BASE ?? 'http://localhost:5190'
 const OUT = new URL('./out/services/', import.meta.url)
 rmSync(OUT, { recursive: true, force: true })
 mkdirSync(OUT, { recursive: true })
-const shot = (page, name) => page.screenshot({ path: new URL(`${name}.png`, OUT).pathname.slice(1) })
+const shot = (page, name) => page.screenshot({ path: fileURLToPath(new URL(`${name}.png`, OUT)) })
 
 const failures = []
 const check = (ok, message) => {
@@ -43,6 +44,8 @@ const read = (page) =>
       tops: tops.map(Math.round),
       // landed = the card rests at its sticky offset (on the pile)
       landed: tops.map((t, i) => Math.abs(t - sticks[i]) < 2),
+      // At the end of the stack, shorter cards can leave their sticky slot first.
+      reached: tops.map((t, i) => t <= sticks[i] + 2),
       step: sticks[1] - sticks[0],
       scales: cards.map((c) => new DOMMatrix(getComputedStyle(c).transform).a),
       dims: cards.map((c) => Number(getComputedStyle(c.querySelector('.sv__dim')).opacity)),
@@ -72,7 +75,7 @@ const walk = async (page, stepPx) => {
 }
 const count = (r) => r.landed.filter(Boolean).length
 
-const browser = await chromium.launch()
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
 
 for (const [label, viewport, extra] of [
   ['desk', { width: 1440, height: 900 }, {}],
@@ -109,7 +112,7 @@ for (const [label, viewport, extra] of [
     await shot(page, label)
   } else {
     const seq = await walk(page, desktop ? 60 : 50)
-    check(seq.every((r, i) => r.landed.every((l, k) => !l || k === 0 || r.landed[k - 1])), `${label}: cards land on the pile in order`)
+    check(seq.every((r) => r.landed.every((landed, i) => !landed || i === 0 || r.reached.slice(0, i).every(Boolean))), `${label}: cards land on the pile in order`)
     const start = seq.find((r) => r.landed[0] && !r.landed[1])
     const middle = seq.find((r) => r.landed[2] && !r.landed[3])
     const end = seq.find((r) => r.landed.every(Boolean))
@@ -147,43 +150,22 @@ for (const [label, viewport, extra] of [
     check(seq.every((r) => r.fits), `${label}: card text fits inside every card`)
     check(seq.every((r) => !r.overflowX), `${label}: no sideways page scroll`)
 
-    // A card opens the Work chapter that shows that service (the first card, while it is on top).
+    // The first service opens its relevant internal case study.
     if (start) {
       await scrollTo(page, start.scrollY)
       await page.waitForTimeout(400)
       await page.locator('#services [data-card]').first().click()
       await page.waitForTimeout(1200)
       const path = await page.evaluate(() => location.pathname)
-      check(path === '/work/screens', `${label}: the first card opens its Work chapter (${path})`)
-      await page.keyboard.press('Escape')
+      check(path === '/work/case-studies/site-1', `${label}: the first card opens its case study (${path})`)
+      await page.goBack()
       await page.waitForTimeout(1000)
     }
   }
 
-  // Work bento logo faces: only the chapters with no landscape capture (side projects and experiments).
-  if (label === 'desk' || label === 'phone') {
-    for (const id of ['side-projects', 'experiments']) {
-      await page.locator(`#work a[href="/work/${id}"]`).scrollIntoViewIfNeeded()
-      await page.waitForTimeout(900)
-      await shot(page, `${label}-face-${id}`)
-    }
-    const faces = await page.evaluate(() =>
-      [...document.querySelectorAll('#work .wa__face')].map((f) => ({
-        chapter: f.closest('a').getAttribute('href'),
-        layout: f.dataset.layout,
-        loaded: [...f.querySelectorAll('img')].every((img) => img.complete && img.naturalWidth > 0),
-      })),
-    )
-    // 3 logos fan out, 2 = mark + badge.
-    check(
-      faces.length === 2 && faces[0].chapter === '/work/side-projects' && faces[0].layout === 'fan' && faces[1].layout === 'badge' && faces.every((f) => f.loaded),
-      `${label}: the picture-less chapters are logo faces (fan, badge), every logo loaded (${faces.map((f) => `${f.chapter} ${f.layout}`).join(', ')})`,
-    )
-    check(
-      await page.evaluate(() => getComputedStyle(document.querySelector('.wa__tile')).boxShadow.includes('inset')),
-      `${label}: Work card tiles carry the emboss bevel`,
-    )
-  }
+  // Template chapters remain in source, but only published work belongs in the bento.
+  const published = await page.locator('#work .wb__tile').evaluateAll((tiles) => tiles.map((tile) => tile.getAttribute('href')))
+  check(published.length === 1 && published[0] === '/work/case-studies', `${label}: only the published Automation Projects chapter is shown`)
 
   check(errors.length === 0, `${label}: no page errors ${errors.join(' | ')}`)
   await context.close()

@@ -1,10 +1,11 @@
 import { chapterPath, workChapters } from '@/content/home'
+import { caseStudyPath, sampleSites } from '@/content/work'
 import { site } from '@/content/site'
 import { pages } from './routes'
 
 /** Every indexable path: each built page (drafts are placeholders) plus each Work chapter. Read at build by vite.config.ts. */
 export function sitemapPaths(): string[] {
-  return [...pages.filter((page) => !page.draft).map((page) => page.path), ...workChapters.map((chapter) => chapterPath(chapter.id))]
+  return [...pages.filter((page) => !page.draft && !page.hidden).map((page) => page.path), ...workChapters.map((chapter) => chapterPath(chapter.id)), ...sampleSites.map((study) => caseStudyPath(study.id))]
 }
 
 /**
@@ -15,15 +16,19 @@ export function llmsTxt(): string {
   const home = pages.find((page) => page.path === '/')!
   const link = (label: string, path: string, about: string) => `- [${label}](${site.url}${path}): ${about}`
   return [
-    `# ${site.name} - ${site.brand}`,
+    `# ${site.name}${site.brand ? ` - ${site.brand}` : ''}`,
     '',
     `> ${home.description}`,
     '',
-    `${site.role}, ${site.location}. Email: ${site.email}`,
+    `${site.role}${site.location ? `, ${site.location}` : ''}. Email: ${site.email}`,
     '',
     '## Pages',
     '',
-    ...pages.filter((page) => !page.draft).map((page) => link(page.label, page.path, page.description)),
+    ...pages.filter((page) => !page.draft && !page.hidden).map((page) => link(page.label, page.path, page.description)),
+    '',
+    '## Case studies',
+    '',
+    ...sampleSites.map((study) => link(study.label, caseStudyPath(study.id), study.summary)),
     '',
     '## Work',
     '',

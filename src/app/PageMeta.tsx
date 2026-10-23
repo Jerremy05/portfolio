@@ -1,3 +1,4 @@
+import { site } from '@/content/site'
 import { absoluteUrl } from '@/lib/seo'
 import type { PageRoute } from './routes'
 
@@ -9,7 +10,7 @@ export function HeadMeta({ title, description, path }: Meta) {
     <>
       <title>{title}</title>
       <meta name="description" content={description} />
-      <link rel="canonical" href={absoluteUrl(path)} />
+      {site.url ? <link rel="canonical" href={absoluteUrl(path)} /> : null}
     </>
   )
 }

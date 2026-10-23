@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RAG-Powered AI Assistant | Automation Project</title>
+    <title>Xero Transaction Export to Asana | Automation Project</title>
 
     <style>
       :root {
@@ -130,7 +130,7 @@
       }
 
       main {
-        width: min(100%, 1200px);
+         width: min(100%, 1200px);
         margin: 0 auto;
         padding: 32px 40px 56px;
       }
@@ -146,7 +146,7 @@
         background: var(--surface);
         color: var(--ink-2);
         font-size: 14px;
-      }
+    }
 
       .back-link:hover {
         color: var(--accent-deep);
@@ -335,6 +335,10 @@
         font-size: 13px;
       }
 
+      /* When your screenshot is ready, replace the placeholder <div> with:
+         <img class="workflow-image" src="your-workflow-screenshot.png"
+              alt="AI receptionist workflow from call to appointment booking" />
+      */
       .workflow-image {
         display: block;
         width: 100%;
@@ -447,11 +451,11 @@
         font-size: 16px;
       }
 
-      .conversation {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
+.conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
       .message {
         width: fit-content;
@@ -585,28 +589,25 @@
     <main>
       <a class="back-link" href="/work/case-studies">← Back to projects</a>
 
-      <header class="page-heading">
+      <header class="page-heading" id="overview">
         <p class="eyebrow">Automation project · Demo</p>
-        <h1>RAG-Powered AI Assistant</h1>
+        <h1>Xero Transaction Export to Asana</h1>
         <p class="subtitle">
-          Answers questions using information from documents stored in Google Drive.
-          When files are added, updated, or deleted, the workflow keeps the knowledge
-          base in Supabase up to date. The AI agent retrieves relevant information to
-          respond to chat messages.
+          Organizes selected Xero transaction information into a format that can be used to create or update Asana tasks, helping teams coordinate related work.
         </p>
 
         <div class="tags">
-          <span class="tag">n8n</span>
-          <span class="tag">Google Drive</span>
-          <span class="tag">Supabase</span>
-          <span class="tag">Ollama</span>
+          <span class="tag">Make.com</span>
+          <span class="tag">Xero</span>
+          <span class="tag">Asana</span>
+          <span class="tag">CSV export</span>
         </div>
       </header>
 
       <section class="panel calculator" aria-labelledby="calculator-title">
         <div class="calculator-heading">
           <div>
-            <p class="eyebrow">Illustrative monthly savings</p>
+            <p class="eyebrow">Illustrative monthly time savings</p>
             <h2 id="calculator-title">Estimate time returned to the team</h2>
           </div>
           <span class="estimate-badge">Estimate · not measured results</span>
@@ -628,12 +629,12 @@
 
         <div class="inputs">
           <div class="input-group">
-            <label for="calls">Questions handled by the assistant per month</label>
+            <label for="calls">Xero transactions processed per month</label>
             <input id="calls" type="number" min="0" step="10" value="120" />
           </div>
 
           <div class="input-group">
-            <label for="minutes">Staff minutes saved per answered question</label>
+            <label for="minutes">Staff minutes saved per transaction</label>
             <input id="minutes" type="number" min="0" step="1" value="5" />
           </div>
 
@@ -643,13 +644,9 @@
           </div>
         </div>
 
-        <p class="formula" id="formula">
-          120 questions × 5 minutes ÷ 60 × $15/hour
-        </p>
+        <p class="formula" id="formula">120 transactions × 5 minutes ÷ 60 × $15/hour</p>
         <p class="disclaimer">
-          Illustrative estimate only. Actual time and labor value depend on question
-          volume, how many questions the assistant can answer using the knowledge base,
-          and the business’s staffing costs. Labor value is not a guaranteed cash saving.
+          Illustrative estimate only. Actual time savings depend on transaction volume, selected fields, formatting needs, and how much checking or task follow-up is still required. Labor value is not a guaranteed cash saving.
         </p>
       </section>
 
@@ -657,22 +654,20 @@
         <p class="eyebrow">Stack</p>
         <h2 class="section-heading">Tools used</h2>
         <div class="tool-list">
-          <span class="tool">n8n</span>
-          <span class="tool">Google Drive</span>
-          <span class="tool">Supabase</span>
-          <span class="tool">Ollama</span>
-          <span class="tool">Javascript</span>
+          <span class="tool">Make.com</span>
+          <span class="tool">Xero</span>
+          <span class="tool">Asana</span>
         </div>
       </section>
 
-      <section class="panel workflow">
+      <section hidden class="panel workflow" id="workflow">
         <p class="eyebrow">Workflow overview</p>
-        <h2 class="section-heading">See how documents power chat responses</h2>
+        <h2 class="section-heading">See how Xero transactions become Asana tasks</h2>
 
         <div class="workflow-placeholder">
           <span>
-            Add your workflow screenshot here<br />
-            Suggested: Google Drive → Supabase knowledge base → AI chat response
+            Add your Make.com workflow screenshot here<br />
+            Suggested: Xero transactions → selected fields → CSV-ready rows → Asana tasks
           </span>
         </div>
       </section>
@@ -682,9 +677,7 @@
           <p class="eyebrow">Context</p>
           <h2>The challenge</h2>
           <p>
-            Helpful information can be spread across multiple documents, making it
-            difficult to find accurate answers quickly. The knowledge base also needs
-            to stay current when source files change.
+            Transaction details may need to be copied and reformatted before related work can be tracked in Asana. Doing this manually can make handoffs slower and task records inconsistent.
           </p>
         </section>
 
@@ -692,15 +685,12 @@
           <p class="eyebrow">Approach</p>
           <h2>The solution</h2>
           <p>
-            The workflow monitors Google Drive for file additions, updates, and
-            deletions, then updates the corresponding information in Supabase. The AI
-            agent searches the stored knowledge for relevant information before
-            responding to chat messages.
+            The workflow organizes selected Xero transaction details into a consistent format that can be used to create or update related Asana tasks.
           </p>
         </section>
       </div>
 
-      <section class="panel process">
+      <section class="panel process" id="process">
         <p class="eyebrow">Process</p>
         <h2 class="section-heading">How it works</h2>
 
@@ -708,43 +698,32 @@
           <article class="step">
             <div class="step-number">1</div>
             <div>
-              <h3>Monitor Google Drive</h3>
-              <p>
-                The workflow detects when a document is added, updated, or deleted.
-              </p>
+              <h3>Select transactions</h3>
+              <p>Choose the Xero transactions and fields to include in the export.</p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">2</div>
             <div>
-              <h3>Update the knowledge base</h3>
-              <p>
-                New or changed files are processed and stored in the Supabase vector
-                database; deleted files are removed from the index.
-              </p>
+              <h3>Gather transaction details</h3>
+              <p>The workflow collects relevant details such as contact, date, amount, and reference.</p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">3</div>
             <div>
-              <h3>Receive a chat question</h3>
-              <p>
-                A chat message is passed to the AI agent, which searches for relevant
-                information in the knowledge base.
-              </p>
+              <h3>Format for Asana</h3>
+              <p>It arranges the selected information into CSV-ready rows for Asana task creation or updates.</p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">4</div>
             <div>
-              <h3>Prepare an informed response</h3>
-              <p>
-                The assistant uses the retrieved document information to respond to the
-                user’s question.
-              </p>
+              <h3>Create or update tasks</h3>
+              <p>The prepared records help the team coordinate follow-up work and keep related tasks organized in Asana.</p>
             </div>
           </article>
         </div>
@@ -752,47 +731,47 @@
 
       <section class="panel outcome">
         <p class="eyebrow">Outcome</p>
-        <h2>Answers grounded in the latest connected documents</h2>
+        <h2>Transaction details ready to support coordinated Asana work</h2>
         <p>
-          This demo shows how a searchable knowledge base can help an AI assistant
-          answer questions using business documents. File changes in Google Drive are
-          reflected in Supabase so the assistant can retrieve relevant information
-          when responding to chat messages.
+          This demo shows how selected Xero transaction information can be arranged for Asana tasks. Structured exports help teams create or update task records and coordinate related work.
         </p>
       </section>
 
-      <section class="panel evidence">
+      <!-- <section class="panel evidence" id="demo">
         <p class="eyebrow">Demo</p>
-        <h2>Example conversation and test scenarios</h2>
+        <h2>Example transaction export and task mapping</h2>
 
-        <div class="evidence">
+        <div class="evidence-grid">
           <div class="evidence-box">
-            <h3>Illustrative sample conversation</h3>
+            <h3>Example Xero transaction</h3>
+            <p>
+              Invoice INV-1042 · Acme Studio · $480 · Due 30 Oct · Status: Awaiting payment
+            </p>
+          </div>
+
+          <div class="evidence-box">
+            <h3>CSV-ready task information</h3>
             <div class="conversation">
-              <p class="message">
-                What is the process for requesting a refund?
-              </p>
-              <p class="message agent">
-                According to the returns policy, you can request a refund within 30
-                days of purchase. The item must be unused and in its original
-                packaging. Contact support with your order number to start the request.
-              </p>
-              <p class="message">
-                Is the original receipt required?
-              </p>
-              <p class="message agent">
-                The policy asks for your order number to help locate the purchase.
-                I don’t see a requirement for the original receipt in the available
-                information.
-              </p>
+              <p class="message"><strong>Task name</strong><br />Follow up on invoice INV-1042 · Acme Studio</p>
+              <p class="message agent"><strong>Task details</strong><br />Amount: $480 · Due: 30 Oct · Status: Awaiting payment</p>
+              <p class="message"><strong>Source</strong><br />Xero transaction INV-1042</p>
             </div>
           </div>
 
+          <div class="evidence-box">
+            <h3>Mapping checks</h3>
+            <ul class="test-list">
+              <li>Selected Xero fields map to the correct CSV columns.</li>
+              <li>Dates, amounts, and transaction references keep the expected format.</li>
+              <li>Task matching rules prevent duplicate Asana tasks when updating records.</li>
+            </ul>
+          </div>
+        </div>
+
         <p class="evidence-note">
-          The conversation is illustrative, not a verified response from the workflow.
-          Replace it with test results from your working demo when available.
+          This transaction and task mapping is illustrative. Confirm selected fields, CSV column names, and task matching rules with your working workflow before using it.
         </p>
-      </section>
+      </section> -->
 
       <footer>
         <span>© 2026 Jerremy Beron</span>
@@ -809,7 +788,7 @@
       const valueResult = document.getElementById("value-result");
       const formula = document.getElementById("formula");
 
-      const currencyFormatter = new Intl.NumberFormat("en-US", {
+      const usdFormatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
         maximumFractionDigits: 0,
@@ -820,23 +799,23 @@
       }
 
       function updateEstimate() {
-        const questions = getNumber(callsInput);
+        const calls = getNumber(callsInput);
         const minutes = getNumber(minutesInput);
         const hourlyRate = getNumber(rateInput);
 
-        const hoursSaved = (questions * minutes) / 60;
+        const hoursSaved = (calls * minutes) / 60;
         const laborValue = hoursSaved * hourlyRate;
 
         hoursResult.textContent =
-          `${new Intl.NumberFormat("en-US", {
+          `${new Intl.NumberFormat("en-PH", {
             maximumFractionDigits: 1,
           }).format(hoursSaved)} hours`;
 
-        valueResult.textContent = currencyFormatter.format(laborValue);
+        valueResult.textContent = usdFormatter.format(laborValue);
 
         formula.textContent =
-          `${questions} questions × ${minutes} minutes ÷ 60 × ` +
-          `${currencyFormatter.format(hourlyRate)}/hour`;
+          `${calls} transactions × ${minutes} minutes ÷ 60 × ` +
+          `${usdFormatter.format(hourlyRate)}/hour`;
       }
 
       [callsInput, minutesInput, rateInput].forEach((input) => {

@@ -24,8 +24,8 @@ const server = createServer((req, res) => {
 }).listen(5199)
 
 const demos = ['funnels', 'plans', 'sites'].flatMap((d) => readdirSync(join(dist, 'demos', d)).filter((f) => f.endsWith('.html')).map((f) => `/demos/${d}/${f}`))
-const ROUTES = ['/', '/proof', '/showcase', '/contact', '/privacy', '/terms', '/work/websites', '/no-such-page', ...demos]
-const browser = await chromium.launch()
+const ROUTES = ['/', '/contact', '/privacy', '/terms', '/work/case-studies', ...Array.from({ length: 9 }, (_, i) => `/work/case-studies/site-${i + 1}`), '/no-such-page', ...demos]
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
 const failures = []
 for (const route of ROUTES) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })

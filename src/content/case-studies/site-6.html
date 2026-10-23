@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI Receptionist | Automation Project</title>
+    <title>Social Media Content Repurposing | Automation Project</title>
 
     <style>
       :root {
@@ -586,30 +586,29 @@
   </head>
 
   <body>
-
     <main>
-      <a class="back-link" href=http://localhost:5190/work/case-studies">← Back to projects</a>
+      <a class="back-link" href="/work/case-studies">← Back to projects</a>
 
-      <header class="page-heading">
+      <header class="page-heading" id="overview">
         <p class="eyebrow">Automation project · Demo</p>
-        <h1>AI Receptionist</h1>
+        <h1>Social Media Content Repurposing</h1>
         <p class="subtitle">
-          A voice assistant that answers common inquiries, collects caller details, and
-          helps book appointments using calendar availability.
+          Turns an existing video or transcript into draft posts for different social platforms.
+          A person reviews and approves each draft before publishing.
         </p>
 
         <div class="tags">
-          <span class="tag">n8n</span>
-          <span class="tag">Vapi</span>
-          <span class="tag">Google Calendar</span>
-          <span class="tag">Demo workflow</span>
+          <span class="tag">Zapier</span>
+          <span class="tag">AI by Zapier</span>
+          <span class="tag">Google Drive</span>
+          <span class="tag">Facebook</span>
         </div>
       </header>
 
       <section class="panel calculator" aria-labelledby="calculator-title">
         <div class="calculator-heading">
           <div>
-            <p class="eyebrow">Illustrative monthly savings</p>
+            <p class="eyebrow">Illustrative monthly time savings</p>
             <h2 id="calculator-title">Estimate time returned to the team</h2>
           </div>
           <span class="estimate-badge">Estimate · not measured results</span>
@@ -617,26 +616,26 @@
 
         <div class="results" aria-live="polite">
           <div class="result">
-            <span class="result-label">Estimated staff time returned</span>
+            <span class="result-label">Estimated drafting time returned</span>
             <strong class="result-value" id="hours-result">10 hours</strong>
             <span class="result-note">per month</span>
           </div>
 
           <div class="result">
             <span class="result-label">Potential labor value</span>
-            <strong class="result-value" id="value-result">₱1,500</strong>
+            <strong class="result-value" id="value-result">$150</strong>
             <span class="result-note">per month, based on the hourly rate entered</span>
           </div>
         </div>
 
         <div class="inputs">
           <div class="input-group">
-            <label for="calls">Calls handled by the receptionist per month</label>
+            <label for="calls">Videos or transcripts repurposed per month</label>
             <input id="calls" type="number" min="0" step="10" value="120" />
           </div>
 
           <div class="input-group">
-            <label for="minutes">Staff minutes avoided per handled call</label>
+            <label for="minutes">Staff minutes saved per source</label>
             <input id="minutes" type="number" min="0" step="1" value="5" />
           </div>
 
@@ -646,13 +645,11 @@
           </div>
         </div>
 
-        <p class="formula" id="formula">
-          120 calls × 5 minutes ÷ 60 × ₱150/hour
-        </p>
+        <p class="formula" id="formula">120 sources × 5 minutes ÷ 60 × $15/hour</p>
         <p class="disclaimer">
-          Illustrative estimate only. Actual time and labor value depend on call volume,
-          how many calls the AI handles end to end, and the business’s staffing costs.
-          Labor value is not a guaranteed cash saving.
+          Illustrative estimate only. Actual time savings depend on source length, draft quality,
+          the number of platforms, and the review and editing required. A person still reviews
+          drafts before anything is published. Labor value is not a guaranteed cash saving.
         </p>
       </section>
 
@@ -660,22 +657,21 @@
         <p class="eyebrow">Stack</p>
         <h2 class="section-heading">Tools used</h2>
         <div class="tool-list">
-          <span class="tool">Vapi</span>
-          <span class="tool">n8n</span>
-          <span class="tool">Google Calendar</span>
-          <span class="tool">Javascript</span>
+          <span class="tool">Zapier</span>
+          <span class="tool">AI by Zapier</span>
+          <span class="tool">Google Drive</span>
+          <span class="tool">Facebook</span>
         </div>
       </section>
 
-      <section class="panel workflow">
+      <section hidden class="panel workflow" id="workflow">
         <p class="eyebrow">Workflow overview</p>
-        <h2 class="section-heading">See how the call becomes a booking</h2>
+        <h2 class="section-heading">See how one source becomes review-ready drafts</h2>
 
-        <!-- Replace this placeholder with your workflow screenshot when it is ready. -->
         <div class="workflow-placeholder">
           <span>
-            Add your n8n workflow screenshot here<br />
-            Suggested: call → AI receptionist → calendar check → booking confirmation
+            Add your Zapier workflow screenshot here<br />
+            Suggested: video or transcript → AI drafts → platform-specific posts → human review
           </span>
         </div>
       </section>
@@ -685,9 +681,9 @@
           <p class="eyebrow">Context</p>
           <h2>The challenge</h2>
           <p>
-            Calls can arrive while staff are busy, outside business hours, or during
-            service delivery. A caller may have to wait or call back to ask a question
-            or request an appointment.
+            Useful ideas from videos, interviews, and transcripts can take time to reshape for
+            each social platform. Rewriting the same source repeatedly can slow down a consistent
+            posting routine.
           </p>
         </section>
 
@@ -695,14 +691,14 @@
           <p class="eyebrow">Approach</p>
           <h2>The solution</h2>
           <p>
-            The AI receptionist speaks with the caller, handles supported questions,
-            collects the details needed for booking, and checks the calendar before
-            offering or confirming an appointment.
+            The workflow takes existing material, identifies its main ideas, and prepares a set
+            of platform-specific post drafts. It saves the drafts for a person to review, edit,
+            and approve before publishing.
           </p>
         </section>
       </div>
 
-      <section class="panel process">
+      <section class="panel process" id="process">
         <p class="eyebrow">Process</p>
         <h2 class="section-heading">How it works</h2>
 
@@ -710,41 +706,32 @@
           <article class="step">
             <div class="step-number">1</div>
             <div>
-              <h3>Answer the call</h3>
-              <p>
-                The voice assistant greets the caller and identifies what they need.
-              </p>
+              <h3>Provide the source</h3>
+              <p>Submit a video transcript or other existing material to start the workflow.</p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">2</div>
             <div>
-              <h3>Collect details</h3>
-              <p>
-                It asks for the caller’s name, contact details, and appointment request.
-              </p>
+              <h3>Identify key ideas</h3>
+              <p>The AI uses the source to find useful points, themes, and supporting details.</p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">3</div>
             <div>
-              <h3>Check availability</h3>
-              <p>
-                The workflow checks Google Calendar and offers an available time.
-              </p>
+              <h3>Create platform drafts</h3>
+              <p>It adapts the ideas into draft posts with formats suited to selected platforms.</p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">4</div>
             <div>
-              <h3>Confirm or pass along</h3>
-              <p>
-                The caller receives the booking details. Requests outside the assistant’s
-                scope can be directed to staff.
-              </p>
+              <h3>Review before publishing</h3>
+              <p>A person checks accuracy, tone, and formatting, then edits or approves each draft.</p>
             </div>
           </article>
         </div>
@@ -752,40 +739,51 @@
 
       <section class="panel outcome">
         <p class="eyebrow">Outcome</p>
-        <h2>More calls can be handled while staff focus on other work</h2>
+        <h2>More usable drafts from material you already have</h2>
         <p>
-          This demo shows how routine calls and appointment requests can be handled
-          through a voice workflow. The assistant checks calendar availability before
-          booking; staff can follow up on requests it cannot handle.
+          The demo shows how one video or transcript can become several starting-point posts
+          without publishing automatically. Human review remains part of the process so the
+          final wording can be checked and adjusted for the brand and audience.
         </p>
       </section>
 
-      <section class="panel evidence">
+      <!-- <section class="panel evidence" id="demo">
         <p class="eyebrow">Demo</p>
-        <h2>Example conversation and test scenarios</h2>
+        <h2>Example drafts and review checks</h2>
 
-        <div class="evidence">
+        <div class="evidence-grid">
           <div class="evidence-box">
-            <h3>Illustrative sample conversation</h3>
+            <h3>Example source idea</h3>
+            <p>
+              A video explains three ways small teams can save time: document repeatable tasks,
+              use templates for common replies, and review automation results regularly.
+            </p>
+          </div>
+
+          <div class="evidence-box">
+            <h3>Illustrative platform drafts</h3>
             <div class="conversation">
-              <p class="message">Hi, I’d like to book an appointment for Friday.</p>
-              <p class="message agent">
-                I can help with that. What name should I use for the booking?
-              </p>
-              <p class="message">
-                Jordan Lee. Do you have anything available in the afternoon?
-              </p>
-              <p class="message agent">
-                I’ll check the calendar for Friday afternoon availability.
-              </p>
+              <p class="message"><strong>LinkedIn</strong><br />Small teams can save time without adding complexity. Start by documenting repeatable tasks, creating templates for common replies, and checking that automations still work as expected.</p>
+              <p class="message agent"><strong>Instagram</strong><br />3 simple ways to save time as a small team: document repeatable tasks, use templates, and review your automations. Which one would help you most?</p>
+              <p class="message"><strong>X</strong><br />Want to save time on repeat work? Document the task, create a template for common replies, and review your automations regularly.</p>
             </div>
           </div>
 
+          <div class="evidence-box">
+            <h3>Review checklist</h3>
+            <ul class="test-list">
+              <li>Drafts reflect the source and do not add unsupported claims.</li>
+              <li>Each platform draft follows the requested length and tone.</li>
+              <li>Drafts are saved for review and are not published automatically.</li>
+            </ul>
+          </div>
+        </div>
+
         <p class="evidence-note">
-          The conversation is illustrative, not a call transcript. Replace it with a
-          recording, transcript, or test results from your working demo when available.
+          The source and drafts are illustrative examples, not outputs from a published campaign.
+          Review all drafts for accuracy, voice, and platform requirements before publishing.
         </p>
-      </section>
+      </section> -->
 
       <footer>
         <span>© 2026 Jerremy Beron</span>
@@ -802,7 +800,7 @@
       const valueResult = document.getElementById("value-result");
       const formula = document.getElementById("formula");
 
-      const pesoFormatter = new Intl.NumberFormat("en-US", {
+      const usdFormatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
         maximumFractionDigits: 0,
@@ -825,11 +823,11 @@
             maximumFractionDigits: 1,
           }).format(hoursSaved)} hours`;
 
-        valueResult.textContent = pesoFormatter.format(laborValue);
+        valueResult.textContent = usdFormatter.format(laborValue);
 
         formula.textContent =
-          `${calls} calls × ${minutes} minutes ÷ 60 × ` +
-          `${pesoFormatter.format(hourlyRate)}/hour`;
+          `${calls} sources × ${minutes} minutes ÷ 60 × ` +
+          `${usdFormatter.format(hourlyRate)}/hour`;
       }
 
       [callsInput, minutesInput, rateInput].forEach((input) => {

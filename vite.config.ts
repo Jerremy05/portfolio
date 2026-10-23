@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { createServer, defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { caseStudyDemos } from './scripts/case-study-demos.ts'
 
 const src = fileURLToPath(new URL('./src', import.meta.url))
 
@@ -34,11 +35,11 @@ function sitemap(): Plugin {
           llmsTxt: () => string
         }
         const { site } = (await server.ssrLoadModule('/src/content/site.ts')) as { site: { url: string } }
-        const urls = sitemapPaths().map((path) => `  <url><loc>${site.url}${path}</loc></url>`)
+        const urls = (site.url ? sitemapPaths() : []).map((path) => `  <url><loc>${site.url}${path}</loc></url>`)
         const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`
         writeFileSync(join(outDir, 'sitemap.xml'), xml)
         writeFileSync(join(outDir, 'llms.txt'), llmsTxt())
-        writeFileSync(join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`)
+        writeFileSync(join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\n${site.url ? `\nSitemap: ${site.url}/sitemap.xml\n` : ''}`)
       } finally {
         await server.close()
       }
@@ -68,7 +69,7 @@ function inlineEntryCss(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), sitemap(), inlineEntryCss()],
+  plugins: [caseStudyDemos(), react(), tailwindcss(), sitemap(), inlineEntryCss()],
   resolve: {
     alias: { '@': src },
   },

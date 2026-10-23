@@ -6,7 +6,7 @@ import type { Credential, SocialLink } from './schema'
  */
 export const site = {
   name: 'Jerremy Beron',
-  brand: 'Your Brand',
+  brand: '',
   /** The brand name as the sidebar logo shows it: the second part takes the accent color. */
   brandParts: ['J', 'B'],
   /** Your logo mark, one file per theme (`light` = for light backgrounds). The 96px copies are the
@@ -18,17 +18,19 @@ export const site = {
     headerDark: '/images/brand/mark-light-96.webp',
   },
   /** The live address, no trailing slash. Canonical URLs, the sitemap and the JSON-LD use it. */
-  url: 'https://example.com',
+  url: '' as string, // Add the final public HTTPS address when a domain/hosting URL is chosen.
   role: 'AI Automation Specialist',
   email: 'jerremyg.beron@gmail.com',
   emailSubject: 'Project inquiry',
   replyPromise: 'Reply within one business day.',
-  location: 'Your City, GMT+0',
+  location: '',
   /** Two-letter country code (ISO 3166) for the Person JSON-LD address. */
-  countryCode: 'US',
+  countryCode: '',
   /** Your clock, shown live at the top of the sidebar. Any IANA zone, e.g. 'America/New_York'. */
-  timeZone: 'UTC',
-  timePlace: 'in Your City',
+  timeZone: 'Asia/Manila',
+  timePlace: 'PH',
+  usTimeZone: 'America/New_York',
+  usTimePlace: 'US ET',
   avatar: { src: '/images/profile/avatar.webp', alt: 'Jerremy Beron', width: 400, height: 400 },
   /** The sidebar picture (112px, 44px on the rail). */
   avatarSmall: '/images/profile/avatar.webp',

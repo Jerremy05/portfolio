@@ -1,5 +1,6 @@
 import type { Icon } from '@phosphor-icons/react'
-import { Briefcase, Compass, Cube, Envelope, FileText, House, SealCheck, ShieldCheck, Stack, User } from '@phosphor-icons/react'
+import { Briefcase, Compass, Cube, Envelope, FileText, House, ShieldCheck, Stack, User } from '@phosphor-icons/react'
+import { visibility } from '@/content/visibility'
 import { workCount } from '@/content/work'
 import { externalLinks, site } from '@/content/site'
 
@@ -18,6 +19,8 @@ export const NAV_GROUPS: { id: NavGroupId; label: string }[] = [
 
 export type PageRoute = {
   kind: 'page'
+  /** Unfinished content is excluded from navigation, search, routing and the sitemap. */
+  hidden?: boolean
   id: string
   path: string
   /** Short name for the sidebar and search. */
@@ -38,6 +41,7 @@ export type PageRoute = {
 
 export type ExternalRoute = {
   kind: 'external'
+  hidden?: boolean
   id: string
   href: string
   label: string
@@ -57,8 +61,8 @@ export const pages: PageRoute[] = [
     id: 'home',
     path: '/',
     label: 'Home',
-    title: `${SUFFIX} | Your Headline Here`,
-    description: 'PLACEHOLDER - tell me what to put here: the one-sentence search result description of you and what you do (under 160 characters).',
+    title: `${SUFFIX} | AI Automation Specialist`,
+    description: 'AI-powered workflows that connect your tools, automate repetitive tasks, and improve lead follow-up and appointment booking.',
     icon: House,
     group: 'menu',
   },
@@ -113,6 +117,7 @@ export const pages: PageRoute[] = [
   {
     kind: 'page',
     id: 'showcase',
+    hidden: !visibility.showcase,
     path: '/showcase',
     label: 'Showcase',
     title: `Showcase | ${SUFFIX}`,
@@ -156,6 +161,7 @@ export const externals: ExternalRoute[] = [
   {
     kind: 'external',
     id: 'resource',
+    hidden: !visibility.resources,
     href: externalLinks.resource,
     label: 'Resources',
     description: 'PLACEHOLDER - tell me what to put here: one line on the off-site link (a blog, a guide, a store), or delete this entry.',
@@ -176,8 +182,8 @@ export function navEntries(group: NavGroupId): NavEntry[] {
 
 export function navEntries(group: NavGroupId): NavEntry[] {
   return [
-    ...pages.filter((p) => p.group === group && p.id !== 'proof'),
-    ...externals.filter((e) => e.group === group && e.id !== 'resource'),
+    ...pages.filter((p) => p.group === group && !p.hidden),
+    ...externals.filter((e) => e.group === group && !e.hidden),
   ]
 }
 /** Where a nav entry goes: its Home section when it has one, else its page. */

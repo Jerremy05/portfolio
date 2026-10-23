@@ -1,5 +1,5 @@
 import type { Image, ToolMark } from './schema'
-import { certification, externalLinks, site } from './site'
+import { certification, site } from './site'
 import { tools } from './tools'
 
 /**
@@ -15,7 +15,7 @@ export const aboutSection = {
   leadQuiet: 'then build and test automations to make those processes more reliable.',
   note: {
     company: `I’m building hands-on projects in AI automation`,
-    product: { label: 'my project showcase', href: externalLinks.showcase },
+    product: { label: 'my automation projects', href: '/#work' },
     rest: 'features demos of AI agents, connected workflows, and appointment booking.',
   },
   picture: {

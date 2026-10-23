@@ -111,3 +111,21 @@ It is a static single-page app: `npm run build` and serve `dist/` with every unk
 [PolyForm Noncommercial 1.0.0](LICENSE), plus one extra permission: you can use it for **your own** portfolio, even if that portfolio promotes your paid services.
 
 What it does not allow without a commercial license: selling or reselling this template, or building portfolio sites for other people for payment. For a commercial license, email brewedops@gmail.com.
+
+## Internal case studies
+
+The nine automation projects open at `/work/case-studies/site-1` through `site-9`, sharing the portfolio navigation and theme. Each complete authored HTML document lives in `src/content/case-studies/`. This is the **single source** for the internal case study and its standalone `/demos/sites/site-N.html` page: the Vite plugin in `scripts/case-study-demos.ts` serves these URLs during development and emits them into `dist/` during builds. No separate copies need editing in `public/`. The app loads one document on demand, extracts its main content without executing its inline scripts, and uses the shared theme styles and calculator handler. The “Open standalone demo” link opens the full document separately.
+
+`src/content/visibility.ts` controls unfinished features. Showcase, template apps, resources, brand identity and certification are currently hidden; their components, content and images remain available. Restore a flag once the matching content is ready. Project counts include only published chapters. Workflow screenshot panels are preserved with `hidden` attributes in the documents; remove those attributes after adding real screenshots.
+
+The sidebar and mobile drawer show PH time (`Asia/Manila`) and US Eastern time (`America/New_York`), configured in `src/content/site.ts`. US daylight saving changes are automatic. The profile name stays visible; the separate brand identity is unset.
+
+No public domain is configured yet. Set `site.url` to the final HTTPS address, then add `og:url`, `og:image` and `twitter:image` in `index.html`. Until then, the app omits canonical tags, and the build emits an empty sitemap without placeholder domains. Rebuild after setting the URL to generate the real sitemap and robots sitemap declaration. The page title and description are already configured.
+
+Run `npm run build` and `npm run lint`. With the dev server running, the current browser checks are `check:home`, `check:sidebar`, `check:services`, `check:work-sheet`, `check:contact`, `check:case-studies`, and `check:site-settings`. For example:
+
+```bash
+CHROMIUM_PATH=/usr/bin/chromium npm run check:case-studies
+```
+
+Omit `CHROMIUM_PATH` when using Playwright’s installed browser. Set `BASE` when using a different dev/preview port. The case study check covers nine projects at three widths in both themes, calculators, theme persistence and browser history. Template-specific checks such as Showcase and Proof remain in source for when those features are restored. Production CSP and responsive checks live in `scripts/audit/`.

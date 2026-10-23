@@ -22,11 +22,9 @@
   flex-direction: column;
   align-items: center;
   margin: 0;
-  /* "MAKE IT YOURS." in Geist 700 at -0.05em is 7.20em wide: 13.05cqi fills ~94% of the column (7.20 x
-     13.05 = 94). The 2.3rem floor keeps the smallest phones' line readable (~265px at 320). To re-measure
-     for your own words: set the bold line in the browser, read its width in em (range width / font-size),
-     and use 94 / that width. Keep the thin line narrower than the bold one, or it overflows. */
-  font-size: clamp(2.3rem, 8.00cqi, 10rem);
+  /* Current bold copy measures about 11.85em. 8cqi fills 95% of the container.
+     Keep the minimum below the narrowest phone width so the line cannot be clipped. */
+  font-size: clamp(1rem, 8cqi, 10rem);
   line-height: 0.86;
   letter-spacing: -0.05em;
   text-transform: uppercase;

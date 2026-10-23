@@ -3,6 +3,7 @@ import { useLocation } from 'react-router'
 import { List, MagnifyingGlass, X } from '@phosphor-icons/react'
 import { useShell } from '@/app/shell-context'
 import { pages } from '@/app/routes'
+import { visibility } from '@/content/visibility'
 import { site } from '@/content/site'
 import { SidebarPanel } from '@/components/sidebar/SidebarPanel'
 import { BrandMark } from '@/components/brand/BrandMark'
@@ -22,7 +23,7 @@ export function MobileNav() {
   const close = () => setDrawerOpen(false)
   const { panelRef, swipeHandlers } = useSwipeToClose(close)
 
-  const current = pages.find((page) => (page.path === '/' ? pathname === '/' : pathname.startsWith(page.path)))
+  const current = pages.find((page) => !page.hidden && (page.path === '/' ? pathname === '/' : pathname.startsWith(page.path)))
 
   useEffect(() => {
     if (!drawerOpen) return
@@ -45,7 +46,7 @@ export function MobileNav() {
   return (
     <>
       <header className="mb-bar">
-        <BrandMark className="mb-bar__mark" />
+        {visibility.brand ? <BrandMark className="mb-bar__mark" /> : null}
         <span className="mb-bar__title">{current?.label ?? site.brand}</span>
         <button type="button" className="mb-bar__btn" onClick={() => setSearchOpen(true)} aria-label="Search">
           <MagnifyingGlass size={20} aria-hidden />

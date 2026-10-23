@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { ArrowRight, ArrowUpRight, X } from '@phosphor-icons/react'
+import { caseStudyPath, sampleSites } from '@/content/work'
 import { HeadMeta } from '@/app/PageMeta'
 import { chapterPath, workChapters } from '@/content/home'
 import type { WorkChapter, WorkItem } from '@/content/schema'
@@ -236,8 +237,10 @@ function Single({ chapter }: { chapter: WorkChapter }) {
   )
 }
 
-/** A live build opens in a new tab; one without a public link is a plain block. */
+/** Case studies stay in the portfolio; standalone demos open separately. */
 function ItemLink({ item, children }: { item: WorkItem; children: ReactNode }) {
+  const study = sampleSites.find((study) => study.href === item.href)
+  if (study) return <Link className="sh__link" to={caseStudyPath(study.id)}>{children}</Link>
   if (!item.href) return <div className="sh__link">{children}</div>
   return (
     <a className="sh__link" href={item.href} target="_blank" rel="noopener">

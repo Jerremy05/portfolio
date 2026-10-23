@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Social Media Content Repurposing | Automation Project</title>
+    <title>Social Media AI Assistant | Automation Project</title>
 
     <style>
       :root {
@@ -130,7 +130,7 @@
       }
 
       main {
-         width: min(100%, 1200px);
+        width: min(100%, 1200px);
         margin: 0 auto;
         padding: 32px 40px 56px;
       }
@@ -146,7 +146,7 @@
         background: var(--surface);
         color: var(--ink-2);
         font-size: 14px;
-    }
+      }
 
       .back-link:hover {
         color: var(--accent-deep);
@@ -335,10 +335,6 @@
         font-size: 13px;
       }
 
-      /* When your screenshot is ready, replace the placeholder <div> with:
-         <img class="workflow-image" src="your-workflow-screenshot.png"
-              alt="AI receptionist workflow from call to appointment booking" />
-      */
       .workflow-image {
         display: block;
         width: 100%;
@@ -451,11 +447,11 @@
         font-size: 16px;
       }
 
-.conversation {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+      .conversation {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
 
       .message {
         width: fit-content;
@@ -587,28 +583,30 @@
 
   <body>
     <main>
-      <a class="back-link" href="/#projects">← Back to projects</a>
+      <a class="back-link" href="/work/case-studies">← Back to projects</a>
 
-      <header class="page-heading" id="overview">
+      <header class="page-heading">
         <p class="eyebrow">Automation project · Demo</p>
-        <h1>Social Media Content Repurposing</h1>
+        <h1>Social Media AI Assistant</h1>
         <p class="subtitle">
-          Turns an existing video or transcript into draft posts for different social platforms.
-          A person reviews and approves each draft before publishing.
+          Responds to incoming social media messages using information from a connected
+          knowledge source. It filters incoming requests, retrieves relevant documents,
+          and uses an AI agent to prepare a helpful response, with conversation memory
+          to support follow-up messages.
         </p>
 
         <div class="tags">
-          <span class="tag">Zapier</span>
-          <span class="tag">AI by Zapier</span>
-          <span class="tag">Google Drive</span>
-          <span class="tag">Facebook</span>
+          <span class="tag">n8n</span>
+          <span class="tag">OpenRouter</span>
+          <span class="tag">Google Docs</span>
+          <span class="tag">Javascript</span>
         </div>
       </header>
 
       <section class="panel calculator" aria-labelledby="calculator-title">
         <div class="calculator-heading">
           <div>
-            <p class="eyebrow">Illustrative monthly time savings</p>
+            <p class="eyebrow">Illustrative monthly savings</p>
             <h2 id="calculator-title">Estimate time returned to the team</h2>
           </div>
           <span class="estimate-badge">Estimate · not measured results</span>
@@ -616,7 +614,7 @@
 
         <div class="results" aria-live="polite">
           <div class="result">
-            <span class="result-label">Estimated drafting time returned</span>
+            <span class="result-label">Estimated staff time returned</span>
             <strong class="result-value" id="hours-result">10 hours</strong>
             <span class="result-note">per month</span>
           </div>
@@ -630,12 +628,12 @@
 
         <div class="inputs">
           <div class="input-group">
-            <label for="calls">Videos or transcripts repurposed per month</label>
+            <label for="calls">Messages handled by the assistant per month</label>
             <input id="calls" type="number" min="0" step="10" value="120" />
           </div>
 
           <div class="input-group">
-            <label for="minutes">Staff minutes saved per source</label>
+            <label for="minutes">Staff minutes avoided per handled message</label>
             <input id="minutes" type="number" min="0" step="1" value="5" />
           </div>
 
@@ -645,11 +643,13 @@
           </div>
         </div>
 
-        <p class="formula" id="formula">120 sources × 5 minutes ÷ 60 × $15/hour</p>
+        <p class="formula" id="formula">
+          120 messages × 5 minutes ÷ 60 × $15/hour
+        </p>
         <p class="disclaimer">
-          Illustrative estimate only. Actual time savings depend on source length, draft quality,
-          the number of platforms, and the review and editing required. A person still reviews
-          drafts before anything is published. Labor value is not a guaranteed cash saving.
+          Illustrative estimate only. Actual time and labor value depend on message
+          volume, how many requests the assistant handles, and the business’s staffing
+          costs. Labor value is not a guaranteed cash saving.
         </p>
       </section>
 
@@ -657,21 +657,22 @@
         <p class="eyebrow">Stack</p>
         <h2 class="section-heading">Tools used</h2>
         <div class="tool-list">
-          <span class="tool">Zapier</span>
-          <span class="tool">AI by Zapier</span>
-          <span class="tool">Google Drive</span>
-          <span class="tool">Facebook</span>
+          <span class="tool">n8n</span>
+          <span class="tool">OpenRouter</span>
+          <span class="tool">Google Docs</span>
+          <span class="tool">Simple Memory</span>
+          <span class="tool">Javascript</span>
         </div>
       </section>
 
-      <section class="panel workflow" id="workflow">
+      <section hidden class="panel workflow">
         <p class="eyebrow">Workflow overview</p>
-        <h2 class="section-heading">See how one source becomes review-ready drafts</h2>
+        <h2 class="section-heading">See how incoming messages get a response</h2>
 
         <div class="workflow-placeholder">
           <span>
-            Add your Zapier workflow screenshot here<br />
-            Suggested: video or transcript → AI drafts → platform-specific posts → human review
+            Add your workflow screenshot here<br />
+            Suggested: message → filter → retrieve document → AI response
           </span>
         </div>
       </section>
@@ -681,9 +682,9 @@
           <p class="eyebrow">Context</p>
           <h2>The challenge</h2>
           <p>
-            Useful ideas from videos, interviews, and transcripts can take time to reshape for
-            each social platform. Rewriting the same source repeatedly can slow down a consistent
-            posting routine.
+            Social media questions can arrive at any time, and answering repeated
+            inquiries manually can take staff away from other work. Responses can also
+            vary when useful business information is spread across different documents.
           </p>
         </section>
 
@@ -691,14 +692,15 @@
           <p class="eyebrow">Approach</p>
           <h2>The solution</h2>
           <p>
-            The workflow takes existing material, identifies its main ideas, and prepares a set
-            of platform-specific post drafts. It saves the drafts for a person to review, edit,
-            and approve before publishing.
+            The workflow filters incoming requests, retrieves relevant information from
+            a connected knowledge source, and gives it to an AI agent to prepare a
+            helpful response. Conversation memory helps the assistant follow the thread
+            of a continuing conversation.
           </p>
         </section>
       </div>
 
-      <section class="panel process" id="process">
+      <section class="panel process">
         <p class="eyebrow">Process</p>
         <h2 class="section-heading">How it works</h2>
 
@@ -706,32 +708,43 @@
           <article class="step">
             <div class="step-number">1</div>
             <div>
-              <h3>Provide the source</h3>
-              <p>Submit a video transcript or other existing material to start the workflow.</p>
+              <h3>Receive a message</h3>
+              <p>
+                A social media message reaches the workflow through its webhook.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">2</div>
             <div>
-              <h3>Identify key ideas</h3>
-              <p>The AI uses the source to find useful points, themes, and supporting details.</p>
+              <h3>Filter the request</h3>
+              <p>
+                The workflow checks the incoming request and continues along the
+                appropriate path.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">3</div>
             <div>
-              <h3>Create platform drafts</h3>
-              <p>It adapts the ideas into draft posts with formats suited to selected platforms.</p>
+              <h3>Retrieve helpful information</h3>
+              <p>
+                Relevant information is fetched from a connected document or knowledge
+                source.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">4</div>
             <div>
-              <h3>Review before publishing</h3>
-              <p>A person checks accuracy, tone, and formatting, then edits or approves each draft.</p>
+              <h3>Prepare a response</h3>
+              <p>
+                The AI agent uses the retrieved information and conversation memory to
+                prepare a reply.
+              </p>
             </div>
           </article>
         </div>
@@ -739,51 +752,46 @@
 
       <section class="panel outcome">
         <p class="eyebrow">Outcome</p>
-        <h2>More usable drafts from material you already have</h2>
+        <h2>More consistent replies to common social media questions</h2>
         <p>
-          The demo shows how one video or transcript can become several starting-point posts
-          without publishing automatically. Human review remains part of the process so the
-          final wording can be checked and adjusted for the brand and audience.
+          This demo shows how incoming messages can be matched with relevant information
+          and answered with AI support. The connected knowledge source helps ground
+          responses, while conversation memory supports follow-up messages.
         </p>
       </section>
 
-      <!-- <section class="panel evidence" id="demo">
+      <section class="panel evidence">
         <p class="eyebrow">Demo</p>
-        <h2>Example drafts and review checks</h2>
+        <h2>Example conversation and test scenarios</h2>
 
-        <div class="evidence-grid">
-          <div class="evidence-box">
-            <h3>Example source idea</h3>
-            <p>
-              A video explains three ways small teams can save time: document repeatable tasks,
-              use templates for common replies, and review automation results regularly.
+      <div class="evidence">
+        <div class="evidence-box">
+          <h3>Illustrative sample conversation</h3>
+          <div class="conversation">
+            <p class="message">
+              Hi, could you tell me what services you offer?
+            </p>
+            <p class="message agent">
+              We offer workflow automation, AI chat assistants, and CRM setup. What kind
+              of support are you looking for?
+            </p>
+            <p class="message">
+              Do you also have information about your pricing?
+            </p>
+            <p class="message agent">
+              Our workflow automation packages start at $250. AI chat assistant setup
+              starts at $500, and CRM setup starts at $300. The final price depends on
+              the project’s requirements.
             </p>
           </div>
-
-          <div class="evidence-box">
-            <h3>Illustrative platform drafts</h3>
-            <div class="conversation">
-              <p class="message"><strong>LinkedIn</strong><br />Small teams can save time without adding complexity. Start by documenting repeatable tasks, creating templates for common replies, and checking that automations still work as expected.</p>
-              <p class="message agent"><strong>Instagram</strong><br />3 simple ways to save time as a small team: document repeatable tasks, use templates, and review your automations. Which one would help you most?</p>
-              <p class="message"><strong>X</strong><br />Want to save time on repeat work? Document the task, create a template for common replies, and review your automations regularly.</p>
-            </div>
-          </div>
-
-          <div class="evidence-box">
-            <h3>Review checklist</h3>
-            <ul class="test-list">
-              <li>Drafts reflect the source and do not add unsupported claims.</li>
-              <li>Each platform draft follows the requested length and tone.</li>
-              <li>Drafts are saved for review and are not published automatically.</li>
-            </ul>
-          </div>
         </div>
+      </div>
 
         <p class="evidence-note">
-          The source and drafts are illustrative examples, not outputs from a published campaign.
-          Review all drafts for accuracy, voice, and platform requirements before publishing.
+          The conversation is illustrative, not a message transcript. Replace it with
+          test results from your working demo when available.
         </p>
-      </section> -->
+      </section>
 
       <footer>
         <span>© 2026 Jerremy Beron</span>
@@ -800,7 +808,7 @@
       const valueResult = document.getElementById("value-result");
       const formula = document.getElementById("formula");
 
-      const usdFormatter = new Intl.NumberFormat("en-US", {
+      const currencyFormatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
         maximumFractionDigits: 0,
@@ -811,23 +819,23 @@
       }
 
       function updateEstimate() {
-        const calls = getNumber(callsInput);
+        const messages = getNumber(callsInput);
         const minutes = getNumber(minutesInput);
         const hourlyRate = getNumber(rateInput);
 
-        const hoursSaved = (calls * minutes) / 60;
+        const hoursSaved = (messages * minutes) / 60;
         const laborValue = hoursSaved * hourlyRate;
 
         hoursResult.textContent =
-          `${new Intl.NumberFormat("en-PH", {
+          `${new Intl.NumberFormat("en-US", {
             maximumFractionDigits: 1,
           }).format(hoursSaved)} hours`;
 
-        valueResult.textContent = usdFormatter.format(laborValue);
+        valueResult.textContent = currencyFormatter.format(laborValue);
 
         formula.textContent =
-          `${calls} sources × ${minutes} minutes ÷ 60 × ` +
-          `${usdFormatter.format(hourlyRate)}/hour`;
+          `${messages} messages × ${minutes} minutes ÷ 60 × ` +
+          `${currencyFormatter.format(hourlyRate)}/hour`;
       }
 
       [callsInput, minutesInput, rateInput].forEach((input) => {

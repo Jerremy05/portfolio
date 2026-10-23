@@ -1,5 +1,5 @@
 import { ArrowUpRight, MapPin } from '@phosphor-icons/react'
-import { aboutSection, capabilities, credentials, type AboutCredential } from '@/content/about'
+import { aboutSection, capabilities, type AboutCredential } from '@/content/about'
 import { certification, externalLinks, socials } from '@/content/site'
 import { personJsonLd } from '@/lib/seo'
 import './about.css'
@@ -14,7 +14,7 @@ const personLd = personJsonLd({
   companyUrl: externalLinks.company,
 })
 
-function Credential({ c }: { c: AboutCredential }) {
+export function Credential({ c }: { c: AboutCredential }) {
   const body = (
     <>
       <span className="ab__cred-mark">

@@ -15,20 +15,26 @@ export const servicesSection = {
   eyebrow: servicesPage.eyebrow,
   titleThin: 'Pick one',
   titleBold: 'or stack a few.',
-  explore: 'Explore',
-  /** The Work chapter each card opens, by service id (a chapter id from home.ts). */
-  work: { 'service-1': 'screens', 'service-2': 'featured', 'service-3': 'websites', 'service-4': 'websites', 'service-5': 'apps' } as Record<string, string>,
+  explore: 'View case study',
+  /** Relevant case study per service. The GHL card uses a related Asana CRM example. */
+  caseStudies: {
+    'service-1': 'site-1',
+    'service-2': 'site-7',
+    'service-3': 'site-2',
+    'service-4': 'site-4',
+    'service-5': 'site-6',
+  } as Record<string, string>,
 }
 
-const SUMMARY = 'PLACEHOLDER - tell me what to put here: the benefit of this service in one line.'
-const BULLET = 'PLACEHOLDER - tell me what to put here: one short benefit'
+export const SUMMARY = 'PLACEHOLDER - tell me what to put here: the benefit of this service in one line.'
+export const BULLET = 'PLACEHOLDER - tell me what to put here: one short benefit'
 
 export const services: Service[] = [
   {
     id: 'service-1',
     title: 'AI Agents & Appointment Booking',
     summary: 'Voice and chat assistants that answer common questions, collect customer details, and help schedule appointments.',
-    outcome: 'Outcome One',
+    outcome: 'Easier Appointment Booking',
     bullets: ['Answer customer questions anytime', 'Capture inquiries before they’re missed', 'Make booking easier with instant confirmations'],
     tools: [tools.toolA, tools.toolB, tools.toolC, tools.toolE, tools.toolN],
   },

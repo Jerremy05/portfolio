@@ -1,6 +1,7 @@
 import { useRef, type PointerEvent, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { SealCheck } from '@phosphor-icons/react'
+import { visibility } from '@/content/visibility'
 import { site } from '@/content/site'
 import { BrandMark } from '@/components/brand/BrandMark'
 import { SocialLinks } from '@/components/brand/SocialLinks'
@@ -28,6 +29,7 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
   const panelRef = useRef<HTMLDivElement>(null)
   useRailGeometry(panelRef)
   const time = useLocalTime(site.timeZone)
+  const usTime = useLocalTime(site.usTimeZone)
 
   const clearHover = () => onHoverChange?.(null)
   // The rail tooltip lines up with the picture, not the whole profile block.
@@ -35,18 +37,19 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
     onHoverChange?.({ label: site.name, element: link.querySelector<HTMLElement>('.sb-pic') ?? link })
 
   return (
-    <div ref={panelRef} className="sb-panel" data-lenis-prevent data-variant={variant} data-collapsed={collapsed}>
+    <div ref={panelRef} className="sb-panel" data-lenis-prevent data-variant={variant} data-brand={visibility.brand} data-collapsed={collapsed}>
       <div className="sb-head">
         <p className="sb-clock sb-fade">
-          <time dateTime={time.iso}>{time.label}</time> {site.timePlace}
+          <span title="Philippines · Asia/Manila">{site.timePlace} <time dateTime={time.iso}>{time.label}</time></span>
+          <span title="US Eastern Time · New York · adjusts for daylight saving">{site.usTimePlace} <time dateTime={usTime.iso}>{usTime.label}</time></span>
         </p>
-        <Link to="/" className="sb-logo" onClick={onNavigate} aria-label={`${site.brand} home`}>
+        {visibility.brand ? <Link to="/" className="sb-logo" onClick={onNavigate} aria-label={`${site.brand} home`}>
           <BrandMark className="sb-logo__mark" />
           <span className="sb-logo__name sb-fade" aria-hidden>
             {site.brandParts[0]}
             <span className="sb-logo__accent">{site.brandParts[1]}</span>
           </span>
-        </Link>
+        </Link> : null}
 
         <Link
           to="/about"
@@ -59,9 +62,9 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
         >
           <span className="sb-pic">
             <img className="sb-pic__img" src={site.avatarSmall} alt="" width={224} height={224} />
-            <span className="sb-pic__check" aria-hidden>
+            {visibility.certification ? <span className="sb-pic__check" aria-hidden>
               <SealCheck weight="fill" />
-            </span>
+            </span> : null}
           </span>
           <span className="sb-profile__name sb-fade">{site.name}</span>
           <span className="sb-profile__role sb-fade">

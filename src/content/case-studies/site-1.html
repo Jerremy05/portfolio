@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>HR Job Posting and Candidate Review Assistant | Automation Project</title>
+    <title>AI Receptionist | Automation Project</title>
 
     <style>
       :root {
@@ -586,31 +586,30 @@
   </head>
 
   <body>
-    <main>
-      <a class="back-link" href="/#projects">← Back to projects</a>
 
-      <header class="page-heading" id="overview">
+    <main>
+      <a class="back-link" href="/work/case-studies">← Back to projects</a>
+
+      <header class="page-heading">
         <p class="eyebrow">Automation project · Demo</p>
-        <h1>HR Job Posting and Candidate Review Assistant</h1>
+        <h1>AI Receptionist</h1>
         <p class="subtitle">
-          Collects applications and resumes, compares candidate information with the job requirements, and organizes applicant statuses. For potential candidates, it prepares questionnaires, sends personalized emails, and helps schedule interviews and screening—supporting the hiring team’s review process.
+          A voice assistant that answers common inquiries, collects caller details, and
+          helps book appointments using calendar availability.
         </p>
 
         <div class="tags">
           <span class="tag">n8n</span>
-          <span class="tag">Google Drive</span>
-          <span class="tag">Gmail</span>
+          <span class="tag">Vapi</span>
           <span class="tag">Google Calendar</span>
-          <span class="tag">Airtable</span>
-          <span class="tag">Ollama</span>
-          <span class="tag">AI Agent</span>
+          <span class="tag">Demo workflow</span>
         </div>
       </header>
 
       <section class="panel calculator" aria-labelledby="calculator-title">
         <div class="calculator-heading">
           <div>
-            <p class="eyebrow">Illustrative monthly time savings</p>
+            <p class="eyebrow">Illustrative monthly savings</p>
             <h2 id="calculator-title">Estimate time returned to the team</h2>
           </div>
           <span class="estimate-badge">Estimate · not measured results</span>
@@ -632,12 +631,12 @@
 
         <div class="inputs">
           <div class="input-group">
-            <label for="calls">Applications and resumes reviewed per month</label>
+            <label for="calls">Calls handled by the receptionist per month</label>
             <input id="calls" type="number" min="0" step="10" value="120" />
           </div>
 
           <div class="input-group">
-            <label for="minutes">Staff minutes saved per candidate review</label>
+            <label for="minutes">Staff minutes avoided per handled call</label>
             <input id="minutes" type="number" min="0" step="1" value="5" />
           </div>
 
@@ -647,9 +646,13 @@
           </div>
         </div>
 
-        <p class="formula" id="formula">120 applications × 5 minutes ÷ 60 × $15/hour</p>
+        <p class="formula" id="formula">
+          120 calls × 5 minutes ÷ 60 × $15/hour
+        </p>
         <p class="disclaimer">
-          Illustrative estimate only. Actual time savings depend on application volume, resume length, review criteria, and follow-up needs. The workflow supports the hiring team’s review; it does not make the final hiring decision. Labor value is not a guaranteed cash saving.
+          Illustrative estimate only. Actual time and labor value depend on call volume,
+          how many calls the AI handles end to end, and the business’s staffing costs.
+          Labor value is not a guaranteed cash saving.
         </p>
       </section>
 
@@ -657,25 +660,22 @@
         <p class="eyebrow">Stack</p>
         <h2 class="section-heading">Tools used</h2>
         <div class="tool-list">
+          <span class="tool">Vapi</span>
           <span class="tool">n8n</span>
-          <span class="tool">Google Drive</span>
           <span class="tool">Google Calendar</span>
-          <span class="tool">Gmail</span>
-          <span class="tool">Airtable</span>
-          <span class="tool">AI Agent</span>
-          <span class="tool">Ollama</span>
           <span class="tool">Javascript</span>
         </div>
       </section>
 
-      <section class="panel workflow" id="workflow">
+      <section hidden class="panel workflow">
         <p class="eyebrow">Workflow overview</p>
-        <h2 class="section-heading">See how an application moves through candidate review</h2>
+        <h2 class="section-heading">See how the call becomes a booking</h2>
 
+        <!-- Replace this placeholder with your workflow screenshot when it is ready. -->
         <div class="workflow-placeholder">
           <span>
             Add your n8n workflow screenshot here<br />
-            Suggested: application form → resume review → questionnaire → interview scheduling
+            Suggested: call → AI receptionist → calendar check → booking confirmation
           </span>
         </div>
       </section>
@@ -685,7 +685,9 @@
           <p class="eyebrow">Context</p>
           <h2>The challenge</h2>
           <p>
-            Reviewing resumes against job requirements and organizing follow-ups can take time. Candidate details, screening answers, and interview schedules may also be stored in different places.
+            Calls can arrive while staff are busy, outside business hours, or during
+            service delivery. A caller may have to wait or call back to ask a question
+            or request an appointment.
           </p>
         </section>
 
@@ -693,12 +695,14 @@
           <p class="eyebrow">Approach</p>
           <h2>The solution</h2>
           <p>
-            The workflow collects applicant details and resumes, compares candidate information with the selected job requirements, and organizes candidate statuses. Potential candidates can receive a questionnaire and personalized follow-up, with interview scheduling coordinated through the workflow.
+            The AI receptionist speaks with the caller, handles supported questions,
+            collects the details needed for booking, and checks the calendar before
+            offering or confirming an appointment.
           </p>
         </section>
       </div>
 
-      <section class="panel process" id="process">
+      <section class="panel process">
         <p class="eyebrow">Process</p>
         <h2 class="section-heading">How it works</h2>
 
@@ -706,32 +710,41 @@
           <article class="step">
             <div class="step-number">1</div>
             <div>
-              <h3>Collect application</h3>
-              <p>The applicant submits a form and resume; details and the file are saved for review.</p>
+              <h3>Answer the call</h3>
+              <p>
+                The voice assistant greets the caller and identifies what they need.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">2</div>
             <div>
-              <h3>Review resume</h3>
-              <p>The workflow extracts resume information and compares it with the job description.</p>
+              <h3>Collect details</h3>
+              <p>
+                It asks for the caller’s name, contact details, and appointment request.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">3</div>
             <div>
-              <h3>Organize candidate status</h3>
-              <p>Applicant records are updated with a status to help the hiring team organize its review.</p>
+              <h3>Check availability</h3>
+              <p>
+                The workflow checks Google Calendar and offers an available time.
+              </p>
             </div>
           </article>
 
           <article class="step">
             <div class="step-number">4</div>
             <div>
-              <h3>Follow up and schedule</h3>
-              <p>Potential candidates can receive a questionnaire and personalized email, then move through screening and interview scheduling.</p>
+              <h3>Confirm or pass along</h3>
+              <p>
+                The caller receives the booking details. Requests outside the assistant’s
+                scope can be directed to staff.
+              </p>
             </div>
           </article>
         </div>
@@ -739,47 +752,40 @@
 
       <section class="panel outcome">
         <p class="eyebrow">Outcome</p>
-        <h2>Candidate reviews and follow-ups are easier to coordinate</h2>
+        <h2>More calls can be handled while staff focus on other work</h2>
         <p>
-          This demo organizes applicant information, questionnaires, email follow-ups, and interview scheduling in one workflow. It helps the hiring team review candidates while leaving hiring decisions with people.
+          This demo shows how routine calls and appointment requests can be handled
+          through a voice workflow. The assistant checks calendar availability before
+          booking; staff can follow up on requests it cannot handle.
         </p>
       </section>
 
-      <!-- <section class="panel evidence" id="demo">
+      <section class="panel evidence">
         <p class="eyebrow">Demo</p>
-        <h2>Example candidate review and follow-up</h2>
+        <h2>Example conversation and test scenarios</h2>
 
-        <div class="evidence-grid">
+        <div class="evidence">
           <div class="evidence-box">
-            <h3>Illustrative candidate record</h3>
-            <p>
-              Applicant: Jordan Lee · Resume received · Role: Operations Assistant
-            </p>
-          </div>
-
-          <div class="evidence-box">
-            <h3>Candidate review steps</h3>
+            <h3>Illustrative sample conversation</h3>
             <div class="conversation">
-              <p class="message"><strong>Review status</strong><br />Potential candidate · Compare resume details with the job requirements</p>
-              <p class="message agent"><strong>Next step</strong><br />Send a role-specific questionnaire and save the answers to the applicant record</p>
-              <p class="message"><strong>Follow-up</strong><br />Personalized email and interview booking through Google Calendar</p>
+              <p class="message">Hi, I’d like to book an appointment for Friday.</p>
+              <p class="message agent">
+                I can help with that. What name should I use for the booking?
+              </p>
+              <p class="message">
+                Jordan Lee. Do you have anything available in the afternoon?
+              </p>
+              <p class="message agent">
+                I’ll check the calendar for Friday afternoon availability.
+              </p>
             </div>
           </div>
 
-          <div class="evidence-box">
-            <h3>Hiring team review</h3>
-            <ul class="test-list">
-              <li>Review candidate information against the stated job requirements.</li>
-              <li>Check questionnaire answers and screening details before interview steps.</li>
-              <li>Keep final hiring decisions with the hiring team.</li>
-            </ul>
-          </div>
-        </div>
-
         <p class="evidence-note">
-          This candidate example is illustrative. Review application details and screening results before making hiring decisions.
+          The conversation is illustrative, not a call transcript. Replace it with a
+          recording, transcript, or test results from your working demo when available.
         </p>
-      </section> -->
+      </section>
 
       <footer>
         <span>© 2026 Jerremy Beron</span>
@@ -796,7 +802,7 @@
       const valueResult = document.getElementById("value-result");
       const formula = document.getElementById("formula");
 
-      const usdFormatter = new Intl.NumberFormat("en-US", {
+      const pesoFormatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
         maximumFractionDigits: 0,
@@ -819,11 +825,11 @@
             maximumFractionDigits: 1,
           }).format(hoursSaved)} hours`;
 
-        valueResult.textContent = usdFormatter.format(laborValue);
+        valueResult.textContent = pesoFormatter.format(laborValue);
 
         formula.textContent =
-          `${calls} applications × ${minutes} minutes ÷ 60 × ` +
-          `${usdFormatter.format(hourlyRate)}/hour`;
+          `${calls} calls × ${minutes} minutes ÷ 60 × ` +
+          `${pesoFormatter.format(hourlyRate)}/hour`;
       }
 
       [callsInput, minutesInput, rateInput].forEach((input) => {

@@ -1,9 +1,12 @@
 // E2E check for /contact (pick A "Answers, then write"). Drives it like a visitor.
 // Usage: BASE=http://localhost:5190 node scripts/check-contact.mjs   (screens -> scripts/out/contact-*.png)
 import { chromium } from 'playwright'
-import { mkdirSync } from 'node:fs'
+import { mkdirSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
+const identity = readFileSync(new URL('../src/content/site.ts', import.meta.url), 'utf8')
+const NAME = identity.match(/name: '([^']+)'/)[1]
+const EMAIL = identity.match(/\n  email: '([^']+)'/)[1]
 const BASE = process.env.BASE ?? 'http://localhost:5190'
 const OUT = new URL('./out/', import.meta.url)
 mkdirSync(OUT, { recursive: true })
@@ -15,7 +18,7 @@ const check = (ok, message) => {
 }
 const shot = (page, name) => page.screenshot({ path: fileURLToPath(new URL(`contact-${name}.png`, OUT)), fullPage: true })
 
-const browser = await chromium.launch()
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
 
 for (const run of [
   { name: 'desk-dark', viewport: { width: 1440, height: 900 }, theme: 'dark' },
@@ -42,7 +45,7 @@ for (const run of [
     robots: document.querySelector('meta[name="robots"]')?.content ?? null,
     ld: [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => JSON.parse(s.textContent)['@graph'].map((n) => n['@type'])).flat(),
   }))
-  check(head.title.startsWith('Contact') && head.title.endsWith('Your Name') && head.h1.length === 1 && head.h1[0] === 'Tell me what you need built.', `${tag}: title + one h1 (${head.h1})`)
+  check(head.title.startsWith('Contact') && head.title.endsWith(NAME) && head.h1.length === 1 && head.h1[0] === 'Tell me what you want to improve.', `${tag}: title + one h1 (${head.h1})`)
   check(head.robots === null, `${tag}: indexable (no noindex placeholder)`)
   check(['ContactPage', 'FAQPage', 'BreadcrumbList'].every((t) => head.ld.includes(t)), `${tag}: JSON-LD ${head.ld}`)
 
@@ -55,8 +58,8 @@ for (const run of [
   check(summaryH >= 44, `${tag}: question rows are 44px+ targets (${summaryH})`)
 
   const socials = await page.$$eval('.ct-direct .social-key', (a) => a.map((x) => x.title))
-  check(socials.length === 5 && socials.at(-1) === 'Discord', `${tag}: socials under the answers (${socials})`)
-  check((await page.$eval('.ct-mail', (a) => a.getAttribute('href'))).startsWith('mailto:you@example.com'), `${tag}: direct address is the site email`)
+  check(socials.join(',') === 'LinkedIn,Facebook', `${tag}: socials under the answers (${socials})`)
+  check((await page.$eval('.ct-mail', (a) => a.getAttribute('href'))).startsWith(`mailto:${EMAIL}`), `${tag}: direct address is the site email`)
 
   await page.click('.ct-send')
   await page.waitForTimeout(100)
@@ -74,9 +77,9 @@ for (const run of [
   await page.click('.ct-send')
   await page.waitForTimeout(300)
   const mailto = await page.evaluate(() => window.__mailto)
-  check(mailto?.startsWith('mailto:you@example.com?subject=Project%20inquiry&body=Dana%20Reyes'), `${tag}: send opens the mail app, addressed and laid out`)
+  check(mailto?.startsWith(`mailto:${EMAIL}?subject=Project%20inquiry&body=Dana%20Reyes`) && decodeURIComponent(mailto).includes('dana@example.com') && decodeURIComponent(mailto).includes('A short note about the project.'), `${tag}: send opens the mail app, addressed and laid out`)
   check((await page.$('.ct-done h3')) !== null && (await page.evaluate(() => document.activeElement?.tagName)) === 'H3', `${tag}: sent state shows and takes focus`)
-  check((await page.$eval('.ct-done__fallback a', (a) => a.getAttribute('href'))) === 'mailto:you@example.com', `${tag}: sent state also gives the address (no mail app opened)`)
+  check((await page.$eval('.ct-done__fallback a', (a) => a.getAttribute('href'))) === `mailto:${EMAIL}`, `${tag}: sent state also gives the address (no mail app opened)`)
   await page.click('.ct-done__actions .pg-btn:last-child')
   await page.waitForTimeout(150)
   check((await page.$('.ct-form')) !== null && (await page.evaluate(() => document.activeElement?.getAttribute('name'))) === 'firstName', `${tag}: Write another brings the form back, focus on the first field`)
@@ -101,7 +104,7 @@ for (const run of [
     h1: document.querySelectorAll('h1').length,
     h2: document.querySelector('#contact-title')?.tagName,
   }))
-  check(home.order.join(',') === 'showcase,contact', `home: Contact follows Showcase (${home.order})`)
+  check(home.order.join(',') === 'contact', `home: Contact stays published while Showcase is hidden (${home.order})`)
   check(home.h1 === 1 && home.h2 === 'H2', `home: still one h1, Contact heads with an h2 (${home.h1}, ${home.h2})`)
   await page.waitForTimeout(800)
   await page.click('.hero__cta')
@@ -110,12 +113,12 @@ for (const run of [
   check(Math.abs(top) < 40, `home: Hire Me glides to Contact (section top ${top}px)`)
 
   // From another page, the sidebar Contact entry lands Home exactly on the section (useHashLanding).
-  await page.goto(`${BASE}/proof`, { waitUntil: 'domcontentloaded' })
+  await page.goto(`${BASE}/privacy`, { waitUntil: 'domcontentloaded' })
   await page.waitForTimeout(800)
   await page.click('.sb-float [data-nav-id="contact"]')
   await page.waitForTimeout(2000)
   const landed = await page.evaluate(() => ({ url: location.pathname + location.hash, top: Math.round(document.getElementById('contact').getBoundingClientRect().top) }))
-  check(landed.url === '/#contact' && Math.abs(landed.top) < 40, `home: /proof -> sidebar Contact lands on the section (${JSON.stringify(landed)})`)
+  check(landed.url === '/#contact' && Math.abs(landed.top) < 40, `home: /privacy -> sidebar Contact lands on the section (${JSON.stringify(landed)})`)
   check(errors.length === 0, `home: no page errors ${errors.join(' | ')}`)
   await page.close()
 }

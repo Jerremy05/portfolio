@@ -320,3 +320,10 @@
   font-size: 4.2cqw;
   line-height: 1.5;
 }
+
+/* A single published chapter should not leave empty cells for hidden templates. */
+.wb__grid.wb__grid--single {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: clamp(250px, 32vw, 440px);
+  grid-template-areas: 'web';
+}

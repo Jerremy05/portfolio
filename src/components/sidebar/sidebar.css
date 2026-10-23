@@ -9,7 +9,7 @@
 .sb-panel,
 .sb-float {
   /* The clock line above the logo: 16px line + 10px gap. The band and the collapse toggle follow it. */
-  --clock-h: 26px;
+  --clock-h: 44px;
 }
 
 .sb-panel {
@@ -67,14 +67,16 @@ background: var(--surface);
 /* Your local time, live, on the band above the logo. Fades out on the rail like every label. */
 .sb-clock {
   position: relative;
-  height: 16px;
-  margin: 0 0 calc(var(--clock-h) - 16px);
+  display: grid;
+  gap: 2px;
+  height: 34px;
+  margin: 0 0 calc(var(--clock-h) - 34px);
   color: var(--ink-2);
   font-size: 12px;
   line-height: 16px;
   white-space: nowrap;
 }
-.sb-clock > time {
+.sb-clock time {
   color: var(--ink);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -584,4 +586,9 @@ background: var(--surface);
   .sb-sep {
     transition-duration: 1ms;
   }
+}
+
+/* Leave no placeholder logo space while the personal brand is undecided. */
+.sb-panel[data-brand='false'] .sb-head::before {
+  height: calc(18px + var(--clock-h) + 18px + var(--pic) / 2);
 }

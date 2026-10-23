@@ -33,7 +33,7 @@ function elementFor(page: PageRoute) {
  */
 function routeFor(page: PageRoute): RouteObject {
   if (page.path === '/') {
-    return { element: elementFor(page), children: [{ index: true }, { path: 'work/:chapter' }] }
+    return { element: elementFor(page), children: [{ index: true, element: <></> }, { path: 'work/:chapter', element: <></> }] }
   }
   return { path: page.path.slice(1), element: elementFor(page) }
 }
@@ -43,6 +43,20 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <AppShell />,
-    children: [...pages.map(routeFor), { path: '*', element: <RouteStage title={notFoundTitle} label="Page not found" /> }],
+    hydrateFallbackElement: <p role="status">Loading…</p>,
+    children: [
+      {
+        path: 'work/case-studies/:project',
+        lazy: async () => {
+          const [{ CaseStudyPage }, { caseStudyLoader }] = await Promise.all([
+            import('@/features/case-study/CaseStudyPage'),
+            import('@/features/case-study/case-study-loader'),
+          ])
+          return { Component: CaseStudyPage, loader: caseStudyLoader }
+        },
+      },
+      ...pages.filter((page) => !page.hidden).map(routeFor),
+      { path: '*', element: <RouteStage title={notFoundTitle} label="Page not found" /> },
+    ],
   },
 ])

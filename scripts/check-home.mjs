@@ -37,11 +37,12 @@ const measure = (page) =>
     }
   })
 
-const browser = await chromium.launch()
+const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
 const cases = [
   { name: 'home-1440', width: 1440, height: 900 },
   { name: 'home-1440-collapsed', width: 1440, height: 900, collapse: true },
   { name: 'home-1024', width: 1024, height: 768 },
+  { name: 'home-320', width: 320, height: 844, mobile: true },
   { name: 'home-390', width: 390, height: 844, mobile: true },
 ]
 

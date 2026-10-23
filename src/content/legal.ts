@@ -13,7 +13,7 @@ export type LegalDoc = {
 export const privacyPolicy: LegalDoc = {
   title: 'Privacy Policy',
   updated: 'October 20, 2026',
-  intro: `This policy covers ${site.url.replace('https://', '')}, the portfolio of ${site.name} trading as ${site.brand}. This is a general template, not legal advice. It has not been reviewed by a lawyer; please have it checked for the laws that apply where you operate.`,
+  intro: `This policy covers ${site.url ? site.url.replace('https://', '') : 'this website'}, the portfolio of ${site.name}${site.brand ? ` trading as ${site.brand}` : ''}. This is a general template, not legal advice. It has not been reviewed by a lawyer; please have it checked for the laws that apply where you operate.`,
   sections: [
     {
       heading: 'What this site collects',
@@ -58,7 +58,7 @@ export const privacyPolicy: LegalDoc = {
 export const termsOfService: LegalDoc = {
   title: 'Terms of Service',
   updated: 'October 20, 2026',
-  intro: `These terms cover your use of this portfolio site, run by ${site.name} trading as ${site.brand}. This is a general template, not legal advice. It has not been reviewed by a lawyer; please have it checked for the laws that apply where you operate.`,
+  intro: `These terms cover your use of this portfolio site, run by ${site.name}${site.brand ? ` trading as ${site.brand}` : ''}. This is a general template, not legal advice. It has not been reviewed by a lawyer; please have it checked for the laws that apply where you operate.`,
   sections: [
     {
       heading: 'Using this site',

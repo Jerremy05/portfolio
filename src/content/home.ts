@@ -1,15 +1,16 @@
+import { visibility } from './visibility'
 import type { Demo, Image, ToolMark, WorkChapter, WorkItem } from './schema'
 import { site } from './site'
 import { method } from './method'
 import { tools } from './tools'
 import {
   apps,
-  bookingPages,
-  caseStudies,
+  // bookingPages,
+  // caseStudies, // Restore with the matching template chapter.
   experiments,
-  featuredProject,
-  funnelPages,
-  processDoc,
+  // featuredProject, // Restore with the matching template chapter.
+  // funnelPages,
+  // processDoc, // Restore with the matching template chapter.
   sampleSites,
   screens,
   sideProjects,
@@ -119,13 +120,13 @@ const groupItems = (groups: typeof sideProjects): WorkItem[] =>
   )
 
 /** The site's own mark for the Experiments card. The card ground is always light. */
-const siteMark: ToolMark = { name: site.brand, logo: site.logo.light }
+export const siteMark: ToolMark = { name: site.brand, logo: site.logo.light }
 
 /** The URL of a chapter's showcase sheet. Real, shareable and in the sitemap. */
 export const chapterPath = (id: string) => `/work/${id}`
 
-const sideProjectItems = groupItems(sideProjects)
-const experimentItems = groupItems(experiments)
+export const sideProjectItems = groupItems(sideProjects)
+export const experimentItems = groupItems(experiments)
 
 export const workSection = {
   ...homeSections.work,
@@ -135,7 +136,7 @@ export const workSection = {
   all: { label: `See all ${workCount} builds`, to: '/work' },
 }
 
-const screenItems: WorkItem[] = screens.map((s) => ({
+export const screenItems: WorkItem[] = screens.map((s) => ({
   id: s.id,
   name: s.name,
   kicker: s.kicker,
@@ -205,7 +206,7 @@ export const workChapters: WorkChapter[] = [
       id: 'case-studies',
       title: 'Automation Projects',
       line: 'AI agents and workflows built to solve practical business needs.',
-      count: sampleSites.length + funnelPages.length + bookingPages.length,
+      count: sampleSites.length,
       unit: 'pages',
       description: 'Explore demos for customer support, appointment booking, lead follow-up, and repetitive business tasks.',
       marks: [tools.toolI, tools.toolJ, tools.toolK],
@@ -232,7 +233,7 @@ export const workChapters: WorkChapter[] = [
   //     href: study.link.href,
   //   })),
   // },
-  {
+  ...(visibility.apps ? [{
     id: 'apps',
     title: 'Apps and Extensions',
     line: 'Phone apps and browser tools you ship.',
@@ -249,7 +250,7 @@ export const workChapters: WorkChapter[] = [
     },
     marks: [tools.toolL, tools.toolA, tools.toolB],
     items: apps.map((app) => ({ id: app.id, name: app.name, kicker: app.kind, summary: app.summary, image: app.image, status: app.status })),
-  },
+  }] : []),
   // {
   //   id: 'side-projects',
   //   title: 'Side Projects',

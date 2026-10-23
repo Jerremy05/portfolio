@@ -1,7 +1,7 @@
 import { useRef, type CSSProperties } from 'react'
 import { Link } from 'react-router'
 import { ArrowUpRight } from '@phosphor-icons/react'
-import { chapterPath } from '@/content/home'
+import { caseStudyPath } from '@/content/work'
 import { services, servicesSection } from '@/content/services'
 import { useScrollScene } from '@/hooks/use-scroll-scene'
 import { servicesScene } from './services-scene'
@@ -14,7 +14,7 @@ const pad = (n: number) => String(n).padStart(2, '0')
  * cards are dealt onto a pile: each card slides up and settles a few pixels below the one before,
  * which sinks back (scale) and dims under it, so a thin edge of every earlier card stays in view.
  * Phones: the same pile on native CSS sticky, without the sink. Reduced motion: a plain stack.
- * Every card opens the Work chapter that shows that service.
+ * Every card opens a relevant case study within the portfolio.
  */
 export function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -37,9 +37,7 @@ export function ServicesSection() {
         {services.map((service, i) => (
           <li key={service.id} className="sv__item" style={{ '--i': i } as CSSProperties}>
             <Link
-              to={chapterPath(servicesSection.work[service.id] ?? 'screens')}
-              state={{ sheet: true }}
-              preventScrollReset
+              to={caseStudyPath(servicesSection.caseStudies[service.id]!)}
               className="sv__card"
               data-card
             >
@@ -59,7 +57,7 @@ export function ServicesSection() {
                 {service.summary} {service.bullets.join('. ')}.
               </span>
               <span className="sv__explore">
-                {servicesSection.explore}
+                {service.id === 'service-3' ? 'View related CRM example' : servicesSection.explore}
                 <ArrowUpRight size={14} weight="bold" aria-hidden />
               </span>
               <span className="sv__dim" aria-hidden />

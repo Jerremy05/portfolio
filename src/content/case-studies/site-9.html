@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Social Media AI Assistant | Automation Project</title>
+    <title>RAG-Powered AI Assistant | Automation Project</title>
 
     <style>
       :root {
@@ -587,19 +587,19 @@
 
       <header class="page-heading">
         <p class="eyebrow">Automation project · Demo</p>
-        <h1>Social Media AI Assistant</h1>
+        <h1>RAG-Powered AI Assistant</h1>
         <p class="subtitle">
-          Responds to incoming social media messages using information from a connected
-          knowledge source. It filters incoming requests, retrieves relevant documents,
-          and uses an AI agent to prepare a helpful response, with conversation memory
-          to support follow-up messages.
+          Answers questions using information from documents stored in Google Drive.
+          When files are added, updated, or deleted, the workflow keeps the knowledge
+          base in Supabase up to date. The AI agent retrieves relevant information to
+          respond to chat messages.
         </p>
 
         <div class="tags">
           <span class="tag">n8n</span>
-          <span class="tag">OpenRouter</span>
-          <span class="tag">Google Docs</span>
-          <span class="tag">Javascript</span>
+          <span class="tag">Google Drive</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">Ollama</span>
         </div>
       </header>
 
@@ -628,12 +628,12 @@
 
         <div class="inputs">
           <div class="input-group">
-            <label for="calls">Messages handled by the assistant per month</label>
+            <label for="calls">Questions handled by the assistant per month</label>
             <input id="calls" type="number" min="0" step="10" value="120" />
           </div>
 
           <div class="input-group">
-            <label for="minutes">Staff minutes avoided per handled message</label>
+            <label for="minutes">Staff minutes saved per answered question</label>
             <input id="minutes" type="number" min="0" step="1" value="5" />
           </div>
 
@@ -644,12 +644,12 @@
         </div>
 
         <p class="formula" id="formula">
-          120 messages × 5 minutes ÷ 60 × $15/hour
+          120 questions × 5 minutes ÷ 60 × $15/hour
         </p>
         <p class="disclaimer">
-          Illustrative estimate only. Actual time and labor value depend on message
-          volume, how many requests the assistant handles, and the business’s staffing
-          costs. Labor value is not a guaranteed cash saving.
+          Illustrative estimate only. Actual time and labor value depend on question
+          volume, how many questions the assistant can answer using the knowledge base,
+          and the business’s staffing costs. Labor value is not a guaranteed cash saving.
         </p>
       </section>
 
@@ -658,21 +658,21 @@
         <h2 class="section-heading">Tools used</h2>
         <div class="tool-list">
           <span class="tool">n8n</span>
-          <span class="tool">OpenRouter</span>
-          <span class="tool">Google Docs</span>
-          <span class="tool">Simple Memory</span>
+          <span class="tool">Google Drive</span>
+          <span class="tool">Supabase</span>
+          <span class="tool">Ollama</span>
           <span class="tool">Javascript</span>
         </div>
       </section>
 
-      <section class="panel workflow">
+      <section hidden class="panel workflow">
         <p class="eyebrow">Workflow overview</p>
-        <h2 class="section-heading">See how incoming messages get a response</h2>
+        <h2 class="section-heading">See how documents power chat responses</h2>
 
         <div class="workflow-placeholder">
           <span>
             Add your workflow screenshot here<br />
-            Suggested: message → filter → retrieve document → AI response
+            Suggested: Google Drive → Supabase knowledge base → AI chat response
           </span>
         </div>
       </section>
@@ -682,9 +682,9 @@
           <p class="eyebrow">Context</p>
           <h2>The challenge</h2>
           <p>
-            Social media questions can arrive at any time, and answering repeated
-            inquiries manually can take staff away from other work. Responses can also
-            vary when useful business information is spread across different documents.
+            Helpful information can be spread across multiple documents, making it
+            difficult to find accurate answers quickly. The knowledge base also needs
+            to stay current when source files change.
           </p>
         </section>
 
@@ -692,10 +692,10 @@
           <p class="eyebrow">Approach</p>
           <h2>The solution</h2>
           <p>
-            The workflow filters incoming requests, retrieves relevant information from
-            a connected knowledge source, and gives it to an AI agent to prepare a
-            helpful response. Conversation memory helps the assistant follow the thread
-            of a continuing conversation.
+            The workflow monitors Google Drive for file additions, updates, and
+            deletions, then updates the corresponding information in Supabase. The AI
+            agent searches the stored knowledge for relevant information before
+            responding to chat messages.
           </p>
         </section>
       </div>
@@ -708,9 +708,9 @@
           <article class="step">
             <div class="step-number">1</div>
             <div>
-              <h3>Receive a message</h3>
+              <h3>Monitor Google Drive</h3>
               <p>
-                A social media message reaches the workflow through its webhook.
+                The workflow detects when a document is added, updated, or deleted.
               </p>
             </div>
           </article>
@@ -718,10 +718,10 @@
           <article class="step">
             <div class="step-number">2</div>
             <div>
-              <h3>Filter the request</h3>
+              <h3>Update the knowledge base</h3>
               <p>
-                The workflow checks the incoming request and continues along the
-                appropriate path.
+                New or changed files are processed and stored in the Supabase vector
+                database; deleted files are removed from the index.
               </p>
             </div>
           </article>
@@ -729,10 +729,10 @@
           <article class="step">
             <div class="step-number">3</div>
             <div>
-              <h3>Retrieve helpful information</h3>
+              <h3>Receive a chat question</h3>
               <p>
-                Relevant information is fetched from a connected document or knowledge
-                source.
+                A chat message is passed to the AI agent, which searches for relevant
+                information in the knowledge base.
               </p>
             </div>
           </article>
@@ -740,10 +740,10 @@
           <article class="step">
             <div class="step-number">4</div>
             <div>
-              <h3>Prepare a response</h3>
+              <h3>Prepare an informed response</h3>
               <p>
-                The AI agent uses the retrieved information and conversation memory to
-                prepare a reply.
+                The assistant uses the retrieved document information to respond to the
+                user’s question.
               </p>
             </div>
           </article>
@@ -752,11 +752,12 @@
 
       <section class="panel outcome">
         <p class="eyebrow">Outcome</p>
-        <h2>More consistent replies to common social media questions</h2>
+        <h2>Answers grounded in the latest connected documents</h2>
         <p>
-          This demo shows how incoming messages can be matched with relevant information
-          and answered with AI support. The connected knowledge source helps ground
-          responses, while conversation memory supports follow-up messages.
+          This demo shows how a searchable knowledge base can help an AI assistant
+          answer questions using business documents. File changes in Google Drive are
+          reflected in Supabase so the assistant can retrieve relevant information
+          when responding to chat messages.
         </p>
       </section>
 
@@ -764,32 +765,32 @@
         <p class="eyebrow">Demo</p>
         <h2>Example conversation and test scenarios</h2>
 
-      <div class="evidence">
-        <div class="evidence-box">
-          <h3>Illustrative sample conversation</h3>
-          <div class="conversation">
-            <p class="message">
-              Hi, could you tell me what services you offer?
-            </p>
-            <p class="message agent">
-              We offer workflow automation, AI chat assistants, and CRM setup. What kind
-              of support are you looking for?
-            </p>
-            <p class="message">
-              Do you also have information about your pricing?
-            </p>
-            <p class="message agent">
-              Our workflow automation packages start at $250. AI chat assistant setup
-              starts at $500, and CRM setup starts at $300. The final price depends on
-              the project’s requirements.
-            </p>
+        <div class="evidence">
+          <div class="evidence-box">
+            <h3>Illustrative sample conversation</h3>
+            <div class="conversation">
+              <p class="message">
+                What is the process for requesting a refund?
+              </p>
+              <p class="message agent">
+                According to the returns policy, you can request a refund within 30
+                days of purchase. The item must be unused and in its original
+                packaging. Contact support with your order number to start the request.
+              </p>
+              <p class="message">
+                Is the original receipt required?
+              </p>
+              <p class="message agent">
+                The policy asks for your order number to help locate the purchase.
+                I don’t see a requirement for the original receipt in the available
+                information.
+              </p>
+            </div>
           </div>
-        </div>
-      </div>
 
         <p class="evidence-note">
-          The conversation is illustrative, not a message transcript. Replace it with
-          test results from your working demo when available.
+          The conversation is illustrative, not a verified response from the workflow.
+          Replace it with test results from your working demo when available.
         </p>
       </section>
 
@@ -819,11 +820,11 @@
       }
 
       function updateEstimate() {
-        const messages = getNumber(callsInput);
+        const questions = getNumber(callsInput);
         const minutes = getNumber(minutesInput);
         const hourlyRate = getNumber(rateInput);
 
-        const hoursSaved = (messages * minutes) / 60;
+        const hoursSaved = (questions * minutes) / 60;
         const laborValue = hoursSaved * hourlyRate;
 
         hoursResult.textContent =
@@ -834,7 +835,7 @@
         valueResult.textContent = currencyFormatter.format(laborValue);
 
         formula.textContent =
-          `${messages} messages × ${minutes} minutes ÷ 60 × ` +
+          `${questions} questions × ${minutes} minutes ÷ 60 × ` +
           `${currencyFormatter.format(hourlyRate)}/hour`;
       }
 

@@ -1,3 +1,4 @@
+import { visibility } from '@/content/visibility'
 import { certification, site } from '@/content/site'
 import type { Faq, ProductFilm, ProductTab, Quote, VideoTestimonial, WorkChapter } from '@/content/schema'
 
@@ -108,23 +109,23 @@ export function personJsonLd({ description, skills, credential, sameAs, companyU
       ...person(),
       description,
       image: absoluteUrl(site.avatar.src),
-      address: { '@type': 'PostalAddress', addressCountry: site.countryCode },
-      worksFor: { '@type': 'Organization', name: site.brand, url: companyUrl },
+      ...(site.countryCode ? { address: { '@type': 'PostalAddress', addressCountry: site.countryCode } } : {}),
+      ...(site.brand ? { worksFor: { '@type': 'Organization', name: site.brand, url: companyUrl } } : {}),
       knowsAbout: skills,
-      hasCredential: {
+      ...(visibility.certification ? { hasCredential: {
         '@type': 'EducationalOccupationalCredential',
         name: credential.name,
         credentialCategory: 'certification',
         identifier: credential.id,
         ...(certification.issuer ? { recognizedBy: { '@type': 'Organization', name: certification.issuer } } : {}),
         ...(credential.url ? { url: credential.url } : {}),
-      },
-      sameAs,
+      } } : {}),
+      sameAs: sameAs.filter((url) => /^https?:\/\//.test(url)),
     },
   ])
 }
 
-const serialize = (graph: object[]) => JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')
+const serialize = (graph: object[]) => JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, (key, value) => key === 'url' && !value ? undefined : value).replace(/</g, '\\u003c')
 
 type ShowcaseLd = { path: string; name: string; description: string; url: string; rooms: ProductTab[]; film: ProductFilm; faq: Faq[] }
 

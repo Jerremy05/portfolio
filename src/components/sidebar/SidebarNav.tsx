@@ -156,7 +156,7 @@ export function SidebarNav({ collapsed, onNavigate, onHoverChange }: Props) {
     <div ref={listRef} className="sb-list" onPointerLeave={onListPointerLeave} onBlur={onListBlur}>
       <span ref={indicatorRef} className="sb-indicator" aria-hidden />
 
-      {NAV_GROUPS.map((group) => (
+      {NAV_GROUPS.filter((group) => group.id === 'general' || navEntries(group.id).length > 0).map((group) => (
         <div key={group.id} className="sb-group" role="group" aria-labelledby={`sb-group-${group.id}`}>
           <div className="sb-group__label" aria-hidden={collapsed || undefined}>
             <span id={`sb-group-${group.id}`} className="sb-fade">
