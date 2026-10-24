@@ -21,3 +21,18 @@
   font-size: 15.5px;
   line-height: 1.65;
 }
+
+.lg-body a {
+  display: inline-block;
+  min-height: 44px;
+  max-width: 100%;
+  padding-block: 8px;
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.lg-body a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

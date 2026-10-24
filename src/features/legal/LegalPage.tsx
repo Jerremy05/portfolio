@@ -22,6 +22,7 @@ export function LegalPage({ page }: { page: PageRoute }) {
             {s.paragraphs.map((p) => (
               <p key={p}>{p}</p>
             ))}
+            {s.email ? <p><a href={`mailto:${s.email}`}>{s.email}</a></p> : null}
           </section>
         ))}
       </div>
