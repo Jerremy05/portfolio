@@ -122,7 +122,7 @@ The sidebar and mobile drawer show PH time (`Asia/Manila`) and US Eastern time (
 
 No public domain is configured yet. Set `site.url` to the final HTTPS address, then add `og:url`, `og:image` and `twitter:image` in `index.html`. Until then, the app omits canonical tags, and the build emits an empty sitemap without placeholder domains. Rebuild after setting the URL to generate the real sitemap and robots sitemap declaration. The page title and description are already configured.
 
-Run `npm run build` and `npm run lint`. With the dev server running, the current browser checks are `check:home`, `check:sidebar`, `check:search`, `check:services`, `check:work-sheet`, `check:contact`, `check:email-contact`, `check:case-studies`, and `check:site-settings`. For example:
+Run `npm run build` and `npm run lint`. With the dev server running, the current browser checks are `check:home`, `check:sidebar`, `check:search`, `check:services`, `check:work-sheet`, `check:contact`, `check:email-contact`, `check:case-studies`, `check:illustration-viewer`, and `check:site-settings`. For example:
 
 ```bash
 CHROMIUM_PATH=/usr/bin/chromium npm run check:case-studies
@@ -134,4 +134,4 @@ Omit `CHROMIUM_PATH` when using Playwright’s installed browser. Set `BASE` whe
 
 Every case study includes a client-facing “How it works” illustration immediately after its introduction. `src/content/workflow-illustrations.ts` maps the nine projects to their PNGs and provides readable text summaries. Its shared renderer adds the same section to the app and standalone demos. Layout styles live in `src/features/case-study/workflow-illustration.css`; Vite emits the shared standalone stylesheet at `/styles/workflow-illustration.css`.
 
-Images keep their complete aspect ratio and open at full size in a separate tab. The surrounding section follows the site theme; the illustrations retain their original light canvas. Original technical screenshot placeholders remain hidden for future use. Site 3 is **Social Media AI Assistant**; site 9 is the separate **RAG-Powered AI Assistant**. The workflow gallery is in `public/images/workflows/README.md`.
+Images keep their complete aspect ratio and enlarge in a same-page dialog, with zoom controls, scrolling/panning, Escape/backdrop dismissal, and a Close button. The shared viewer script is `public/scripts/illustration-viewer.js`. The surrounding section follows the site theme; the illustrations retain their original light canvas. Original technical screenshot placeholders remain hidden for future use. Site 3 is **Social Media AI Assistant**; site 9 is the separate **RAG-Powered AI Assistant**. The workflow gallery is in `public/images/workflows/README.md`.

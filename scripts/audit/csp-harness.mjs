@@ -39,6 +39,13 @@ for (const route of ROUTES) {
     await page.evaluate((t) => window.scrollTo(0, t), y)
     await page.waitForTimeout(60)
   }
+  if (await page.locator('.workflow-illustration__frame').count()) {
+    await page.locator('#workflow-illustration-viewer').waitFor({ state: 'attached' })
+    await page.locator('.workflow-illustration__frame').click()
+    await page.waitForFunction(() => document.querySelector('#workflow-illustration-viewer')?.open)
+    await page.getByRole('button', { name: 'Zoom in', exact: true }).click()
+    await page.getByRole('button', { name: 'Close illustration' }).click()
+  }
   await page.waitForTimeout(1500)
   const theme = await page.evaluate(() => document.documentElement.dataset.theme ?? null)
   if (!route.startsWith('/demos/') && theme !== 'dark') bad.push(`theme bootstrap did not run (data-theme=${theme})`)

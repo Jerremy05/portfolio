@@ -46,8 +46,8 @@ try {
           return image.naturalWidth > 1000 && getComputedStyle(image).objectFit === 'contain'
             && Math.abs(bounds.height - bounds.width * image.naturalHeight / image.naturalWidth) < 1
         }), 'the full illustration loads without cropping')
-        assert.equal(await page.locator('.workflow-illustration__frame').getAttribute('href'), imagePath)
-        assert.equal(await page.locator('.workflow-illustration__frame').getAttribute('target'), '_blank')
+        assert.equal(await page.locator('.workflow-illustration__frame').evaluate((element) => element.tagName), 'BUTTON')
+        assert.equal(await page.locator('.workflow-illustration__frame').getAttribute('aria-haspopup'), 'dialog')
         const inputs = page.locator('.calculator input')
         assert.equal(await inputs.count(), 3)
         await inputs.nth(0).fill('120')

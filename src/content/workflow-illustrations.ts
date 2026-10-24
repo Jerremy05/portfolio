@@ -1,4 +1,5 @@
 /** Client-friendly illustrations shared by the portfolio routes and standalone demos. */
+export const WORKFLOW_VIEWER_PATH = '/scripts/illustration-viewer.js'
 export const WORKFLOW_STYLESHEET_PATH = '/styles/workflow-illustration.css'
 
 type WorkflowIllustration = {
@@ -88,14 +89,15 @@ export function withWorkflowIllustration(source: string, id: string): string {
         <h2 class="workflow-illustration__title" id="workflow-illustration-title">How it works</h2>
         <p class="workflow-illustration__intro">Follow the main steps from start to finish.</p>
         <figure class="workflow-illustration__figure">
-          <a class="workflow-illustration__frame" href="${illustration.src}" target="_blank" rel="noopener noreferrer" aria-label="Open full-size ${title} illustration (new tab)">
+          <button type="button" class="workflow-illustration__frame" aria-haspopup="dialog" aria-controls="workflow-illustration-viewer" aria-label="Enlarge ${title} illustration">
             <img src="${illustration.src}" width="${illustration.width}" height="${illustration.height}" loading="lazy" decoding="async" alt="Client-friendly workflow overview for ${title}" />
-            <span class="workflow-illustration__open">Open full-size illustration <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4L10 14" /><path d="M20 14v6H4V4h6" /></svg></span>
-          </a>
+            <span class="workflow-illustration__open">Enlarge illustration <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5" /></svg></span>
+          </button>
           <figcaption class="workflow-illustration__caption">${escapeHtml(illustration.summary)}</figcaption>
         </figure>
       </section>`
   return source
     .replace('</head>', `    <link rel="stylesheet" href="${WORKFLOW_STYLESHEET_PATH}" />\n  </head>`)
     .replace('</header>', `</header>\n${section}`)
+    .replace('</body>', `    <script src="${WORKFLOW_VIEWER_PATH}" async></script>\n  </body>`)
 }

@@ -3,6 +3,7 @@ import { Link, useLoaderData } from 'react-router'
 import { HeadMeta } from '@/app/PageMeta'
 import { RouteStage } from '@/app/RouteStage'
 import { caseStudyPath } from '@/content/work'
+import { WORKFLOW_VIEWER_PATH } from '@/content/workflow-illustrations'
 import { site } from '@/content/site'
 import type { caseStudyLoader } from './case-study-loader'
 import './case-study.css'
@@ -42,6 +43,7 @@ export function CaseStudyPage() {
   if (!study || !html) return <RouteStage title="Case study not found" label="Page not found" />
   return (
     <article className="case-study">
+      <script src={WORKFLOW_VIEWER_PATH} async />
       <HeadMeta title={`${study.label} | ${site.name}`} description={study.summary} path={caseStudyPath(study.id)} />
       <nav className="case-study__nav" aria-label="Case study navigation">
         <Link className="btn-line" to="/work/case-studies">← Back to projects</Link>
