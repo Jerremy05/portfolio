@@ -129,3 +129,9 @@ CHROMIUM_PATH=/usr/bin/chromium npm run check:case-studies
 ```
 
 Omit `CHROMIUM_PATH` when using Playwright’s installed browser. Set `BASE` when using a different dev/preview port. The case study check covers nine projects at three widths in both themes, calculators, theme persistence and browser history. Template-specific checks such as Showcase and Proof remain in source for when those features are restored. Production CSP and responsive checks live in `scripts/audit/`.
+
+### Case study illustrations
+
+Every case study includes a client-facing “How it works” illustration immediately after its introduction. `src/content/workflow-illustrations.ts` maps the nine projects to their PNGs and provides readable text summaries. Its shared renderer adds the same section to the app and standalone demos. Layout styles live in `src/features/case-study/workflow-illustration.css`; Vite emits the shared standalone stylesheet at `/styles/workflow-illustration.css`.
+
+Images keep their complete aspect ratio and open at full size in a separate tab. The surrounding section follows the site theme; the illustrations retain their original light canvas. Original technical screenshot placeholders remain hidden for future use. Site 3 is **Social Media AI Assistant**; site 9 is the separate **RAG-Powered AI Assistant**. The workflow gallery is in `public/images/workflows/README.md`.

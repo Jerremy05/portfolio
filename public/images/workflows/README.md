@@ -8,7 +8,7 @@ These are simplified explanations, not execution screenshots or measured results
 |---|---|---|
 | AI Receptionist | [View / download](ai-receptionist-portfolio.png) | n8n, Vapi, Google Calendar |
 | Asana CRM Lead Engagement | [View / download](asana-crm-lead-engagement-portfolio.png) | Zapier, Google Drive, Asana, Gmail, AI by Zapier |
-| Social Media AI Agent with RAG | [View / download](social-media-ai-assistant-portfolio.png) | n8n, Google Drive, Google Sheets, Google Docs, Supabase, AI Agent, Ollama, OpenRouter |
+| Social Media AI Assistant | [View / download](social-media-ai-assistant-portfolio.png) | n8n, Google Docs, OpenRouter, conversation memory |
 | Automated Lead Enrichment | [View / download](automated-lead-enrichment-portfolio.png) | Zapier, Gmail, Google Sheets, Slack, AI by Zapier |
 | Gmail Attachment Organizer | [View / download](gmail-attachment-organizer-portfolio.png) | Make, Gmail, Google Drive, Google Sheets, Gemini |
 | Social Media Content Repurposing | [View / download](social-media-content-repurposing-portfolio.png) | Zapier, Google Drive, Facebook, AI by Zapier |
@@ -37,11 +37,11 @@ These are simplified explanations, not execution screenshots or measured results
 </details>
 
 <details>
-<summary>Social Media AI Agent with RAG</summary>
+<summary>Social Media AI Assistant</summary>
 
-[![Social Media AI Agent with RAG — illustrated workflow](social-media-ai-assistant-portfolio.png)](social-media-ai-assistant-portfolio.png)
+[![Social Media AI Assistant — illustrated workflow](social-media-ai-assistant-portfolio.png)](social-media-ai-assistant-portfolio.png)
 
-**Tools:** n8n, Google Drive, Google Sheets, Google Docs, Supabase, AI Agent, Ollama, OpenRouter
+**Tools:** n8n, Google Docs, OpenRouter, conversation memory
 
 </details>
 

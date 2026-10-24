@@ -1,4 +1,5 @@
 import type { LoaderFunctionArgs } from 'react-router'
+import { withWorkflowIllustration } from '@/content/workflow-illustrations'
 import { sampleSites } from '@/content/work'
 
 // Each full authored document is the single source for its standalone demo and portfolio page.
@@ -10,5 +11,5 @@ const documents = import.meta.glob<string>('../../content/case-studies/*.html', 
 export async function caseStudyLoader({ params }: LoaderFunctionArgs) {
   const study = sampleSites.find((item) => item.id === params.project)
   const load = study ? documents[`../../content/case-studies/${study.id}.html`] : undefined
-  return { study, document: load ? await load() : '' }
+  return { study, document: load && study ? withWorkflowIllustration(await load(), study.id) : '' }
 }

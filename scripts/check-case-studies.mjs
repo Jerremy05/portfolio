@@ -3,6 +3,11 @@ import assert from 'node:assert/strict'
 import { chromium } from 'playwright'
 const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {})
 const base = process.env.BASE ?? 'http://localhost:5190'
+const illustrations = [
+  'ai-receptionist', 'asana-crm-lead-engagement', 'social-media-ai-assistant',
+  'automated-lead-enrichment', 'gmail-attachment-organizer', 'social-media-content-repurposing',
+  'xero-transaction-export-to-asana', 'hr-candidate-review-assistant', 'rag-powered-ai-assistant',
+]
 let checks = 0
 try {
   for (const width of [390, 820, 1440]) {
@@ -27,6 +32,22 @@ try {
         })
         assert.ok(panelMatches, `theme surface: ${id}/${width}/${theme}`)
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `overflow: ${id}/${width}/${theme}`)
+        const illustration = page.locator('#workflow-illustration img')
+        assert.equal(await illustration.count(), 1, 'one illustration for each case study')
+        const imagePath = `/images/workflows/${illustrations[id - 1]}-portfolio.png`
+        assert.equal(await illustration.getAttribute('src'), imagePath)
+        await illustration.scrollIntoViewIfNeeded()
+        await page.waitForFunction(() => {
+          const image = document.querySelector('#workflow-illustration img')
+          return image?.complete && image.naturalWidth > 0
+        })
+        assert.ok(await illustration.evaluate((image) => {
+          const bounds = image.getBoundingClientRect()
+          return image.naturalWidth > 1000 && getComputedStyle(image).objectFit === 'contain'
+            && Math.abs(bounds.height - bounds.width * image.naturalHeight / image.naturalWidth) < 1
+        }), 'the full illustration loads without cropping')
+        assert.equal(await page.locator('.workflow-illustration__frame').getAttribute('href'), imagePath)
+        assert.equal(await page.locator('.workflow-illustration__frame').getAttribute('target'), '_blank')
         const inputs = page.locator('.calculator input')
         assert.equal(await inputs.count(), 3)
         await inputs.nth(0).fill('120')
@@ -41,6 +62,18 @@ try {
     assert.deepEqual(errors, [])
     await page.close()
   }
+  // The same generated section and stylesheet must work on every standalone demo.
+  const demo = await browser.newPage({ viewport: { width: 390, height: 844 } })
+  for (let id = 1; id <= 9; id++) {
+    await demo.goto(`${base}/demos/sites/site-${id}.html`)
+    const image = demo.locator('#workflow-illustration img')
+    await image.scrollIntoViewIfNeeded()
+    await demo.waitForFunction(() => document.querySelector('#workflow-illustration img')?.naturalWidth > 0)
+    assert.equal(await image.getAttribute('src'), `/images/workflows/${illustrations[id - 1]}-portfolio.png`)
+    assert.equal(await image.evaluate((image) => getComputedStyle(image).objectFit), 'contain')
+    assert.ok(await demo.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
+  }
+  await demo.close()
   const page = await browser.newPage({ reducedMotion: 'reduce' })
   await page.goto(`${base}/work/case-studies`)
   const card = page.locator('.sh__link[href="/work/case-studies/site-1"]')
@@ -60,7 +93,7 @@ try {
   await page.locator('.case-study h1').waitFor()
   await page.getByRole('link', { name: 'Back to projects' }).click()
   await page.locator('dialog[open]').waitFor()
-  console.log(`PASS: ${checks} project/viewport/theme combinations, calculators, same-tab navigation, Back/Forward, and return to projects`)
+  console.log(`PASS: ${checks} project/viewport/theme combinations, complete illustrations, standalone demos, calculators, same-tab navigation, Back/Forward, and return to projects`)
 } finally {
   await browser.close()
 }

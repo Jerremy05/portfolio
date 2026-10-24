@@ -6,6 +6,7 @@ import { caseStudyPath } from '@/content/work'
 import { site } from '@/content/site'
 import type { caseStudyLoader } from './case-study-loader'
 import './case-study.css'
+import './workflow-illustration.css'
 
 export function CaseStudyPage() {
   const { study, document: source } = useLoaderData<typeof caseStudyLoader>()

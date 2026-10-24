@@ -1,0 +1,62 @@
+/* Shared with standalone demos. Keep the complete image in a frame; never crop it. */
+.workflow-illustration {
+  margin-block: 24px;
+  color: var(--ink);
+  scroll-margin-top: 72px;
+}
+.workflow-illustration__title {
+  margin: 6px 0 0;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.workflow-illustration__intro {
+  margin: 10px 0 20px;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.workflow-illustration__figure { margin: 0; }
+.workflow-illustration__frame {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--ink);
+  text-decoration: none;
+}
+.workflow-illustration__frame > img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+}
+.workflow-illustration__frame:hover { border-color: var(--accent); }
+.workflow-illustration__frame:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.workflow-illustration__open {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 14px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.workflow-illustration__open > svg { flex: none; }
+.workflow-illustration__caption {
+  max-width: 75ch;
+  margin: 14px 0 0;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.65;
+}
+@media (max-width: 700px) {
+  .workflow-illustration__open { justify-content: center; text-align: center; }
+}
