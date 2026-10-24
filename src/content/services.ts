@@ -3,8 +3,8 @@ import { tools } from './tools'
 
 export const servicesPage = {
   eyebrow: 'Services',
-  title: 'Everything you offer, in one line each.',
-  lede: 'PLACEHOLDER - tell me what to put here: one sentence on what you offer and how a client can combine it.',
+  title: 'How I can help your business.',
+  lede: 'Practical automation services for customer support, daily operations, and lead management.',
 }
 
 /**
@@ -13,10 +13,10 @@ export const servicesPage = {
  */
 export const servicesSection = {
   eyebrow: servicesPage.eyebrow,
-  titleThin: 'Pick one',
-  titleBold: 'or stack a few.',
-  explore: 'View case study',
-  /** Relevant case study per service. The GHL card uses a related Asana CRM example. */
+  titleThin: 'How I can help',
+  titleBold: 'your business.',
+  explore: 'See an example',
+  /** One representative case study for each broad service category. */
   caseStudies: {
     'service-1': 'site-1',
     'service-2': 'site-7',
@@ -32,58 +32,42 @@ export const BULLET = 'PLACEHOLDER - tell me what to put here: one short benefit
 export const services: Service[] = [
   {
     id: 'service-1',
-    title: 'AI Agents & Appointment Booking',
-    summary: 'Voice and chat assistants that answer common questions, collect customer details, and help schedule appointments.',
-    outcome: 'Easier Appointment Booking',
-    bullets: ['Answer customer questions anytime', 'Capture inquiries before they’re missed', 'Make booking easier with instant confirmations'],
-    tools: [tools.toolA, tools.toolB, tools.toolC, tools.toolE, tools.toolN],
+    title: 'AI Assistants & Agents',
+    summary: 'Build assistants that help customers and your team.',
+    outcome: 'Helpful Customer Support',
+    bullets: ['Handle common inquiries', 'Support booking and follow-up', 'Find answers in business documents'],
+    tools: [tools.toolB, tools.toolA, tools.toolE, tools.toolR, tools.toolT],
   },
   {
     id: 'service-2',
-    title: 'Workflow Automation',
-    summary: 'Connect the apps you use to handle repetitive tasks and move information automatically.',
-    outcome: 'Less Manual Work',
-    bullets: [
-      'Spend less time copying information between apps',
-      'Reduce missed steps in routine tasks',
-      'Keep information moving between your tools',
-    ],
-    tools: [tools.toolB, tools.toolG, tools.toolJ, tools.toolM, tools.toolO],
+    title: 'Business Workflow Automation',
+    summary: 'Connect your apps and reduce repetitive admin work.',
+    outcome: 'Less Repetitive Admin',
+    bullets: ['Move data between tools', 'Keep records in sync', 'Automate routine handoffs'],
+    tools: [tools.toolB, tools.toolG, tools.toolJ, tools.toolS],
   },
   {
     id: 'service-3',
-    title: 'GHL Funnel, Automation, CRM',
-    summary: 'Capture inquiries through Funnel, keep lead details organized, and make follow-up easier in GoHighLevel.',
-    outcome: 'More Organized Lead Follow-Up',
-    bullets: [
-      'Collect inquiries through landing pages and forms',
-      'See each lead’s details and next step in one place',
-      'Send timely follow-ups to encourage a reply or booking',
-    ],
-    tools: [tools.toolL, tools.toolB, tools.toolO],
+    title: 'CRM & Lead Management',
+    summary: 'Organize leads from first inquiry to client onboarding.',
+    outcome: 'Organized Lead Follow-Up',
+    bullets: ['Capture inquiries', 'Manage pipelines and follow-ups', 'Coordinate client onboarding'],
+    tools: [tools.toolL, tools.toolI, tools.toolG],
   },
   {
     id: 'service-4',
     title: 'Lead Research & Enrichment',
-    summary: 'Add useful company details to lead records so you can review and prioritize potential customers.',
-    outcome: 'Better-Informed Lead Decisions',
-    bullets: [
-      'See key company details at a glance',
-      'Prioritize leads using the details that matter',
-      'Flag incomplete records for review',
-    ],
-    tools: [tools.toolJ, tools.toolI, tools.toolK, tools.toolS, tools.toolP],
+    summary: 'Research prospects and add useful context to lead records.',
+    outcome: 'Better-Informed Outreach',
+    bullets: ['Find company information', 'Prioritize with clear criteria', 'Flag missing details for review'],
+    tools: [tools.toolG, tools.toolH, tools.toolS, tools.toolP],
   },
   {
     id: 'service-5',
-    title: 'AI Content & File Automation',
-    summary: 'Turn transcripts into content drafts and sort incoming files into the right places.',
+    title: 'Content & Document Automation',
+    summary: 'Reduce the work of preparing content and organizing files.',
     outcome: 'Less Content Admin',
-    bullets: [
-      'Create more content from existing recordings',
-      'Find files without sorting them by hand',
-      'Keep content and documents organized',
-    ],
-    tools: [tools.toolA, tools.toolF, tools.toolK],
+    bullets: ['Repurpose existing material', 'Name and file attachments', 'Log documents for easy retrieval'],
+    tools: [tools.toolJ, tools.toolG, tools.toolF, tools.toolN],
   },
 ]

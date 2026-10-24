@@ -51,7 +51,7 @@ const read = (page) =>
       dims: cards.map((c) => Number(getComputedStyle(c.querySelector('.sv__dim')).opacity)),
       rule: rule ? new DOMMatrix(getComputedStyle(rule).transform).a : null,
       gaps: cards.slice(1).map((c, i) => Math.round(c.getBoundingClientRect().top - cards[i].getBoundingClientRect().bottom)),
-      fits: cards.every((c) => c.scrollHeight <= c.clientHeight + 1),
+      fits: cards.every((c) => c.scrollHeight <= c.clientHeight + 1 && c.scrollWidth <= c.clientWidth + 1),
       overflowX: document.documentElement.scrollWidth > innerWidth,
       navLit: document.querySelector('[data-nav-id="services"]')?.dataset.active === 'true',
     }
@@ -81,6 +81,7 @@ for (const [label, viewport, extra] of [
   ['desk', { width: 1440, height: 900 }, {}],
   ['laptop', { width: 1280, height: 720 }, {}],
   ['tablet', { width: 820, height: 1180 }, { isMobile: true, hasTouch: true, deviceScaleFactor: 2 }],
+  ['phone-small', { width: 320, height: 844 }, { isMobile: true, hasTouch: true, deviceScaleFactor: 2 }],
   ['phone', { width: 390, height: 844 }, { isMobile: true, hasTouch: true, deviceScaleFactor: 2 }],
   ['reduced', { width: 1440, height: 900 }, { reducedMotion: 'reduce' }],
 ]) {

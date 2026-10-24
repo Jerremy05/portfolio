@@ -220,3 +220,10 @@
     display: none;
   }
 }
+
+/* Keep supporting tool names below the service outcome on narrow cards. */
+@media (max-width: 700px) {
+  .sv__top { flex-direction: column; gap: 12px; }
+  .sv__index { white-space: normal; }
+  .sv__tags { max-width: 100%; justify-content: flex-start; }
+}

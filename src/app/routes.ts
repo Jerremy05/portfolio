@@ -86,7 +86,7 @@ export const pages: PageRoute[] = [
     path: '/services',
     label: 'Services',
     title: `Services | ${SUFFIX}`,
-    description: 'AI agents, workflow automation, CRM, and lead enrichment.',
+    description: 'AI assistants and agents, workflow automation, CRM, lead research, and content and document automation.',
     icon: Stack,
     group: 'menu',
     section: 'services',

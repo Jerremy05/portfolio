@@ -57,7 +57,7 @@ export function ServicesSection() {
                 {service.summary} {service.bullets.join('. ')}.
               </span>
               <span className="sv__explore">
-                {service.id === 'service-3' ? 'View related CRM example' : servicesSection.explore}
+                {servicesSection.explore}
                 <ArrowUpRight size={14} weight="bold" aria-hidden />
               </span>
               <span className="sv__dim" aria-hidden />
