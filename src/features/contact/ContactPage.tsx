@@ -8,6 +8,7 @@ import { allFaqs } from '@/content/faqs'
 import { contactJsonLd } from '@/lib/seo'
 import { EmailContact } from './EmailContact'
 import { ContactForm } from './ContactForm'
+import { DiscoveryCall } from './DiscoveryCall'
 import './contact.css'
 
 const pad2 = (n: number) => String(n).padStart(2, '0')
@@ -16,7 +17,9 @@ const pad2 = (n: number) => String(n).padStart(2, '0')
 function ContactSheet({ nested }: { nested: boolean }) {
   const H = nested ? 'h3' : 'h2'
   return (
-    <div className="ct-sheet">
+    <>
+      <DiscoveryCall nested={nested} />
+      <div className="ct-sheet">
       <section className="ct-plate" aria-labelledby="ct-faq-title">
         <p className="pg-mono">{c.faqEyebrow}</p>
         <H id="ct-faq-title" className="ct-plate__title">
@@ -40,14 +43,22 @@ function ContactSheet({ nested }: { nested: boolean }) {
         </div>
       </section>
 
-      <section className="ct-panel" aria-labelledby="ct-card-title">
-        <H id="ct-card-title" className="ct-panel__title">
-          {c.cardTitle}
-        </H>
-        <p className="ct-panel__body">{c.cardBody}</p>
-        <ContactForm nested={nested} />
+      <section className="ct-panel ct-panel--email" aria-labelledby="ct-card-title">
+        <details className="ct-email-option">
+          <summary>
+            <H id="ct-card-title" className="ct-panel__title">
+              {c.cardTitle}
+              <CaretDown size={18} weight="bold" aria-hidden />
+            </H>
+          </summary>
+          <div>
+            <p className="ct-panel__body">{c.cardBody}</p>
+            <ContactForm nested={nested} />
+          </div>
+        </details>
       </section>
-    </div>
+      </div>
+    </>
   )
 }
 

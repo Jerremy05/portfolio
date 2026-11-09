@@ -6,11 +6,11 @@ export const contactPage = {
   eyebrow: 'Contact',
   titleThin: 'Tell me what',
   titleBold: 'you want to improve.',
-  lede: 'Thinking about automating a task or improving your lead follow-up? Tell me what you’re trying to solve, and I’ll reply with a practical next step.',
+  lede: 'Thinking about automating a task or improving your lead follow-up? Book a discovery call, or send a short project note if you prefer to start by email.',
   faqEyebrow: 'FAQs',
   faqTitle: 'Quick answers',
-  faqSub: 'Still have a question? Write below.',
-  cardTitle: 'Let’s talk about your project',
+  faqSub: 'A few things to know before we talk.',
+  cardTitle: 'Prefer to write first?',
   cardBody: 'Share the task you want to improve, the tools you use, and what a good result would look like. A few sentences is enough.',
 }
 
@@ -34,4 +34,17 @@ export const contactForm = {
   copy: 'Copy message',
   copied: 'Copied',
   again: 'Write another',
+}
+
+/** Paste the public appointment-schedule URL, not a private calendar URL.
+ * A full calendar.google.com/calendar/appointments/schedules/... link enables the inline calendar.
+ * Leave empty until the real booking page is ready; no placeholder calendar is shown to visitors.
+ */
+export const discoveryCall = {
+  url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2_Chofm0mL8bMhgghC1MwMY-WwzP4I7QhcRDn2tXx2STKfoRxL-CAgi-q_vglS5weBwIWLJRSY' as string,
+  eyebrow: 'Discovery call',
+  title: 'Let’s find the right next step.',
+  body: 'Choose a time to discuss your workflow, the tools you use, and what you want to improve. You can book directly without sending an inquiry first.',
+  button: 'Choose a time',
+  hint: 'Select an available time below and follow Google Calendar’s booking steps to confirm your call.',
 }

@@ -22,7 +22,7 @@ export function WorkSection() {
           <span className="wk-title__thin">{workSection.titleThin}</span> <span className="wk-title__bold">{workSection.titleBold}</span>
         </h2>
       </header>
-      <ul className={`wb__grid${workChapters.length === 1 ? ' wb__grid--single' : ''}`}>
+      <ul className={`wb__grid${workChapters.length <= 2 ? ' wb__grid--compact' : ''}`}>
       {/* <ul className="wb__grid wb__grid--case-studies-only"> */}
         {workChapters.map((chapter) => {
         {/* {workChapters.filter((chapter) => chapter.id === 'case-studies').map((chapter) => { */}
@@ -47,7 +47,7 @@ export function WorkSection() {
                 <span className="wb__cap">
                   <b>{chapter.title}</b>
                   <span className="wk-count">
-                    {chapter.count} {chapter.unit}
+                    {chapter.count === 0 ? 'Coming soon' : `${chapter.count} ${chapter.unit}`}
                   </span>
                 </span>
               </Link>

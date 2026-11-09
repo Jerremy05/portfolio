@@ -121,6 +121,8 @@ export type WorkChapter = {
   marks?: ToolMark[]
   /** The builds, shown as the sheet's showcase. Empty for a single-build chapter. */
   items: WorkItem[]
+  /** Copy shown while a chapter is waiting for its first published project. */
+  emptyState?: { title: string; description: string }
   /** Single-build chapters: a lead picture, a gallery and a live link instead of items. */
   lead?: Image
   gallery?: Image[]

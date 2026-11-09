@@ -8,6 +8,7 @@ import {
   // bookingPages,
   // caseStudies, // Restore with the matching template chapter.
   experiments,
+  funnelProjects,
   // featuredProject, // Restore with the matching template chapter.
   // funnelPages,
   // processDoc, // Restore with the matching template chapter.
@@ -216,6 +217,20 @@ export const workChapters: WorkChapter[] = [
         // ...bookingPages.map(demoItem('Booking pages')),
       ],
     },
+  {
+    id: 'funnels',
+    title: 'Funnels & Automation',
+    line: 'HighLevel funnels and the workflows behind them.',
+    count: funnelProjects.length,
+    unit: funnelProjects.length === 1 ? 'project' : 'projects',
+    description: 'HighLevel funnels and connected automations for lead capture, follow-up, and appointment booking.',
+    marks: [tools.toolL],
+    items: funnelProjects,
+    emptyState: {
+      title: 'HighLevel project coming soon',
+      description: 'A closer look at the funnel and its connected automation will be shared here.',
+    },
+  },
   //   {
   //   id: 'websites',
   //   title: 'Case Studies',

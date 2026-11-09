@@ -92,7 +92,7 @@ export function WorkSheet({ chapter }: { chapter: WorkChapter | null }) {
             <header ref={headRef} className="sh__head" onPointerDown={onDragStart}>
               <div>
                 <p className="wk-count">
-                  {shown.count} {shown.unit}
+                  {shown.count === 0 ? 'Coming soon' : `${shown.count} ${shown.unit}`}
                 </p>
                 <h2 id="sh-title" className="sh__title">
                   {shown.title}
@@ -105,7 +105,12 @@ export function WorkSheet({ chapter }: { chapter: WorkChapter | null }) {
 
             <div ref={bodyRef} className="sh__body" onScroll={onBodyScroll}>
               <p className="sh__intro">{shown.description}</p>
-              {shown.lead ? <Single chapter={shown} /> : shown.items.some((item) => item.image) ? <Showcase items={shown.items} /> : <Groups items={shown.items} />}
+              {shown.items.length === 0 && !shown.lead && shown.emptyState ? (
+                <section className="sh__empty" aria-labelledby="sh-empty-title" data-reveal>
+                  <h3 id="sh-empty-title">{shown.emptyState.title}</h3>
+                  <p className="sh__sum">{shown.emptyState.description}</p>
+                </section>
+              ) : shown.lead ? <Single chapter={shown} /> : shown.items.some((item) => item.image) ? <Showcase items={shown.items} /> : <Groups items={shown.items} />}
 
               {next && next !== shown ? (
                 <nav className="sh__next" aria-label="More work" data-reveal>

@@ -73,7 +73,7 @@ export const pages: PageRoute[] = [
     path: '/work',
     label: 'Projects',
     title: `Work | ${SUFFIX}`,
-    description: 'Explore AI agents and automation case studies.',
+    description: 'Explore AI agents, automation case studies, and HighLevel funnels.',
     icon: Briefcase,
     group: 'menu',
     badge: workCount,

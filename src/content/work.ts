@@ -1,5 +1,5 @@
 import { visibility } from './visibility'
-import type { AiGroup, AppBuild, Demo, Image, LinkRef } from './schema'
+import type { AiGroup, AppBuild, Demo, Image, LinkRef, WorkItem } from './schema'
 
 export const workPage = {
   eyebrow: 'Work',
@@ -107,6 +107,11 @@ export const funnelPages: Demo[] = [
   // demo('funnels', 'funnel-4', 'Funnel Page 4', 'Funnel', FUNNEL_SUMMARY),
 ]
 
+/** Add completed HighLevel funnel projects here; they appear in the Projects card and sheet.
+ * Include a screenshot in `image` and the public funnel URL in `href` when ready.
+ */
+export const funnelProjects: WorkItem[] = []
+
 export const bookingPages: Demo[] = [
   // demo('funnels', 'booking-1', 'Booking Page 1', 'Booking', BOOKING_SUMMARY),
   // demo('funnels', 'booking-2', 'Booking Page 2', 'Booking', BOOKING_SUMMARY),
@@ -211,7 +216,7 @@ export const templateWorkCount =
   buildsIn(experiments)
 
 /** Count only projects in published chapters. Template data above stays available for later. */
-export const workCount = sampleSites.length + (visibility.apps ? apps.length : 0)
+export const workCount = sampleSites.length + funnelProjects.length + (visibility.apps ? apps.length : 0)
 
 /** Internal portfolio URL for an automation case study. */
 export const caseStudyPath = (id: string) => `/work/case-studies/${id}`

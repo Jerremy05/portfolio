@@ -321,9 +321,13 @@
   line-height: 1.5;
 }
 
-/* A single published chapter should not leave empty cells for hidden templates. */
-.wb__grid.wb__grid--single {
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: clamp(250px, 32vw, 440px);
-  grid-template-areas: 'web';
+/* One or two published chapters fill the grid without gaps for hidden templates. */
+.wb__grid.wb__grid--compact {
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  grid-template-rows: none;
+  grid-auto-rows: clamp(250px, 32vw, 440px);
+  grid-template-areas: none;
+}
+.wb__grid--compact > .wb__cell {
+  grid-area: auto;
 }

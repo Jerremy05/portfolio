@@ -9,7 +9,7 @@ export function absoluteUrl(pathOrUrl: string): string {
 }
 
 /** Title for a Work chapter's own URL. */
-export const chapterTitle = (chapter: WorkChapter) => `${chapter.title}: ${chapter.count} ${chapter.unit} | Work by ${site.name}`
+export const chapterTitle = (chapter: WorkChapter) => `${chapter.title}: ${chapter.count === 0 ? 'Coming soon' : `${chapter.count} ${chapter.unit}`} | Work by ${site.name}`
 
 /**
  * schema.org structured data for a Work chapter: a CollectionPage whose main entity is the list of
@@ -27,7 +27,7 @@ export function chapterJsonLd(chapter: WorkChapter, path: string): string {
         ...(chapter.id === 'apps' ? { applicationCategory: 'MobileApplication' } : {}),
         creator: person,
       }))
-    : [
+    : chapter.lead ? [
         {
           '@type': 'CreativeWork',
           name: chapter.title,
@@ -36,7 +36,7 @@ export function chapterJsonLd(chapter: WorkChapter, path: string): string {
           ...(chapter.lead ? { image: absoluteUrl(chapter.lead.src) } : {}),
           creator: person,
         },
-      ]
+      ] : []
 
   const data = {
     '@context': 'https://schema.org',

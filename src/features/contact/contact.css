@@ -376,3 +376,90 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Google appointment booking leads the contact options on Home and /contact. */
+.ct-booking {
+  min-width: 0;
+  margin-top: clamp(32px, 6vh, 48px);
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+.ct-booking__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.ct-booking__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  color: var(--ink-2);
+}
+.ct-booking__link {
+  flex: none;
+  text-decoration: none;
+}
+.ct-booking__hint,
+.ct-booking__fallback,
+.ct-booking__privacy {
+  color: var(--ink-2);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.ct-booking__hint { margin: 24px 0 12px; }
+.ct-booking__calendar {
+  display: block;
+  width: 100%;
+  height: 780px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: #fff;
+  color-scheme: light;
+}
+.ct-booking__fallback { margin: 12px 0 0; }
+.ct-booking__privacy { margin: 16px 0 0; }
+.ct-booking :is(.ct-booking__fallback, .ct-booking__privacy) a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ct-booking a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+@container (max-width: 760px) {
+  .ct-booking__head { flex-direction: column; align-items: flex-start; }
+  .ct-booking__link { width: 100%; justify-content: center; }
+  .ct-booking__calendar { height: 960px; }
+}
+
+/* Email is an optional path; the calendar remains the primary contact action. */
+.ct-panel--email { align-self: start; }
+.ct-email-option > summary {
+  cursor: pointer;
+  list-style: none;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.ct-email-option > summary::-webkit-details-marker { display: none; }
+.ct-email-option > summary .ct-panel__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  font-size: 22px;
+}
+.ct-email-option > summary svg { flex: none; transition: transform 160ms ease; }
+.ct-email-option[open] > summary svg { transform: rotate(180deg); }
+.ct-email-option > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+  border-radius: 4px;
+}

@@ -12,7 +12,7 @@ export type LegalDoc = {
 /** Keep aligned with contact handling, clipboard actions, browser preferences, and deployed hosting. */
 export const privacyPolicy: LegalDoc = {
   title: 'Privacy Policy',
-  updated: 'October 24, 2026',
+  updated: 'November 10, 2026',
   intro: `This policy explains how information is handled when you browse ${site.url ? site.url.replace('https://', '') : 'this website'}, view the portfolio of ${site.name}, or contact me about a project.`,
   sections: [
     {
@@ -21,6 +21,14 @@ export const privacyPolicy: LegalDoc = {
         'The contact form uses the name, email address, and message you enter to prepare an email in your browser. Selecting “Send message” opens your preferred email app with those details filled in. The form does not submit them to a website backend. You still need to send the email from your mail app.',
         'The site itself does not save contact-form entries to local storage. Your browser or mail app may offer autofill or save a draft under its own settings and policies.',
         'If you send an email, I receive the information you choose to include. I use it to respond to your inquiry, discuss potential work, and manage any agreed project. Please avoid including passwords, API keys, or other sensitive information in an initial inquiry.',
+      ],
+    },
+    {
+      heading: 'Discovery-call booking',
+      paragraphs: [
+        'When enabled, the contact section embeds a public Google Calendar appointment schedule and provides a link to its booking page. Loading the embedded calendar connects your browser to Google, which may process technical information and use cookies according to its own policies.',
+        'If you book a call, Google handles the information requested on its booking page and the appointment details under its policies. I receive the booking information needed to arrange and attend your call. The portfolio itself does not store your booking details or determine available times.',
+        'You can choose to contact me by email instead of booking an appointment.',
       ],
     },
     {

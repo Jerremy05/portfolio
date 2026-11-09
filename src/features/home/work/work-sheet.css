@@ -343,3 +343,19 @@ a:hover .sh__name svg {
     gap: 48px 40px;
   }
 }
+
+/* A chapter can be visible before its first completed project is published. */
+.sh__empty {
+  display: grid;
+  gap: 12px;
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+}
+.sh__empty > h3 {
+  margin: 0;
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
