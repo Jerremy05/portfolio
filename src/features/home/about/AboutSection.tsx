@@ -1,5 +1,5 @@
-import { ArrowUpRight, MapPin } from '@phosphor-icons/react'
-import { aboutSection, capabilities, type AboutCredential } from '@/content/about'
+import { ArrowUpRight } from '@phosphor-icons/react'
+import { aboutSection, capabilities, credentials, type AboutCredential } from '@/content/about'
 import { certification, externalLinks, socials } from '@/content/site'
 import { personJsonLd } from '@/lib/seo'
 import './about.css'
@@ -15,25 +15,21 @@ const personLd = personJsonLd({
 })
 
 export function Credential({ c }: { c: AboutCredential }) {
-  const body = (
-    <>
-      <span className="ab__cred-mark">
-        {c.image ? <img className={c.imageDark ? 'only-light' : undefined} src={c.image.src} alt="" width={c.image.width} height={c.image.height} loading="lazy" decoding="async" /> : <MapPin size={16} weight="fill" aria-hidden />}
-        {c.imageDark ? <img className="only-dark" src={c.imageDark.src} alt="" width={c.imageDark.width} height={c.imageDark.height} loading="lazy" decoding="async" /> : null}
-      </span>
+  return (
+    <a className="ab__cred" href={c.href} target="_blank" rel="noopener noreferrer">
+      <img className="ab__cred-preview" src={c.image.src} alt={c.image.alt} width={c.image.width} height={c.image.height} loading="lazy" decoding="async" />
       <span className="ab__cred-copy">
         <b>{c.title}</b>
-        <small>{c.detail}</small>
+        <span className="ab__cred-issuer">{c.issuer}</span>
+        <time dateTime={c.date}>{c.completed}</time>
+        <span className="ab__cred-description">{c.description}</span>
+        <span className="ab__cred-link">
+          View certificate <span className="ab__cred-format">PDF</span>
+          <ArrowUpRight className="ab__cred-go" size={16} weight="bold" aria-hidden />
+        </span>
+        <span className="sr-only">(opens in a new tab)</span>
       </span>
-    </>
-  )
-  return c.href ? (
-    <a className="ab__cred" href={c.href} target="_blank" rel="noopener noreferrer">
-      {body}
-      <ArrowUpRight className="ab__cred-go" size={15} weight="bold" aria-hidden />
     </a>
-  ) : (
-    <span className="ab__cred">{body}</span>
   )
 }
 
@@ -101,11 +97,15 @@ export function AboutSection() {
         </ul>
       </div>
 
-      {/* <div className="ab__creds">
-        {credentials.map((c) => (
-          <Credential key={c.id} c={c} />
-        ))}
-      </div> */}
+      <section id="certificates" className="ab__certificates" aria-labelledby="ab-certificates-title">
+        <h3 id="ab-certificates-title">Certificates of completion</h3>
+        <p className="ab__certificates-intro">Completed training in AI automation, connected workflows, and CRM systems.</p>
+        <ul className="ab__creds">
+          {credentials.map((c) => (
+            <li key={c.id}><Credential c={c} /></li>
+          ))}
+        </ul>
+      </section>
 
     </section>
   )

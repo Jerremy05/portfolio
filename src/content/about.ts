@@ -1,5 +1,5 @@
 import type { Image, ToolMark } from './schema'
-import { certification, site } from './site'
+import { site } from './site'
 import { tools } from './tools'
 
 /**
@@ -35,31 +35,56 @@ export const capabilities: { title: string; tools: ToolMark[] }[] = [
 ]
 
 export type AboutCredential = {
-  id: 'cert' | 'place' | 'community' | 'partner'
+  id: string
   title: string
-  detail: string
-  image?: Image
-  /** A dark-theme version of the mark, when the light one would vanish on a dark ground (or the reverse). */
-  imageDark?: Image
-  href?: string
+  issuer: string
+  completed: string
+  date: string
+  description: string
+  image: Image
+  href: string
 }
 
+/** Completion certificates, with the original PDFs available to visitors. */
 export const credentials: AboutCredential[] = [
-  { id: 'cert', title: certification.title, detail: certification.detail, image: { ...certification.image!, alt: '' } },
-  { id: 'place', title: `Based ${site.timePlace}`, detail: 'Your time zone · Your hours' },
   {
-    id: 'community',
-    title: 'Your Community',
-    detail: 'Your role',
-    href: '#',
-    image: { src: '/images/badges/64/community.webp', alt: '', width: 64, height: 64 },
+    id: 'highlevel',
+    title: 'HighLevel CRM',
+    issuer: 'Tara AI Community+',
+    completed: 'November 9, 2026',
+    date: '2026-11-09',
+    description: 'CRM and pipeline management, funnels, email marketing, appointment booking, API integrations, and AI agents.',
+    image: { src: '/images/certificates/Jerremy_Beron_HighLevel.webp', alt: 'HighLevel CRM certificate of completion awarded to Jerremy Beron', width: 1400, height: 990 },
+    href: '/certificates/Jerremy_Beron_HighLevel.pdf',
   },
   {
-    id: 'partner',
-    title: 'Your Partner',
-    detail: 'Your role',
-    href: '#',
-    image: { src: '/images/badges/64/partner-light.webp', alt: '', width: 64, height: 64 },
-    imageDark: { src: '/images/badges/64/partner.webp', alt: '', width: 64, height: 64 },
+    id: 'n8n',
+    title: 'AI Automation with n8n',
+    issuer: 'Technical Virtual Assistants PH',
+    completed: 'October 7, 2026',
+    date: '2026-10-07',
+    description: 'Workflow design, triggers and actions, data handling, API connections, MCP servers and clients, and AI agents.',
+    image: { src: '/images/certificates/Jerremy_Beron_n8n.webp', alt: 'AI Automation with n8n certificate of completion awarded to Jerremy Beron', width: 1400, height: 990 },
+    href: '/certificates/Jerremy_Beron_n8n.pdf',
+  },
+  {
+    id: 'make',
+    title: 'No Code Automation with Make.com',
+    issuer: 'Technical Virtual Assistants PH',
+    completed: 'May 1, 2026',
+    date: '2026-05-01',
+    description: 'Scenario design, filters, triggers, app connections, data manipulation, advanced routing, HTTP requests, and AI agents.',
+    image: { src: '/images/certificates/Jerremy_Beron_Make.com.webp', alt: 'No Code Automation with Make.com certificate of completion awarded to Jerremy Beron', width: 1400, height: 990 },
+    href: '/certificates/Jerremy_Beron_Make.com.pdf',
+  },
+  {
+    id: 'zapier',
+    title: 'No Code Automation with Zapier',
+    issuer: 'Technical Virtual Assistants PH',
+    completed: 'April 27, 2026',
+    date: '2026-04-27',
+    description: 'Triggers, formatting, delays, filters, paths, looping, Sub-Zaps, webhooks, and AI by Zapier.',
+    image: { src: '/images/certificates/Jerremy_Beron_Zapier.webp', alt: 'No Code Automation with Zapier certificate of completion awarded to Jerremy Beron', width: 1400, height: 990 },
+    href: '/certificates/Jerremy_Beron_Zapier.pdf',
   },
 ]
