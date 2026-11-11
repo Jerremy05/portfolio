@@ -118,7 +118,7 @@ export function ContactForm({ nested = false }: { nested?: boolean }) {
         <span>{f.email}</span>
         <input type="email" {...field('email')} autoComplete="email" required maxLength={254} placeholder={f.phEmail} />
       </label>
-      <label className="ct-field">
+      <label className="ct-field ct-field--message">
         <span>{f.message}</span>
         <textarea {...field('message')} required maxLength={1500} placeholder={f.phMessage} />
       </label>

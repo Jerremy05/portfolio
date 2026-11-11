@@ -477,3 +477,15 @@
   line-height: 1.5;
   letter-spacing: .03em;
 }
+
+/* Let the message box fill the equal-height email card instead of leaving a blank footer. */
+.ct-panel--email .ct-form {
+  flex: 1;
+  grid-template-rows: auto auto minmax(300px, 1fr) auto;
+}
+.ct-field--message { grid-template-rows: auto minmax(0, 1fr); }
+.ct-field--message > textarea { min-height: 280px; }
+@container (max-width: 800px) {
+  .ct-panel--email .ct-form { grid-template-rows: auto auto minmax(240px, 1fr) auto; }
+  .ct-field--message > textarea { min-height: 220px; }
+}
