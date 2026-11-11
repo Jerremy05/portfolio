@@ -432,6 +432,12 @@ button.ab__cred:hover { border-color: var(--ink-2); }
 button.ab__cred:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 html:has(.certificate-preview[open]) { overflow: hidden; }
 .certificate-preview {
+  position: fixed;
+  inset: auto;
+  left: 50vw;
+  top: 50dvh;
+  transform: translate(-50%, -50%);
+  margin: 0;
   width: min(1100px, calc(100% - 32px));
   max-height: calc(100dvh - 32px);
   padding: 0;
