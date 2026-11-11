@@ -1,5 +1,5 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
-import { Link, useLoaderData } from 'react-router'
+import { Link, useLoaderData, useLocation } from 'react-router'
 import { HeadMeta } from '@/app/PageMeta'
 import { RouteStage } from '@/app/RouteStage'
 import { caseStudyPath } from '@/content/work'
@@ -10,6 +10,8 @@ import './case-study.css'
 import './workflow-illustration.css'
 
 export function CaseStudyPage() {
+  const location = useLocation()
+  const fromServices = location.state?.from === 'services'
   const { study, document: source } = useLoaderData<typeof caseStudyLoader>()
   const body = useRef<HTMLDivElement>(null)
   const html = useMemo(() => {
@@ -46,7 +48,9 @@ export function CaseStudyPage() {
       <script src={WORKFLOW_VIEWER_PATH} async />
       <HeadMeta title={`${study.label} | ${site.name}`} description={study.summary} path={caseStudyPath(study.id)} />
       <nav className="case-study__nav" aria-label="Case study navigation">
-        <Link className="btn-line" to="/work/case-studies">← Back to projects</Link>
+        <Link className="btn-line" to={fromServices ? '/#services' : '/work/case-studies'}>
+          {fromServices ? '← Back to services' : '← Back to projects'}
+        </Link>
         <a className="btn-line" href={study.href} target="_blank" rel="noopener noreferrer">Open standalone demo ↗</a>
       </nav>
       <div key={study.id} ref={body} dangerouslySetInnerHTML={{ __html: html }} />

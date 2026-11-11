@@ -26,6 +26,7 @@ export function ServicesSection() {
           <li key={service.id} className="sv__item" style={{ '--i': i } as CSSProperties}>
             <Link
               to={caseStudyPath(servicesSection.caseStudies[service.id]!)}
+              state={{ from: 'services' }}
               className="sv__card"
               data-card
             >
