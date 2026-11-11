@@ -98,50 +98,12 @@
   }
 }
 
-/*
- * Phones and tablets: the scroll exit runs as a CSS scroll timeline, on the compositor, in the same
- * frame as the thumb (a JS scrub trails it). Desktop with a fine pointer runs hero-scene.ts instead.
- * animation-timeline sits in its own, more specific rule: a minifier folds it into the `animation`
- * shorthand otherwise, and the browser drops the whole declaration.
- */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) and (not ((min-width: 1024px) and (hover: hover) and (pointer: fine))) {
-    .hero {
-      view-timeline-name: --hero;
-    }
-    .hero .hero__title {
-      animation: hero-sink linear both;
-    }
-    .hero .hero__foot {
-      animation: hero-leave linear both;
-    }
-    .app .hero .hero__title,
-    .app .hero .hero__foot {
-      animation-timeline: --hero;
-      animation-range: exit 0% exit 100%;
-    }
-  }
-}
-
-@keyframes hero-sink {
-  to {
-    opacity: 0;
-    transform: translateY(30svh) scale(0.92);
-  }
-}
-
-@keyframes hero-leave {
-  40%,
-  to {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__line,
-  .hero__sub,
-  .hero__cta {
-    animation: hero-fade 200ms ease both;
-  }
-}
+/* Keep the complete introduction readable as one section, without a scroll hold. */
+.hero { min-height: min(100svh, 900px); padding-block: 64px; }
+.hero__sub { margin-top: 28px; }
+.hero__statement { max-width: 64ch; margin-top: 28px; }
+.hero__body { margin: 0; color: var(--ink-2); font-size: clamp(16px, 1.8cqi, 20px); line-height: 1.65; text-wrap: pretty; }
+.hero__body strong { color: var(--ink); font-weight: 600; }
+.hero__cta { margin-top: 28px; }
+@media (max-width: 1023px) { .hero { min-height: calc(100svh - 56px); padding: 40px 20px; } }
+@media (prefers-reduced-motion: reduce) { .hero__line, .hero__sub, .hero__cta { animation: none; } }

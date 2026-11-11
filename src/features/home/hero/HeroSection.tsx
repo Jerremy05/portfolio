@@ -1,25 +1,12 @@
-import { useRef } from 'react'
 import { Link } from 'react-router'
 import { ArrowUpRight } from '@phosphor-icons/react'
-import { homeHero } from '@/content/home'
-import { useScrollScene } from '@/hooks/use-scroll-scene'
+import { homeHero, homeManifesto } from '@/content/home'
 import { scrollToSection } from '@/lib/motion/smooth-scroll'
-import { heroScene } from './hero-scene'
 import './hero.css'
 
-/**
- * Hero: a thin line over a bold one (Geist 100 / 700), centered and sized to the
- * content column, then a mono sub-head and one call to action. On scroll the two lines part and
- * sink back while the next section rises (hero-scene.ts on desktop, CSS scroll timeline on phones).
- * Each line sits in a `__layer` wrapper: the scroll motion moves the wrapper, the load entrance
- * animates the line, so the two never fight over one transform.
- */
 export function HeroSection() {
-  const ref = useRef<HTMLElement>(null)
-  useScrollScene(ref, heroScene)
-
   return (
-    <section ref={ref} id="top" className="hero" aria-labelledby="hero-title">
+    <section id="top" className="hero" aria-labelledby="hero-title">
       <h1 id="hero-title" className="hero__title">
         <span className="hero__layer hero__layer--thin">
           <span className="hero__line hero__line--thin">{homeHero.headlineThin}</span>
@@ -31,6 +18,14 @@ export function HeroSection() {
 
       <div className="hero__foot">
         <p className="hero__sub">{homeHero.subhead}</p>
+
+        <div className="hero__statement">
+          <p className="hero__body">
+            {homeManifesto.parts.map((part, index) => (
+              <span key={index}>{index > 0 ? ' ' : ''}{typeof part === 'string' ? part : <strong>{part.key}</strong>}</span>
+            ))}
+          </p>
+        </div>
 
         {/* Glides Home to the Contact section (a same-path link, so Lenis keeps its glide). */}
         <Link

@@ -2,7 +2,6 @@ import { visibility } from '@/content/visibility'
 import type { ComponentType } from 'react'
 import { AboutSection } from './about/AboutSection'
 import { HeroSection } from './hero/HeroSection'
-import { ManifestoSection } from './manifesto/ManifestoSection'
 import { ServicesSection } from './services/ServicesSection'
 import { WorkSection } from './work/WorkSection'
 import { ShowcaseSection } from '@/features/showcase/ShowcasePage'
@@ -18,7 +17,6 @@ export type HomeSection = { id: string; Component: ComponentType }
 
 export const homeSectionList: HomeSection[] = [
   { id: 'hero', Component: HeroSection },
-  { id: 'manifesto', Component: ManifestoSection },
   { id: 'work', Component: WorkSection },
   { id: 'services', Component: ServicesSection },
   { id: 'about', Component: AboutSection },
