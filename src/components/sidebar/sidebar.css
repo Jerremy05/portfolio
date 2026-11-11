@@ -152,12 +152,11 @@ background: var(--surface);
   height: 100%;
   border-radius: 12px;
   object-fit: cover;
-  background: radial-gradient(ellipse at 50% 35%, #f0f3e8 0%, #d5e3cd 100%);
+  background: #fff;
+  /* Lighting correction only: use the original photograph without facial regeneration. */
+  filter: brightness(1.025) contrast(1.035);
   box-shadow: 0 0 0 4px var(--surface);
   transition: box-shadow 180ms ease, transform var(--dur-press) ease-out;
-}
-:root[data-theme='dark'] .sb-pic__img {
-  background: radial-gradient(ellipse at 50% 35%, #477a50 0%, #23352a 100%);
 }
 .sb-profile:hover .sb-pic__img {
   box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px var(--accent);
