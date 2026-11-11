@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import { aboutSection, capabilities, credentials, type AboutCredential } from '@/content/about'
 import { certification, externalLinks, socials } from '@/content/site'
@@ -15,8 +16,10 @@ const personLd = personJsonLd({
 })
 
 export function Credential({ c }: { c: AboutCredential }) {
+  const preview = useRef<HTMLDialogElement>(null)
   return (
-    <a className="ab__cred" href={c.href} target="_blank" rel="noopener noreferrer">
+    <>
+    <button type="button" className="ab__cred" onClick={() => preview.current?.showModal()} aria-haspopup="dialog">
       <img className="ab__cred-preview" src={c.image.src} alt={c.image.alt} width={c.image.width} height={c.image.height} loading="lazy" decoding="async" />
       <span className="ab__cred-copy">
         <b>{c.title}</b>
@@ -24,12 +27,29 @@ export function Credential({ c }: { c: AboutCredential }) {
         <time dateTime={c.date}>{c.completed}</time>
         <span className="ab__cred-description">{c.description}</span>
         <span className="ab__cred-link">
-          View certificate <span className="ab__cred-format">PDF</span>
+          View certificate
           <ArrowUpRight className="ab__cred-go" size={16} weight="bold" aria-hidden />
         </span>
-        <span className="sr-only">(opens in a new tab)</span>
       </span>
-    </a>
+    </button>
+    <dialog
+      ref={preview}
+      className="certificate-preview"
+      aria-labelledby={`certificate-title-${c.id}`}
+      onClick={(event) => { if (event.target === event.currentTarget) preview.current?.close() }}
+    >
+      <div className="certificate-preview__panel">
+        <header className="certificate-preview__header">
+          <h2 id={`certificate-title-${c.id}`}>{c.title}</h2>
+          <button type="button" onClick={() => preview.current?.close()} aria-label="Close certificate preview">×</button>
+        </header>
+        <div className="certificate-preview__image">
+          <img src={c.image.src} alt={c.image.alt} width={c.image.width} height={c.image.height} loading="lazy" />
+        </div>
+        <a className="certificate-preview__download" href={c.href} download>Download PDF <ArrowUpRight size={16} aria-hidden /></a>
+      </div>
+    </dialog>
+    </>
   )
 }
 
