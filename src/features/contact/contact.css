@@ -490,10 +490,11 @@
   .ct-field--message > textarea { min-height: 160px; }
 }
 
-/* Use the full content column for the contact heading and both contact paths. */
+/* Center the contact area and cap its width on large screens. */
 .pg.ct {
   width: 100%;
-  max-width: none;
+  max-width: 1200px;
+  margin-inline: auto;
 }
 
 /* Compact spacing around the full-size, unscaled booking interface. */
