@@ -38,6 +38,12 @@ function routeFor(page: PageRoute): RouteObject {
   return { path: page.path.slice(1), element: elementFor(page) }
 }
 
+// A fresh opening starts on Home even if the saved address has a section anchor.
+// In-site section links still work normally after the router has initialized.
+if (window.location.pathname === '/' && window.location.hash) {
+  window.history.replaceState(window.history.state, '', `/${window.location.search}`)
+}
+
 /** Every route comes from the registry in routes.ts. */
 export const router = createBrowserRouter([
   {
