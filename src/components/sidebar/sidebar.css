@@ -8,8 +8,8 @@
 
 .sb-panel,
 .sb-float {
-  /* The clock line above the logo: 16px line + 10px gap. The band and the collapse toggle follow it. */
-  --clock-h: 44px;
+  /* Clocks sit below the portrait; no reserved clock space above the header. */
+  --clock-h: 0px;
 }
 
 .sb-panel {
@@ -54,23 +54,31 @@ background: var(--surface);
   text-align: center;
 }
 
-/* The portrait fills the header below the clocks; no empty accent band. */
+/* The portrait fills the header; no empty accent band. */
 .sb-head::before {
   content: none;
 }
 
-/* Your local time, live, on the band above the logo. Fades out on the rail like every label. */
+/* Both clocks share one row directly below the portrait. */
 .sb-clock {
   position: relative;
-  display: grid;
-  gap: 2px;
-  height: 34px;
-  margin: 0 0 calc(var(--clock-h) - 34px);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin: 14px 0 0;
   color: var(--ink-2);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 16px;
   white-space: nowrap;
 }
+.sb-clock > span + span {
+  padding-left: 10px;
+  border-left: 1px solid var(--line-strong);
+}
+
 .sb-clock time {
   color: var(--ink);
   font-weight: 600;

@@ -21,7 +21,7 @@ type Props = {
 
 /**
  * Everything inside the sidebar card. Shared by the desktop float and the phone drawer.
- * Header: live local time, an optional logo, a large square portrait,
+ * Header: an optional logo, a large square portrait, a single row of live clocks,
  * name, role, then the socials (all from content/site.ts).
  * Search is not in the card; it stays on Ctrl+K and in the phone top bar.
  */
@@ -39,10 +39,7 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
   return (
     <div ref={panelRef} className="sb-panel" data-lenis-prevent data-variant={variant} data-brand={visibility.brand} data-collapsed={collapsed}>
       <div className="sb-head">
-        <p className="sb-clock sb-fade">
-          <span title="Philippines · Asia/Manila">{site.timePlace} <time dateTime={time.iso}>{time.label}</time></span>
-          <span title="US Eastern Time · New York · adjusts for daylight saving">{site.usTimePlace} <time dateTime={usTime.iso}>{usTime.label}</time></span>
-        </p>
+
         {visibility.brand ? <Link to="/" className="sb-logo" onClick={onNavigate} aria-label={`${site.brand} home`}>
           <BrandMark className="sb-logo__mark" />
           <span className="sb-logo__name sb-fade" aria-hidden>
@@ -66,6 +63,10 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
               <SealCheck weight="fill" />
             </span> : null}
           </span>
+        <span className="sb-clock sb-fade">
+          <span title="Philippines · Asia/Manila">{site.timePlace} <time dateTime={time.iso}>{time.label}</time></span>
+          <span title="US Eastern Time · New York · adjusts for daylight saving">{site.usTimePlace} <time dateTime={usTime.iso}>{usTime.label}</time></span>
+        </span>
           <span className="sb-profile__name sb-fade">{site.name}</span>
           <span className="sb-profile__role sb-fade">
             {site.role}
