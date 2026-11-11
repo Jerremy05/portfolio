@@ -379,3 +379,50 @@ a.ab__cred:focus-visible,
     animation-name: none;
   }
 }
+
+/* Certificate deck: draw a card forward with a pointer or keyboard focus. */
+.ab__certificates .ab__creds {
+  display: flex;
+  gap: 0;
+  padding: 28px 0 20px;
+  isolation: isolate;
+}
+.ab__certificates .ab__creds > li {
+  position: relative;
+  flex: 0 0 34%;
+  margin-right: -12%;
+  transition: transform 280ms ease;
+}
+.ab__certificates .ab__creds > li:nth-child(1) { z-index: 1; }
+.ab__certificates .ab__creds > li:nth-child(2) { z-index: 2; }
+.ab__certificates .ab__creds > li:nth-child(3) { z-index: 3; }
+.ab__certificates .ab__creds > li:nth-child(4) { z-index: 4; }
+.ab__certificates .ab__creds > li:last-child { margin-right: 0; }
+.ab__certificates .ab__cred {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: -10px 6px 24px rgb(0 0 0 / .14);
+}
+.ab__certificates .ab__cred-preview { margin-top: 0; border-bottom: 1px solid var(--line); }
+.ab__certificates .ab__cred-copy { padding: 18px; }
+.ab__certificates .ab__creds > li:focus-within { z-index: 10; transform: translateY(-24px); }
+@media (hover: hover) and (pointer: fine) {
+  .ab__certificates .ab__creds > li:hover { z-index: 10; transform: translateY(-24px) rotate(-2deg); }
+  .ab__certificates .ab__cred:hover { box-shadow: 0 20px 32px rgb(0 0 0 / .22); }
+}
+@container (max-width: 720px) {
+  .ab__certificates .ab__creds { overflow-x: auto; gap: 16px; scroll-snap-type: x mandatory; padding: 12px 4px 24px; }
+  .ab__certificates .ab__creds > li { flex: 0 0 82%; margin-right: 0; scroll-snap-align: start; }
+  .ab__certificates .ab__creds > li:focus-within { transform: none; }
+}
+@media (hover: none) {
+  .ab__certificates .ab__creds { overflow-x: auto; gap: 16px; scroll-snap-type: x mandatory; }
+  .ab__certificates .ab__creds > li { flex: 0 0 min(82%, 320px); margin-right: 0; scroll-snap-align: start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ab__certificates .ab__creds > li { transition: none; }
+  .ab__certificates .ab__creds > li:hover,
+  .ab__certificates .ab__creds > li:focus-within { transform: none; }
+}
