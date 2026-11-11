@@ -9,6 +9,10 @@ import { DESKTOP_QUERY, useMediaQuery } from '@/hooks/use-media-query'
 import { useSmoothScroll } from '@/hooks/use-smooth-scroll'
 import { ShellProvider, useShell } from './shell-context'
 
+// Keep Home scroll positions for Back/Forward within this visit, but start a fresh
+// opening of the main address at the hero instead of restoring a previous visit.
+const homeScrollSession = crypto.randomUUID()
+
 /** Global shortcuts: Ctrl/Cmd+K opens search, Ctrl/Cmd+B collapses the desktop sidebar. */
 function useShortcuts(isDesktop: boolean) {
   const { setSearchOpen, toggleCollapsed } = useShell()
@@ -51,7 +55,11 @@ function Shell() {
         </div>
       </main>
       <SearchPalette />
-      <ScrollRestoration />
+      <ScrollRestoration getKey={(location) =>
+        location.pathname === '/' && !location.hash
+          ? `${homeScrollSession}:${location.key}`
+          : location.key
+      } />
     </div>
   )
 }
