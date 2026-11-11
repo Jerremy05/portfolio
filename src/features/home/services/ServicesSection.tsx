@@ -1,27 +1,15 @@
-import { useRef, type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import { caseStudyPath } from '@/content/work'
 import { services, servicesSection } from '@/content/services'
-import { useScrollScene } from '@/hooks/use-scroll-scene'
-import { servicesScene } from './services-scene'
 import './services.css'
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
-/**
- * Services, "Card stack". The heading holds while the five service
- * cards are dealt onto a pile: each card slides up and settles a few pixels below the one before,
- * which sinks back (scale) and dims under it, so a thin edge of every earlier card stays in view.
- * Phones: the same pile on native CSS sticky, without the sink. Reduced motion: a plain stack.
- * Every card opens a relevant case study within the portfolio.
- */
 export function ServicesSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  useScrollScene(sectionRef, servicesScene)
-
   return (
-    <section ref={sectionRef} id="services" className="sv" aria-labelledby="services-title">
+    <section id="services" className="sv" aria-labelledby="services-title">
       <header className="sv__head">
         <p className="sv__eyebrow">
           {servicesSection.eyebrow}
@@ -46,26 +34,18 @@ export function ServicesSection() {
                   {pad(i + 1)}
                   <span>{service.outcome}</span>
                 </span>
-                <span className="sv__tags">
-                  {service.tools.map((tool) => (
-                    <span key={tool.name}>{tool.name}</span>
-                  ))}
-                </span>
               </span>
               <span className="sv__name">{service.title}</span>
               <span className="sv__desc">
-                {service.summary} {service.bullets.join('. ')}.
+                {service.summary}
               </span>
               <span className="sv__explore">
                 {servicesSection.explore}
                 <ArrowUpRight size={14} weight="bold" aria-hidden />
               </span>
-              <span className="sv__dim" aria-hidden />
             </Link>
           </li>
         ))}
-        {/* Room for the finished pile to hold (services.css .sv__tail): sticky range ends at the list's content box. */}
-        <li className="sv__tail" aria-hidden />
       </ol>
     </section>
   )
