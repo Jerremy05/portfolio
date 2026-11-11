@@ -183,7 +183,7 @@
 .ab__creds {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 14px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -197,7 +197,7 @@
   height: 100%;
   overflow: hidden;
   border: 1px solid var(--line-strong);
-  border-radius: 14px;
+  border-radius: 10px;
   background: var(--surface-2);
   color: inherit;
   text-decoration: none;
@@ -217,11 +217,11 @@
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
-  padding: 20px;
+  gap: 6px;
+  padding: 14px;
 }
 .ab__cred-copy > b {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.3;
@@ -229,13 +229,13 @@
 .ab__cred-issuer,
 .ab__cred-copy > time {
   color: var(--ink-2);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.5;
 }
 .ab__cred-description {
-  margin: 4px 0 16px;
+  margin: 2px 0 8px;
   color: var(--ink-2);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.6;
 }
 .ab__cred-link {
@@ -244,7 +244,7 @@
   gap: 10px;
   width: 100%;
   margin-top: auto;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 .ab__cred-format {
@@ -268,10 +268,23 @@ a.ab__cred:focus-visible,
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+@container (min-width: 840px) {
+  .ab__creds { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 @container (max-width: 560px) {
   .ab__creds {
     grid-template-columns: minmax(0, 1fr);
   }
+  .ab__cred {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    align-items: start;
+  }
+  .ab__cred-preview {
+    margin-top: 14px;
+    border-bottom: 0;
+  }
+  .ab__cred-copy { padding: 12px; }
 }
 
 /* ---------- Narrow columns: the picture drops under the lead ---------- */

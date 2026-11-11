@@ -380,8 +380,9 @@
 /* Google appointment booking leads the contact options on Home and /contact. */
 .ct-booking {
   min-width: 0;
-  margin-top: clamp(32px, 6vh, 48px);
-  padding: clamp(20px, 3vw, 32px);
+  max-width: 880px;
+  margin: 28px auto 0;
+  padding: 20px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-xl);
   background: var(--surface);
@@ -411,11 +412,11 @@
   font-size: 13px;
   line-height: 1.6;
 }
-.ct-booking__hint { margin: 24px 0 12px; }
+.ct-booking__hint { margin: 16px 0 10px; }
 .ct-booking__calendar {
   display: block;
   width: 100%;
-  height: 780px;
+  height: 560px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: #fff;
@@ -435,7 +436,7 @@
 @container (max-width: 760px) {
   .ct-booking__head { flex-direction: column; align-items: flex-start; }
   .ct-booking__link { width: 100%; justify-content: center; }
-  .ct-booking__calendar { height: 960px; }
+  .ct-booking__calendar { height: 620px; }
 }
 
 /* Email is an optional path; the calendar remains the primary contact action. */
@@ -462,4 +463,10 @@
   outline: 2px solid var(--accent);
   outline-offset: 5px;
   border-radius: 4px;
+}
+
+.ct-booking .ct-panel__title { font-size: 22px; }
+.ct-booking .ct-panel__body { font-size: 14px; line-height: 1.5; }
+@container (max-width: 560px) {
+  .ct-booking { padding: 14px; }
 }
