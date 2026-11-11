@@ -1,13 +1,16 @@
-import { useLayoutEffect, useMemo, useRef } from 'react'
+import { lazy, Suspense, useLayoutEffect, useMemo, useRef } from 'react'
 import { Link, useLoaderData } from 'react-router'
 import { HeadMeta } from '@/app/PageMeta'
 import { RouteStage } from '@/app/RouteStage'
 import { caseStudyPath } from '@/content/work'
 import { WORKFLOW_VIEWER_PATH } from '@/content/workflow-illustrations'
 import { site } from '@/content/site'
+import { BookingLink } from '@/components/page/BookingLink'
 import type { caseStudyLoader } from './case-study-loader'
 import './case-study.css'
 import './workflow-illustration.css'
+
+const ProjectAutomation = lazy(() => import('@/features/home/automation/AutomationSection').then((module) => ({ default: module.AutomationSection })))
 
 export function CaseStudyPage() {
   const { study, document: source } = useLoaderData<typeof caseStudyLoader>()
@@ -16,7 +19,11 @@ export function CaseStudyPage() {
     // DOMParser leaves scripts inert. Only the trusted main content is inserted into the app.
     const main = new DOMParser().parseFromString(source, 'text/html').querySelector('main')
     main?.querySelectorAll('.back-link, footer, script, style').forEach((element) => element.remove())
-    return main?.innerHTML ?? ''
+    if (!main) return { lead: '', rest: '' }
+    const lead = [...main.children].filter((element) => element.matches('.page-heading, #workflow-illustration, .outcome'))
+    const leadHtml = lead.map((element) => element.outerHTML).join('\n')
+    lead.forEach((element) => element.remove())
+    return { lead: leadHtml, rest: main.innerHTML }
   }, [source])
   useLayoutEffect(() => {
     const root = body.current
@@ -40,7 +47,7 @@ export function CaseStudyPage() {
     update()
     return () => inputs.forEach((input) => input.removeEventListener('input', update))
   }, [html])
-  if (!study || !html) return <RouteStage title="Case study not found" label="Page not found" />
+  if (!study || !html.lead) return <RouteStage title="Case study not found" label="Page not found" />
   return (
     <article className="case-study">
       <script src={WORKFLOW_VIEWER_PATH} async />
@@ -49,7 +56,13 @@ export function CaseStudyPage() {
         <Link className="btn-line" to="/work/case-studies">← Back to projects</Link>
         <a className="btn-line" href={study.href} target="_blank" rel="noopener noreferrer">Open standalone demo ↗</a>
       </nav>
-      <div key={study.id} ref={body} dangerouslySetInnerHTML={{ __html: html }} />
+      <div key={study.id} ref={body}>
+        <div className="case-study__lead" dangerouslySetInnerHTML={{ __html: html.lead }} />
+        <div className="case-study__booking"><BookingLink /></div>
+        {study.id === 'site-1' ? <Suspense fallback={null}><ProjectAutomation compact /></Suspense> : null}
+        <div className="case-study__detail" dangerouslySetInnerHTML={{ __html: html.rest }} />
+        <div className="case-study__booking"><BookingLink /></div>
+      </div>
     </article>
   )
 }

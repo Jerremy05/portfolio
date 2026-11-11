@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useLocation } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import { List, MagnifyingGlass, X } from '@phosphor-icons/react'
 import { useShell } from '@/app/shell-context'
 import { pages } from '@/app/routes'
@@ -48,6 +48,7 @@ export function MobileNav() {
       <header className="mb-bar">
         {visibility.brand ? <BrandMark className="mb-bar__mark" /> : null}
         <span className="mb-bar__title">{current?.label ?? site.brand}</span>
+        <Link className="mb-bar__contact" to="/#contact" onClick={close}>{pages.find((page) => page.id === 'contact')!.label}</Link>
         <button type="button" className="mb-bar__btn" onClick={() => setSearchOpen(true)} aria-label="Search">
           <MagnifyingGlass size={20} aria-hidden />
         </button>

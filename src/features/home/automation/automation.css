@@ -469,3 +469,15 @@
     padding-block: clamp(64px, 12vh, 120px);
   }
 }
+
+/* Optional project-level detail: fully visible, with no scroll pin. */
+.fl.fl--compact { height: auto; margin-block: 32px; }
+.fl--compact .fl__pin { position: static; height: auto; padding: 24px 0; overflow: visible; }
+.fl--compact .wk-title { font-size: clamp(24px, 3.2cqi, 36px); }
+.fl--compact .fl__grid { grid-template-columns: minmax(0, 1fr); }
+.fl--compact .fl__steps { flex-wrap: wrap; flex-direction: row; }
+.fl--compact .fl__details { gap: 12px; }
+.fl--compact .fl__details > p { font-size: 15px; }
+.fl--compact .fl__rail { padding: 0; }
+.fl--compact .fl__rule { display: none; }
+.fl--compact .fl__svg { max-height: none; }

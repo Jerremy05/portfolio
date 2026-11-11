@@ -379,3 +379,16 @@ a.ab__cred:focus-visible,
     animation-name: none;
   }
 }
+
+/* Background and credentials support the work instead of dominating the page. */
+.ab { padding-block: 56px; }
+.ab__stage { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr); align-items: center; gap: 28px; min-height: 0; margin: 28px 0 0; padding: 0 0 20px; }
+.ab__lead { max-width: 28ch; font-size: clamp(24px, 3cqi, 36px); line-height: 1.25; animation: none !important; translate: none; }
+.ab__pic { position: relative; right: auto; width: 100%; max-width: 280px; justify-self: end; animation: none !important; }
+.ab__stage::after { animation: none !important; }
+.ab__below { margin-top: 24px; gap: 28px; }
+.ab__certificates { margin-top: 32px; }
+@container (max-width: 760px) {
+  .ab__stage { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .ab__pic { max-width: 200px; justify-self: center; margin-top: 0; }
+}

@@ -44,10 +44,12 @@ const pad2 = (n: number) => String(n).padStart(2, '0')
  * holds (CSS sticky) and the page scrolls. The rail follows the method steps. Pointing at a
  * stage inspects it; on phones a tap zooms the diagram onto it, with previous / next.
  */
-export function AutomationSection() {
+const stillScene = () => {}
+
+export function AutomationSection({ compact = false }: { compact?: boolean } = {}) {
   const sectionRef = useRef<HTMLElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
-  useScrollScene(sectionRef, automationScene)
+  useScrollScene(sectionRef, compact ? stillScene : automationScene)
 
   const [focus, setFocus] = useState<string | null>(null)
   const [zoomed, setZoomed] = useState(false)
@@ -94,14 +96,15 @@ export function AutomationSection() {
     }
   }
 
+  const Heading = compact ? 'h3' : 'h2'
   return (
-    <section ref={sectionRef} id="automation" className="fl" aria-labelledby="fl-title">
+    <section ref={sectionRef} id="automation" className={compact ? 'fl fl--compact' : 'fl'} aria-labelledby="fl-title">
       <div className="fl__pin">
         <header className="fl__head">
           <p className="wk-eyebrow">{liveAutomation.eyebrow}</p>
-          <h2 id="fl-title" className="wk-title">
+          <Heading id="fl-title" className="wk-title">
             <span>{liveAutomation.titleThin}</span> <span className="wk-title__bold">{liveAutomation.titleBold}</span>
-          </h2>
+          </Heading>
         </header>
 
         <div className="fl__grid">

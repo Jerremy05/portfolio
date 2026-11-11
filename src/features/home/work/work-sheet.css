@@ -359,3 +359,5 @@ a:hover .sh__name svg {
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
+
+.sh__booking { margin: -12px 0 28px; }

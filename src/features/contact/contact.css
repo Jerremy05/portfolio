@@ -470,3 +470,6 @@
 @container (max-width: 560px) {
   .ct-booking { padding: 14px; }
 }
+
+.ct.pg { padding-block: 56px; }
+.ct-sheet { align-items: start; margin-top: 28px; }

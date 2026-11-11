@@ -331,3 +331,28 @@
 .wb__grid--compact > .wb__cell {
   grid-area: auto;
 }
+
+/* Project evidence is visible immediately; no category dialog is required first. */
+.wb { max-width: 1160px; margin: 0 auto; padding-block: 48px 64px; }
+.wb__head { margin-bottom: 28px; }
+.wp-projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
+.wp-project { min-width: 0; border: 1px solid var(--line-strong); border-radius: var(--radius-xl); background: var(--surface); }
+.wp-project--featured { grid-column: 1 / -1; }
+.wp-project__link { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; border-radius: inherit; }
+.wp-project--featured .wp-project__link { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; }
+.wp-project__media { display: block; overflow: hidden; margin: 12px; border-radius: var(--radius-md); background: #f8faf5; }
+.wp-project__media img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: contain; }
+.wp-project__copy { display: flex; flex-direction: column; gap: 12px; padding: 16px 24px 24px; }
+.wp-project__copy h3 { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin: 0; font-size: clamp(21px, 2.7cqi, 29px); line-height: 1.2; letter-spacing: -0.03em; }
+.wp-project__copy h3 svg { flex: none; margin-top: 4px; color: var(--accent-ink); }
+.wp-project__summary { font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+.wp-project__link:hover { box-shadow: 0 0 0 2px var(--accent); }
+.wp-project__link:focus-visible, .wp-categories a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.wp-categories { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.wp-categories a { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; min-height: 44px; padding: 12px 16px; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: var(--surface); font-size: 14px; font-weight: 600; }
+@container (max-width: 620px) {
+  .wp-projects { grid-template-columns: minmax(0, 1fr); }
+  .wp-project--featured { grid-column: auto; }
+  .wp-project--featured .wp-project__link { display: flex; }
+  .wp-project__copy { padding: 12px 18px 20px; }
+}
