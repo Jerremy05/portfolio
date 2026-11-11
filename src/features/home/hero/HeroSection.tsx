@@ -1,8 +1,10 @@
+import { useRef } from 'react'
 import { Link } from 'react-router'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import { homeHero } from '@/content/home'
+import { useScrollScene } from '@/hooks/use-scroll-scene'
 import { scrollToSection } from '@/lib/motion/smooth-scroll'
-import { pages } from '@/app/routes'
+import { heroScene } from './hero-scene'
 import './hero.css'
 
 /**
@@ -13,9 +15,11 @@ import './hero.css'
  * animates the line, so the two never fight over one transform.
  */
 export function HeroSection() {
+  const ref = useRef<HTMLElement>(null)
+  useScrollScene(ref, heroScene)
 
   return (
-    <section id="top" className="hero" aria-labelledby="hero-title">
+    <section ref={ref} id="top" className="hero" aria-labelledby="hero-title">
       <h1 id="hero-title" className="hero__title">
         <span className="hero__layer hero__layer--thin">
           <span className="hero__line hero__line--thin">{homeHero.headlineThin}</span>
@@ -40,18 +44,6 @@ export function HeroSection() {
           }}
         >
           {homeHero.cta.label}
-          <ArrowUpRight size={16} weight="bold" aria-hidden />
-        </Link>
-        <Link
-          to="/#work"
-          className="hero__projects btn-line"
-          onClick={(event) => {
-            if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return
-            event.preventDefault()
-            scrollToSection('work')
-          }}
-        >
-          {pages.find((page) => page.id === 'work')!.label}
           <ArrowUpRight size={16} weight="bold" aria-hidden />
         </Link>
       </div>

@@ -90,38 +90,58 @@
   }
 }
 
+/* Phones: the bar above takes 56px, so the hero fills the rest of the first screen. */
+@media (max-width: 1023px) {
+  .hero {
+    min-height: calc(100svh - 56px);
+    padding-block: 64px;
+  }
+}
 
-.hero {
-  min-height: clamp(440px, 62svh, 640px);
-  padding: clamp(56px, 8vh, 80px) clamp(20px, 3.5vw, 56px) 48px;
+/*
+ * Phones and tablets: the scroll exit runs as a CSS scroll timeline, on the compositor, in the same
+ * frame as the thumb (a JS scrub trails it). Desktop with a fine pointer runs hero-scene.ts instead.
+ * animation-timeline sits in its own, more specific rule: a minifier folds it into the `animation`
+ * shorthand otherwise, and the browser drops the whole declaration.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (not ((min-width: 1024px) and (hover: hover) and (pointer: fine))) {
+    .hero {
+      view-timeline-name: --hero;
+    }
+    .hero .hero__title {
+      animation: hero-sink linear both;
+    }
+    .hero .hero__foot {
+      animation: hero-leave linear both;
+    }
+    .app .hero .hero__title,
+    .app .hero .hero__foot {
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+  }
 }
-.hero__title { font-size: clamp(1.25rem, 7.2cqi, 7rem); }
-.hero__foot { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 14px; }
-.hero__sub {
-  flex-basis: 100%;
-  max-width: 58ch;
-  margin: 28px auto 10px;
-  font-family: inherit;
-  font-size: 18px;
-  letter-spacing: 0;
-  line-height: 1.6;
-  text-transform: none;
+
+@keyframes hero-sink {
+  to {
+    opacity: 0;
+    transform: translateY(30svh) scale(0.92);
+  }
 }
-.hero__cta, .hero__projects {
-  justify-content: center;
-  min-height: 48px;
-  margin-top: 0;
-  padding: 13px 20px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-md);
+
+@keyframes hero-leave {
+  40%,
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
 }
-.hero__cta { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-.hero__projects { background: var(--surface); }
-.hero :is(.hero__cta, .hero__projects):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-@media (max-width: 600px) {
-  .hero { min-height: auto; padding-block: 56px 40px; }
-  .hero__sub { font-size: 16px; }
-}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero__line, .hero__sub, .hero__cta { animation: none; }
+  .hero__line,
+  .hero__sub,
+  .hero__cta {
+    animation: hero-fade 200ms ease both;
+  }
 }

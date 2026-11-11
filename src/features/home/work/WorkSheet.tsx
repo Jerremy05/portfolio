@@ -4,7 +4,6 @@ import { ArrowRight, ArrowUpRight, X } from '@phosphor-icons/react'
 import { caseStudyPath, sampleSites } from '@/content/work'
 import { HeadMeta } from '@/app/PageMeta'
 import { chapterPath, workChapters } from '@/content/home'
-import { BookingLink } from '@/components/page/BookingLink'
 import type { WorkChapter, WorkItem } from '@/content/schema'
 import { gsap, MOTION_CONDITIONS, spring } from '@/lib/motion/gsap'
 import { chapterJsonLd, chapterTitle } from '@/lib/seo'
@@ -106,7 +105,6 @@ export function WorkSheet({ chapter }: { chapter: WorkChapter | null }) {
 
             <div ref={bodyRef} className="sh__body" onScroll={onBodyScroll}>
               <p className="sh__intro">{shown.description}</p>
-              <div className="sh__booking"><BookingLink /></div>
               {shown.items.length === 0 && !shown.lead && shown.emptyState ? (
                 <section className="sh__empty" aria-labelledby="sh-empty-title" data-reveal>
                   <h3 id="sh-empty-title">{shown.emptyState.title}</h3>

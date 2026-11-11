@@ -348,9 +348,3 @@
 .case-study__nav .btn-line { padding: 10px 14px; border: 1px solid var(--line-strong); border-radius: var(--radius-md); background: var(--surface); }
 .case-study__nav .btn-line:hover { background: var(--surface-2); }
 .case-study__nav .btn-line:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-.case-study__lead > .outcome { margin-top: 20px; }
-.case-study__booking { display: flex; justify-content: flex-start; margin-block: 24px 32px; }
-.case-study__booking .booking-link { color: var(--on-accent); padding: 13px 20px; }
-.case-study__detail > .tools { margin-top: 24px; }
-.case-study__detail > .calculator { margin-top: 24px; }

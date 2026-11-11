@@ -60,7 +60,7 @@ export function AboutSection() {
           <img
             src={s.picture.src}
             srcSet={s.picture.srcSet}
-            sizes="auto, (min-width: 1024px) 280px, 200px"
+            sizes="auto, (min-width: 1024px) 46vw, 92vw"
             alt={s.picture.alt}
             width={s.picture.width}
             height={s.picture.height}

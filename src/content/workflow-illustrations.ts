@@ -82,16 +82,6 @@ const escapeHtml = (value: string) => value.replaceAll('&', '&amp;').replaceAll(
 export function withWorkflowIllustration(source: string, id: string): string {
   const illustration = workflowIllustrations[id]
   if (!illustration || source.includes('id="workflow-illustration"')) return source
-  // Move complete sections, preserving their authored copy and calculator disclaimers.
-  const take = (className: string) => {
-    const pattern = new RegExp(`<section class="panel ${className}"[^>]*>[\\s\\S]*?<\\/section>`)
-    const match = source.match(pattern)?.[0] ?? ''
-    if (match) source = source.replace(match, '')
-    return match
-  }
-  const outcome = take('outcome')
-  const calculator = take('calculator')
-  const tools = take('tools')
   const title = escapeHtml(illustration.title)
   const section = `
       <section class="panel workflow-illustration" id="workflow-illustration" aria-labelledby="workflow-illustration-title">
@@ -108,7 +98,6 @@ export function withWorkflowIllustration(source: string, id: string): string {
       </section>`
   return source
     .replace('</head>', `    <link rel="stylesheet" href="${WORKFLOW_STYLESHEET_PATH}" />\n  </head>`)
-    .replace('</header>', `</header>\n${section}\n${outcome}`)
-    .replace('</main>', `${tools}\n${calculator}\n</main>`)
+    .replace('</header>', `</header>\n${section}`)
     .replace('</body>', `    <script src="${WORKFLOW_VIEWER_PATH}" async></script>\n  </body>`)
 }
