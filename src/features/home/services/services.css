@@ -117,3 +117,10 @@
   .sv__item, .sv__card { transition: none; }
   .sv__item:hover, .sv__item:focus-within { transform: none; }
 }
+
+/* Match the centered contact content width. */
+.sv {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}

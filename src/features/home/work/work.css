@@ -331,3 +331,10 @@
 .wb__grid--compact > .wb__cell {
   grid-area: auto;
 }
+
+/* Match the centered contact content width. */
+.wk.wb {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
