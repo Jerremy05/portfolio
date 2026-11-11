@@ -446,7 +446,7 @@
 }
 
 /* Two clear contact paths, with FAQs underneath. */
-.ct-options { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 20px; margin-top: 28px; }
+.ct-options { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: 20px; margin-top: 28px; }
 .ct-options > .ct-booking { width: 100%; max-width: none; margin: 0; padding: 24px; }
 .ct-options > .ct-panel--email { min-width: 0; padding: 24px; }
 .ct-option-label { margin: 0 0 16px; color: var(--ink-2); }
