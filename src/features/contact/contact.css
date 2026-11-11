@@ -439,34 +439,24 @@
   .ct-booking__calendar { height: 620px; }
 }
 
-/* Email is an optional path; the calendar remains the primary contact action. */
-.ct-panel--email { align-self: start; }
-.ct-email-option > summary {
-  cursor: pointer;
-  list-style: none;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-}
-.ct-email-option > summary::-webkit-details-marker { display: none; }
-.ct-email-option > summary .ct-panel__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-  font-size: 22px;
-}
-.ct-email-option > summary svg { flex: none; transition: transform 160ms ease; }
-.ct-email-option[open] > summary svg { transform: rotate(180deg); }
-.ct-email-option > summary:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 5px;
-  border-radius: 4px;
-}
-
 .ct-booking .ct-panel__title { font-size: 22px; }
 .ct-booking .ct-panel__body { font-size: 14px; line-height: 1.5; }
 @container (max-width: 560px) {
   .ct-booking { padding: 14px; }
+}
+
+/* Two clear contact paths, with FAQs underneath. */
+.ct-options { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 20px; margin-top: 28px; }
+.ct-options > .ct-booking { width: 100%; max-width: none; margin: 0; padding: 24px; }
+.ct-options > .ct-panel--email { min-width: 0; padding: 24px; }
+.ct-option-label { margin: 0 0 16px; color: var(--ink-2); }
+.ct-options .ct-panel__title { font-size: 22px; }
+.ct-options .ct-panel__body { font-size: 14px; line-height: 1.6; }
+.ct-options .ct-booking__head { flex-direction: column; align-items: stretch; gap: 16px; }
+.ct-options .ct-booking__link { align-self: flex-start; }
+.ct-options .ct-row2 { grid-template-columns: minmax(0, 1fr); }
+.ct-sheet { grid-template-columns: minmax(0, 1fr); margin-top: 24px; }
+@container (max-width: 800px) {
+  .ct-options { grid-template-columns: minmax(0, 1fr); }
+  .ct-options > .ct-booking, .ct-options > .ct-panel--email { padding: 20px; }
 }

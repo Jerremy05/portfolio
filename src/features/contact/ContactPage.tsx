@@ -18,7 +18,15 @@ function ContactSheet({ nested }: { nested: boolean }) {
   const H = nested ? 'h3' : 'h2'
   return (
     <>
-      <DiscoveryCall nested={nested} />
+      <div className="ct-options">
+        <DiscoveryCall nested={nested} />
+        <section className="ct-panel ct-panel--email" aria-labelledby="ct-card-title">
+          <p className="pg-mono ct-option-label">{c.cardEyebrow}</p>
+          <H id="ct-card-title" className="ct-panel__title">{c.cardTitle}</H>
+          <p className="ct-panel__body">{c.cardBody}</p>
+          <ContactForm nested={nested} />
+        </section>
+      </div>
       <div className="ct-sheet">
       <section className="ct-plate" aria-labelledby="ct-faq-title">
         <p className="pg-mono">{c.faqEyebrow}</p>
@@ -43,20 +51,7 @@ function ContactSheet({ nested }: { nested: boolean }) {
         </div>
       </section>
 
-      <section className="ct-panel ct-panel--email" aria-labelledby="ct-card-title">
-        <details className="ct-email-option">
-          <summary>
-            <H id="ct-card-title" className="ct-panel__title">
-              {c.cardTitle}
-              <CaretDown size={18} weight="bold" aria-hidden />
-            </H>
-          </summary>
-          <div>
-            <p className="ct-panel__body">{c.cardBody}</p>
-            <ContactForm nested={nested} />
-          </div>
-        </details>
-      </section>
+
       </div>
     </>
   )

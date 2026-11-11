@@ -10,8 +10,9 @@ export const contactPage = {
   faqEyebrow: 'FAQs',
   faqTitle: 'Quick answers',
   faqSub: 'A few things to know before we talk.',
+  cardEyebrow: 'Write by email · no call required',
   cardTitle: 'Prefer to write first?',
-  cardBody: 'Share the task you want to improve, the tools you use, and what a good result would look like. A few sentences is enough.',
+  cardBody: 'Send a written project note by email. Share the task you want to improve, the tools you use, and what a good result would look like. A few sentences is enough.',
 }
 
 /** The form. Until a backend is wired, Send opens the visitor's own mail app with the message laid out. */
@@ -42,9 +43,9 @@ export const contactForm = {
  */
 export const discoveryCall = {
   url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2_Chofm0mL8bMhgghC1MwMY-WwzP4I7QhcRDn2tXx2STKfoRxL-CAgi-q_vglS5weBwIWLJRSY' as string,
-  eyebrow: 'Discovery call',
+  eyebrow: 'Talk on a live call',
   title: 'Let’s find the right next step.',
-  body: 'Choose a time to discuss your workflow, the tools you use, and what you want to improve. You can book directly without sending an inquiry first.',
+  body: 'Book a live discovery call so we can talk through your workflow, the tools you use, and what you want to improve. Check the booking details for the meeting link and how to join.',
   button: 'Choose a time',
   hint: 'Select an available time below and follow Google Calendar’s booking steps to confirm your call.',
 }
