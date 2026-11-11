@@ -489,3 +489,9 @@
   .ct-panel--email .ct-form { grid-template-rows: auto auto minmax(240px, 1fr) auto; }
   .ct-field--message > textarea { min-height: 220px; }
 }
+
+/* Use the full content column for the contact heading and both contact paths. */
+.pg.ct {
+  width: 100%;
+  max-width: none;
+}
