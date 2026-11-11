@@ -63,6 +63,7 @@
   color: var(--ink-2);
   font-family: var(--font-mono);
   font-size: 15px;
+  font-weight: 400;
   line-height: 1.7;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -102,8 +103,8 @@
 .hero { min-height: min(100svh, 900px); padding-block: 64px; }
 .hero__sub { margin-top: 28px; }
 .hero__statement { max-width: 64ch; margin-top: 28px; }
-.hero__body { margin: 0; color: var(--ink-2); font-size: clamp(16px, 1.8cqi, 20px); line-height: 1.65; text-wrap: pretty; }
-.hero__body strong { color: var(--ink); font-weight: 600; }
+.hero__body { margin: 0; color: var(--ink-2); font-family: var(--font-mono); font-size: 15px; font-weight: 400; line-height: 1.7; letter-spacing: 0.06em; text-transform: uppercase; text-wrap: balance; }
+.hero__body strong { color: inherit; font-weight: inherit; }
 .hero__cta { margin-top: 28px; }
 @media (max-width: 1023px) { .hero { min-height: calc(100svh - 56px); padding: 40px 20px; } }
 @media (prefers-reduced-motion: reduce) { .hero__line, .hero__sub, .hero__cta { animation: none; } }
