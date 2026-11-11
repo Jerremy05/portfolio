@@ -31,9 +31,9 @@ export const site = {
   timePlace: 'PH',
   usTimeZone: 'America/New_York',
   usTimePlace: 'US ET',
-  avatar: { src: '/images/profile/avatar.webp', alt: 'Jerremy Beron', width: 400, height: 400 },
+  avatar: { src: '/images/profile/portrait.webp', alt: 'Jerremy Beron', width: 640, height: 640 },
   /** The sidebar picture (112px, 44px on the rail). */
-  avatarSmall: '/images/profile/avatar.webp',
+  avatarSmall: '/images/profile/portrait.webp',
 } as const
 
 /** A credential shown in About and the sidebar check. Delete the `image` to show it without a badge. */
