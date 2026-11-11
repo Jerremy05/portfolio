@@ -21,8 +21,8 @@ type Props = {
 
 /**
  * Everything inside the sidebar card. Shared by the desktop float and the phone drawer.
- * Header: your live local time on top, the logo centered on a soft accent band, a big picture
- * overlapping the band's edge with a check, name, role, then the socials (all from content/site.ts).
+ * Header: live local time, an optional logo, a large square portrait,
+ * name, role, then the socials (all from content/site.ts).
  * Search is not in the card; it stays on Ctrl+K and in the phone top bar.
  */
 export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverChange, headerAction }: Props) {
