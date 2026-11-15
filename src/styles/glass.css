@@ -178,3 +178,8 @@
   --glass-fill: color-mix(in srgb, var(--surface) 96%, transparent);
   background-color: var(--glass-fill);
 }
+
+/* Dark sidebar uses its backdrop and outer shadow, without artificial inner lighting. */
+:root[data-theme='dark']:not([data-glass='off']) .app .sb-panel[data-variant] {
+  box-shadow: var(--glass-shadow);
+}
