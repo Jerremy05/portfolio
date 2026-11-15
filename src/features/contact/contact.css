@@ -505,3 +505,9 @@
 @container (min-width: 801px) {
   .ct-options .ct-row2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
+
+/* Keep the contact heading inline instead of forcing its bold phrase below. */
+.ct .pg-title {
+  display: block;
+  text-wrap: wrap;
+}
