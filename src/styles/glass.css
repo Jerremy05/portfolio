@@ -1,19 +1,28 @@
-/* Theme-matched green glass with uniform translucency and no gradients. */
+/* Matt-glass reference: nearly clear material, fine grain, and broad inner reflections.
+   Background imagery supplies the theme color; the surface has no color gradient. */
 :root {
-  --glass-fill: rgb(240 248 232 / .72);
-  --glass-edge: rgb(255 255 255 / .62);
-  --glass-highlight: rgb(255 255 255 / .82);
-  --glass-reflection: rgb(255 255 255 / .3);
-  --glass-rim-bottom: rgb(255 255 255 / .26);
-  --glass-shadow: 0 5px 12px -6px rgb(30 65 37 / .16), 0 24px 55px -26px rgb(30 65 37 / .3);
+  --glass-fill: rgb(255 255 255 / .14);
+  --glass-edge: rgb(255 255 255 / .22);
+  --glass-highlight: rgb(255 255 255 / .62);
+  --glass-inner: rgb(255 255 255 / .24) 0 39px 56px -36px inset,
+    rgb(255 255 255 / .36) 0 7px 11px -4px inset,
+    rgb(82 120 70 / .12) 0 -82px 68px -64px inset,
+    rgb(235 251 222 / .22) 0 98px 100px -48px inset,
+    rgb(255 255 255 / .18) 0 4px 18px inset,
+    rgb(255 255 255 / .12) 0 1px 40px inset;
+  --glass-shadow: 0 14px 40px -24px rgb(29 61 33 / .24);
 }
 :root[data-theme='dark'] {
-  --glass-fill: rgb(45 61 43 / .76);
-  --glass-edge: rgb(225 244 216 / .23);
-  --glass-highlight: rgb(246 255 240 / .38);
-  --glass-reflection: rgb(236 250 230 / .07);
-  --glass-rim-bottom: rgb(217 239 205 / .1);
-  --glass-shadow: 0 5px 12px -6px rgb(0 0 0 / .3), 0 24px 55px -26px rgb(0 0 0 / .7);
+  --glass-fill: rgb(225 244 214 / .035);
+  --glass-edge: rgb(235 255 225 / .12);
+  --glass-highlight: rgb(244 255 236 / .42);
+  --glass-inner: rgb(245 255 236 / .3) 0 39px 56px -36px inset,
+    rgb(255 255 255 / .2) 0 7px 11px -4px inset,
+    rgb(86 130 62 / .13) 0 -82px 68px -64px inset,
+    rgb(193 231 166 / .1) 0 98px 100px -48px inset,
+    rgb(213 244 190 / .08) 0 4px 18px inset,
+    rgb(227 255 212 / .06) 0 1px 40px inset;
+  --glass-shadow: 0 18px 45px -25px rgb(0 0 0 / .5);
 }
 .app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
 .app .ab__certificates .ab__cred,
@@ -21,21 +30,24 @@
   background: var(--surface);
   border: 1px solid var(--glass-edge);
   border-radius: 28px;
-  box-shadow: inset 0 1px 0 var(--glass-highlight), inset 1px 0 0 var(--glass-reflection), inset 0 -1px 0 var(--glass-rim-bottom), var(--glass-shadow);
+  box-shadow: var(--glass-inner), var(--glass-shadow);
 }
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
   .app .ab__certificates .ab__cred,
   .app .case-study .panel {
-    background: var(--glass-fill);
-    -webkit-backdrop-filter: blur(24px) saturate(110%);
-    backdrop-filter: blur(24px) saturate(110%);
+    background-color: var(--glass-fill);
+    background-image: url('/images/glass-grain.png');
+    background-repeat: repeat;
+    background-size: 96px 96px;
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
+    backdrop-filter: blur(24px) saturate(120%);
   }
 }
 /* The deck still lifts forward; the frost itself does not animate. */
 .app :is(.wb__tile:hover, .sv__item:hover .sv__card, .ab__certificates .ab__cred:hover) {
   border-color: color-mix(in srgb, var(--glass-highlight) 70%, var(--accent));
-  box-shadow: inset 0 1px 1px var(--glass-highlight), inset 1px 0 0 var(--glass-reflection), inset 0 -1px 0 var(--glass-rim-bottom), 0 26px 50px -20px rgb(22 49 29 / .38);
+  box-shadow: var(--glass-inner), inset 0 1px 0 var(--glass-highlight), var(--glass-shadow);
 }
 .app .workflow-technical { border-radius: 18px; }
 /* Images, PDF previews, the Google scheduler, and input fields keep their own clear backgrounds. */
@@ -43,8 +55,8 @@
   .app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
   .app .ab__certificates .ab__cred,
   .app .case-study .panel {
-    -webkit-backdrop-filter: blur(14px) saturate(110%);
-    backdrop-filter: blur(14px) saturate(110%);
+    -webkit-backdrop-filter: blur(18px) saturate(115%);
+    backdrop-filter: blur(18px) saturate(115%);
   }
 }
 @media (prefers-reduced-transparency: reduce), (forced-colors: active) {
