@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router'
 import './styles/index.css'
 import { router } from './app/router'
 import './styles/section-headings.css'
+import './styles/glass.css'
 
 // The static title + description in index.html are for crawlers that do not run JS; from here each route renders its own.
 document.querySelectorAll('head > [data-static-meta]').forEach((el) => el.remove())

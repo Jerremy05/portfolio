@@ -1,0 +1,57 @@
+/* Shared green-tinted glass. Opaque defaults keep older browsers readable. */
+:root {
+  --glass-fill: rgb(249 251 245 / .82);
+  --glass-top: rgb(255 255 255 / .42);
+  --glass-bottom: rgb(210 229 201 / .12);
+  --glass-edge: rgb(255 255 255 / .72);
+  --glass-highlight: rgb(255 255 255 / .82);
+  --glass-shadow: 0 12px 32px -16px rgb(30 65 37 / .25);
+}
+:root[data-theme='dark'] {
+  --glass-fill: rgb(34 43 35 / .88);
+  --glass-top: rgb(197 224 184 / .075);
+  --glass-bottom: rgb(13 27 18 / .12);
+  --glass-edge: rgb(197 224 184 / .19);
+  --glass-highlight: rgb(235 255 224 / .14);
+  --glass-shadow: 0 16px 38px -18px rgb(0 0 0 / .6);
+}
+.app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
+.app .ab__certificates .ab__cred,
+.app .case-study .panel {
+  background: var(--surface);
+  border: 1px solid var(--glass-edge);
+  box-shadow: inset 0 1px 0 var(--glass-highlight), var(--glass-shadow);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
+  .app .ab__certificates .ab__cred,
+  .app .case-study .panel {
+    background: linear-gradient(145deg, var(--glass-top), var(--glass-bottom)), var(--glass-fill);
+    -webkit-backdrop-filter: blur(20px) saturate(125%);
+    backdrop-filter: blur(20px) saturate(125%);
+  }
+}
+/* The deck still lifts forward; the frost itself does not animate. */
+.app :is(.wb__tile:hover, .sv__item:hover .sv__card, .ab__certificates .ab__cred:hover) {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--glass-edge));
+  box-shadow: inset 0 1px 0 var(--glass-highlight), 0 20px 40px -18px rgb(22 49 29 / .35);
+}
+/* Images, PDF previews, the Google scheduler, and input fields keep their own clear backgrounds. */
+@media (max-width: 800px) {
+  .app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
+  .app .ab__certificates .ab__cred,
+  .app .case-study .panel {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+@media (prefers-reduced-transparency: reduce), (forced-colors: active) {
+  .app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
+  .app .ab__certificates .ab__cred,
+  .app .case-study .panel {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: var(--line-strong);
+  }
+}
