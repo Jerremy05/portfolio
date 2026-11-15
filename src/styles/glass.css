@@ -67,3 +67,62 @@
     border-color: var(--line-strong);
   }
 }
+
+/* Glass controls: lighter than the cards, with a green tint for primary actions. */
+:root {
+  --glass-button-fill: rgb(255 255 255 / .32);
+  --glass-button-edge: rgb(72 108 63 / .26);
+  --glass-button-shine: rgb(255 255 255 / .36);
+}
+:root[data-theme='dark'] {
+  --glass-button-fill: rgb(222 245 210 / .075);
+  --glass-button-edge: rgb(210 240 194 / .22);
+  --glass-button-shine: rgb(244 255 237 / .14);
+}
+.app :is(.btn-line, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
+  border: 1px solid var(--glass-button-edge);
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--ink);
+  box-shadow: inset 0 1px 0 var(--glass-button-shine), 0 4px 12px -8px rgb(0 0 0 / .24);
+  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+.app :is(.btn-line, .pg-btn, .ct-send) { min-height: 44px; }
+.app :is(.sb-toggle, .sh__close, .certificate-preview__header button) { border-radius: 50%; }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .app :is(.btn-line, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
+    background: var(--glass-button-fill);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+.app :is(.hero__cta, .ct-send) {
+  background: color-mix(in srgb, var(--accent) 24%, var(--surface) 76%);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--ink);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .app :is(.hero__cta, .ct-send) { background: color-mix(in srgb, var(--accent) 24%, transparent); }
+}
+.app :is(.btn-line, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button):hover {
+  background: color-mix(in srgb, var(--accent) 18%, var(--glass-button-fill));
+  border-color: var(--accent);
+  color: var(--ink);
+  box-shadow: inset 0 1px 0 var(--glass-button-shine), 0 6px 16px -10px rgb(0 0 0 / .3);
+}
+.app :is(.btn-line, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.app :is(.btn-line, .pg-btn, .ct-send):active { box-shadow: inset 0 1px 4px rgb(0 0 0 / .12); }
+@media (prefers-reduced-motion: reduce) {
+  .app :is(.btn-line, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) { transition: none; }
+}
+@media (prefers-reduced-transparency: reduce), (forced-colors: active) {
+  .app :is(.btn-line, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
+    background: var(--surface-2);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: var(--line-strong);
+  }
+}
