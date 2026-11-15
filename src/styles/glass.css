@@ -1,6 +1,6 @@
-/* Clear glass: uniform translucent surfaces, background blur, and subtle edge reflections. */
+/* Theme-matched green glass with uniform translucency and no gradients. */
 :root {
-  --glass-fill: rgb(255 255 255 / .62);
+  --glass-fill: rgb(240 248 232 / .72);
   --glass-edge: rgb(255 255 255 / .62);
   --glass-highlight: rgb(255 255 255 / .82);
   --glass-reflection: rgb(255 255 255 / .3);
@@ -8,7 +8,7 @@
   --glass-shadow: 0 5px 12px -6px rgb(30 65 37 / .16), 0 24px 55px -26px rgb(30 65 37 / .3);
 }
 :root[data-theme='dark'] {
-  --glass-fill: rgb(25 28 26 / .72);
+  --glass-fill: rgb(45 61 43 / .76);
   --glass-edge: rgb(225 244 216 / .23);
   --glass-highlight: rgb(246 255 240 / .38);
   --glass-reflection: rgb(236 250 230 / .07);
