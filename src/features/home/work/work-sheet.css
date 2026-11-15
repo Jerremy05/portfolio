@@ -171,20 +171,32 @@ a.sh__shot:hover img {
 .sh__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  gap: 36px 24px;
+  gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+.sh__item { min-width: 0; }
 .sh__link {
   display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  min-width: 0;
   gap: 16px;
+  padding: 16px;
+  text-decoration: none;
 }
+.sh__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.sh__link > .sh__shot { min-width: 0; border-radius: 16px; }
 
 .sh__cap {
   display: grid;
-  gap: 6px;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  padding: 4px 4px 8px;
+  overflow-wrap: anywhere;
 }
 
 .sh__name {
@@ -321,7 +333,7 @@ a:hover .sh__name svg {
     padding: 8px 48px 64px;
   }
   .sh__grid {
-    gap: 44px 28px;
+    gap: 24px;
   }
   /* The first build leads: a wide picture with its caption beside it. */
   .sh__item--lead {
@@ -329,7 +341,8 @@ a:hover .sh__name svg {
   }
   .sh__item--lead > .sh__link {
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    align-items: end;
+    grid-template-rows: auto;
+    align-items: center;
     gap: 32px;
   }
   .sh__item--lead .sh__name {

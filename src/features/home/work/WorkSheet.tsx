@@ -167,7 +167,7 @@ function Grid({ items, lead }: { items: WorkItem[]; lead: boolean }) {
                 />
               ) : null}
             </span>
-            <span className="sh__cap">
+            <div className="sh__cap">
               <span className="wk-count">
                 {item.kicker}
                 {item.status ? <span className="sh__status">{item.status}</span> : null}
@@ -177,7 +177,7 @@ function Grid({ items, lead }: { items: WorkItem[]; lead: boolean }) {
                 {item.href ? <ArrowUpRight size={16} weight="bold" aria-hidden /> : null}
               </h3>
               <span className="sh__sum">{item.summary}</span>
-            </span>
+            </div>
           </ItemLink>
         </li>
       ))}
