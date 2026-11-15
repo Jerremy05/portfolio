@@ -1,4 +1,4 @@
-/* Matt-glass reference: nearly clear material, fine grain, and broad inner reflections.
+/* Matt-glass reference: nearly clear material, smooth blur and broad inner reflections.
    Background imagery supplies the theme color; the surface has no color gradient. */
 :root {
   --glass-fill: rgb(255 255 255 / .14);
@@ -37,9 +37,7 @@
   .app .ab__certificates .ab__cred,
   .app .case-study .panel {
     background-color: var(--glass-fill);
-    background-image: url('/images/glass-grain.png');
-    background-repeat: repeat;
-    background-size: 96px 96px;
+    background-image: none;
     -webkit-backdrop-filter: blur(24px) saturate(120%);
     backdrop-filter: blur(24px) saturate(120%);
   }
