@@ -110,7 +110,7 @@ export function withWorkflowIllustration(source: string, id: string): string {
       </section>`
   return source
     .replace('<body>', '<body class="standalone-demo">')
-    .replace('</head>', `    <link rel="stylesheet" href="${WORKFLOW_STYLESHEET_PATH}" />\n    <link rel="stylesheet" href="${STANDALONE_THEME_PATH}" />\n    <script src="/scripts/demo-theme.js"></script>\n  </head>`)
+    .replace('</head>', `    <link rel="stylesheet" href="${WORKFLOW_STYLESHEET_PATH}" />\n    <link rel="stylesheet" href="${STANDALONE_THEME_PATH}" />\n    <script src="/scripts/glass-preference.js"></script>\n    <script src="/scripts/demo-theme.js"></script>\n  </head>`)
     .replace('</header>', `</header>\n${section}`)
     .replace('</body>', `    <script src="${WORKFLOW_VIEWER_PATH}" async></script>\n  </body>`)
 }

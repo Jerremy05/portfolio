@@ -24,20 +24,20 @@
     rgb(227 255 212 / 0.027) 0 1px 40px inset;
   --glass-shadow: 0 18px 45px -25px rgb(0 0 0 / .5);
 }
-:is(.app, .standalone-demo) :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
-:is(.app, .standalone-demo) .ab__certificates .ab__cred,
-:is(.app, .standalone-demo) .case-study .panel,
-.standalone-demo .panel {
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
+:root:not([data-glass='off']) :is(.app, .standalone-demo) .ab__certificates .ab__cred,
+:root:not([data-glass='off']) :is(.app, .standalone-demo) .case-study .panel,
+:root:not([data-glass='off']) .standalone-demo .panel {
   background: var(--surface);
   border: 1px solid var(--glass-edge);
   border-radius: 28px;
   box-shadow: var(--glass-inner), var(--glass-shadow);
 }
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :is(.app, .standalone-demo) :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
-  :is(.app, .standalone-demo) .ab__certificates .ab__cred,
-  :is(.app, .standalone-demo) .case-study .panel,
-.standalone-demo .panel {
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) .ab__certificates .ab__cred,
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) .case-study .panel,
+:root:not([data-glass='off']) .standalone-demo .panel {
     background-color: var(--glass-fill);
     background-image: none;
     -webkit-backdrop-filter: blur(24px) saturate(120%);
@@ -45,26 +45,26 @@
   }
 }
 /* The deck still lifts forward; the frost itself does not animate. */
-:is(.app, .standalone-demo) :is(.wb__tile:hover, .sv__item:hover .sv__card, .ab__certificates .ab__cred:hover) {
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.wb__tile:hover, .sv__item:hover .sv__card, .ab__certificates .ab__cred:hover) {
   border-color: color-mix(in srgb, var(--glass-highlight) 70%, var(--accent));
   box-shadow: var(--glass-inner), inset 0 1px 0 var(--glass-highlight), var(--glass-shadow);
 }
-:is(.app, .standalone-demo) .workflow-technical { border-radius: 18px; }
+:root:not([data-glass='off']) :is(.app, .standalone-demo) .workflow-technical { border-radius: 18px; }
 /* Images, PDF previews, the Google scheduler, and input fields keep their own clear backgrounds. */
 @media (max-width: 800px) {
-  :is(.app, .standalone-demo) :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
-  :is(.app, .standalone-demo) .ab__certificates .ab__cred,
-  :is(.app, .standalone-demo) .case-study .panel,
-.standalone-demo .panel {
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) .ab__certificates .ab__cred,
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) .case-study .panel,
+:root:not([data-glass='off']) .standalone-demo .panel {
     -webkit-backdrop-filter: blur(18px) saturate(115%);
     backdrop-filter: blur(18px) saturate(115%);
   }
 }
 @media (prefers-reduced-transparency: reduce), (forced-colors: active) {
-  :is(.app, .standalone-demo) :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
-  :is(.app, .standalone-demo) .ab__certificates .ab__cred,
-  :is(.app, .standalone-demo) .case-study .panel,
-.standalone-demo .panel {
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) .ab__certificates .ab__cred,
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) .case-study .panel,
+:root:not([data-glass='off']) .standalone-demo .panel {
     background: var(--surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -83,7 +83,7 @@
   --glass-button-edge: rgb(210 240 194 / .22);
   --glass-button-shine: rgb(244 255 237 / .14);
 }
-:is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
   border: 1px solid var(--glass-button-edge);
   border-radius: 14px;
   background: var(--surface-2);
@@ -91,39 +91,39 @@
   box-shadow: inset 0 1px 0 var(--glass-button-shine), 0 4px 12px -8px rgb(0 0 0 / .24);
   transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
-:is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send) { min-height: 44px; }
-:is(.app, .standalone-demo) :is(.sb-toggle, .sh__close, .certificate-preview__header button) { border-radius: 50%; }
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send) { min-height: 44px; }
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.sb-toggle, .sh__close, .certificate-preview__header button) { border-radius: 50%; }
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
     background: var(--glass-button-fill);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
   }
 }
-:is(.app, .standalone-demo) :is(.hero__cta, .ct-send) {
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.hero__cta, .ct-send) {
   background: color-mix(in srgb, var(--accent) 24%, var(--surface) 76%);
   border-color: color-mix(in srgb, var(--accent) 60%, transparent);
   color: var(--ink);
 }
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  :is(.app, .standalone-demo) :is(.hero__cta, .ct-send) { background: color-mix(in srgb, var(--accent) 24%, transparent); }
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.hero__cta, .ct-send) { background: color-mix(in srgb, var(--accent) 24%, transparent); }
 }
-:is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button):hover {
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button):hover {
   background: color-mix(in srgb, var(--accent) 18%, var(--glass-button-fill));
   border-color: var(--accent);
   color: var(--ink);
   box-shadow: inset 0 1px 0 var(--glass-button-shine), 0 6px 16px -10px rgb(0 0 0 / .3);
 }
-:is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button):focus-visible {
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
-:is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send):active { box-shadow: inset 0 1px 4px rgb(0 0 0 / .12); }
+:root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send):active { box-shadow: inset 0 1px 4px rgb(0 0 0 / .12); }
 @media (prefers-reduced-motion: reduce) {
-  :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) { transition: none; }
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) { transition: none; }
 }
 @media (prefers-reduced-transparency: reduce), (forced-colors: active) {
-  :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) :is(.btn-line, .back-link, .pg-btn, .ct-send, .ct-copy-email, .sh__close, .mb-bar__btn, .sb-toggle, .social-key, .certificate-preview__header button, .illustration-viewer__bar button) {
     background: var(--surface-2);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -132,8 +132,8 @@
 }
 
 /* Social logos stay plain until hovered or reached by keyboard. */
-:is(.app, .standalone-demo) .social-keys { padding: 0; background: transparent; box-shadow: none; }
-:is(.app, .standalone-demo) .social-keys .social-key {
+:root:not([data-glass='off']) :is(.app, .standalone-demo) .social-keys { padding: 0; background: transparent; box-shadow: none; }
+:root:not([data-glass='off']) :is(.app, .standalone-demo) .social-keys .social-key {
   background: transparent;
   border-color: transparent;
   box-shadow: none;
@@ -141,8 +141,8 @@
   backdrop-filter: none;
   color: var(--ink-2);
 }
-:is(.app, .standalone-demo) .social-keys .social-key::before { content: none; }
-:is(.app, .standalone-demo) .social-keys .social-key:is(:hover, :focus-visible) {
+:root:not([data-glass='off']) :is(.app, .standalone-demo) .social-keys .social-key::before { content: none; }
+:root:not([data-glass='off']) :is(.app, .standalone-demo) .social-keys .social-key:is(:hover, :focus-visible) {
   background: var(--glass-button-fill);
   border-color: var(--glass-button-edge);
   box-shadow: inset 0 1px 0 var(--glass-button-shine);
@@ -151,5 +151,10 @@
   backdrop-filter: blur(12px);
 }
 @media (prefers-reduced-transparency: reduce), (forced-colors: active) {
-  :is(.app, .standalone-demo) .social-keys .social-key:is(:hover, :focus-visible) { background: var(--surface-2); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  :root:not([data-glass='off']) :is(.app, .standalone-demo) .social-keys .social-key:is(:hover, :focus-visible) { background: var(--surface-2); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* Sidebar light comes from the left edge only, rather than wrapping the panel. */
+:root:not([data-glass='off']) :is(.app, .standalone-demo) .sb-panel[data-variant] {
+  box-shadow: inset 1px 0 0 var(--glass-highlight), inset 18px 0 28px -24px var(--glass-highlight), var(--glass-shadow);
 }

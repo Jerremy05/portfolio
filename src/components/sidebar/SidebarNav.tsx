@@ -1,9 +1,10 @@
 import type { FocusEvent, MouseEvent, PointerEvent } from 'react'
 import { Link, NavLink, useLocation } from 'react-router'
-import { ArrowUpRight, MoonStars } from '@phosphor-icons/react'
+import { ArrowUpRight, MoonStars, Sparkle } from '@phosphor-icons/react'
 import { NAV_GROUPS, navEntries, navTarget, pages, type NavEntry } from '@/app/routes'
 import { useSectionInView } from '@/hooks/use-section-in-view'
 import { useTheme } from '@/hooks/use-theme'
+import { useGlass } from '@/hooks/use-glass'
 import { scrollToSection } from '@/lib/motion/smooth-scroll'
 import { isThemeSwitching } from '@/lib/theme'
 import { useNavIndicator } from './use-nav-indicator'
@@ -18,6 +19,7 @@ type Props = {
 }
 
 const THEME_ID = 'theme'
+const GLASS_ID = 'glass'
 
 function activePageId(pathname: string): string | null {
   const match = pages.find((page) => (page.path === '/' ? pathname === '/' : pathname.startsWith(page.path)))
@@ -42,6 +44,7 @@ export function SidebarNav({ collapsed, onNavigate, onHoverChange }: Props) {
   }
   const { listRef, indicatorRef, hoverId, setHoverId } = useNavIndicator()
   const { theme, toggleTheme } = useTheme()
+  const { glass, toggleGlass } = useGlass()
 
   const hover = (id: string, label: string, element: HTMLElement) => {
     setHoverId(id)
@@ -167,6 +170,7 @@ export function SidebarNav({ collapsed, onNavigate, onHoverChange }: Props) {
           {navEntries(group.id).map(renderEntry)}
 
           {group.id === 'general' ? (
+            <>
             <button
               type="button"
               role="switch"
@@ -183,6 +187,22 @@ export function SidebarNav({ collapsed, onNavigate, onHoverChange }: Props) {
               <span className="sb-item__label sb-fade">Dark mode</span>
               <span className="sb-switch sb-fade" aria-hidden />
             </button>
+            <button
+              type="button"
+              role="switch"
+              aria-label="Glass effect"
+              aria-checked={glass}
+              className="sb-item"
+              {...itemState(GLASS_ID)}
+              onPointerEnter={(e) => hover(GLASS_ID, 'Glass effect', e.currentTarget)}
+              onFocus={(e) => hover(GLASS_ID, 'Glass effect', e.currentTarget)}
+              onClick={toggleGlass}
+            >
+              <span className="sb-item__icon"><Sparkle size={20} weight={glass ? 'fill' : 'regular'} aria-hidden /></span>
+              <span className="sb-item__label sb-fade">Glass effect</span>
+              <span className="sb-switch sb-fade" aria-hidden />
+            </button>
+            </>
           ) : null}
         </div>
       ))}

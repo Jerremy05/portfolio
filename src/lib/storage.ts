@@ -5,6 +5,7 @@
 
 export const STORAGE_KEYS = {
   theme: 'pv2-theme',
+  glass: 'pv2-glass',
   sidebar: 'pv2-sidebar',
   consent: 'pv2-consent',
 } as const
