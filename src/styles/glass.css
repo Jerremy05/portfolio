@@ -158,3 +158,9 @@
 :root:not([data-glass='off']) :is(.app, .standalone-demo) .sb-panel[data-variant] {
   box-shadow: inset 1px 0 0 var(--glass-highlight), inset 18px 0 28px -24px var(--glass-highlight), var(--glass-shadow);
 }
+
+/* The sidebar panel is clipped for collapse animation, so cast its shadow from
+   the outer wrapper where the rounded clip cannot cut it off. */
+:root:not([data-theme='dark']):not([data-glass='off']) .app .sb-float {
+  filter: drop-shadow(0 3px 5px rgb(31 59 34 / .14)) drop-shadow(8px 12px 18px rgb(31 59 34 / .2));
+}
