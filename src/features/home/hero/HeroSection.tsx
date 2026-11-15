@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { ArrowUpRight } from '@phosphor-icons/react'
-import { homeHero, homeManifesto } from '@/content/home'
+import { homeHero } from '@/content/home'
 import { scrollToSection } from '@/lib/motion/smooth-scroll'
 import './hero.css'
 
@@ -20,11 +20,7 @@ export function HeroSection() {
         <p className="hero__sub">{homeHero.subhead}</p>
 
         <div className="hero__statement">
-          <p className="hero__body">
-            {homeManifesto.parts.map((part, index) => (
-              <span key={index}>{index > 0 ? ' ' : ''}{typeof part === 'string' ? part : <strong>{part.key}</strong>}</span>
-            ))}
-          </p>
+          <p className="hero__body">{homeHero.statement}</p>
         </div>
 
         {/* Glides Home to the Contact section (a same-path link, so Lenis keeps its glide). */}
