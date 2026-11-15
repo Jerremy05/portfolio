@@ -1,0 +1,18 @@
+/* Section headings follow the Projects reference, using one shared scale so
+   differing section padding cannot produce different container-unit sizes. */
+.app {
+  --heading-sidebar-space: 0px;
+  --section-heading-size: clamp(1.7rem, calc((100vw - var(--heading-sidebar-space)) * .044), 3.3rem);
+}
+@media (min-width: 1024px) {
+  .app { --heading-sidebar-space: calc(var(--sidebar-w) + 2 * var(--sidebar-gap)); }
+}
+.app :is(#work-title, #services-title, #ab-title, #ab-certificates-title, #contact-title) {
+  font-family: var(--font-sans);
+  font-size: var(--section-heading-size);
+  font-weight: 100;
+  line-height: .92;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+.app :is(#work-title, #services-title, #ab-title, #ab-certificates-title, #contact-title) :is(b, .wk-title__bold) { font-weight: 700; }

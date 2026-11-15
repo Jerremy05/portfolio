@@ -118,7 +118,7 @@ export function AboutSection() {
       </div>
 
       <section id="certificates" className="ab__certificates" aria-labelledby="ab-certificates-title">
-        <h3 id="ab-certificates-title">Certificates of completion</h3>
+        <h3 id="ab-certificates-title">Certificates of <span className="wk-title__bold">completion</span></h3>
         <p className="ab__certificates-intro">Completed training in AI automation, connected workflows, and CRM systems.</p>
         <ul className="ab__creds">
           {credentials.map((c) => (
