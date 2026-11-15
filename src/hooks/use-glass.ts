@@ -5,7 +5,7 @@ const subscribe = (notify: () => void) => {
   window.addEventListener('glasschange', notify)
   return () => window.removeEventListener('glasschange', notify)
 }
-const snapshot = () => document.documentElement.dataset.glass !== 'off'
+const snapshot = () => document.documentElement.dataset.glass === 'on'
 
 export function useGlass() {
   const glass = useSyncExternalStore(subscribe, snapshot)
