@@ -152,12 +152,9 @@ background: var(--surface);
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  background: #fff;
-  box-shadow: 0 0 0 4px var(--surface);
-  transition: box-shadow 180ms ease, transform var(--dur-press) ease-out;
-}
-.sb-profile:hover .sb-pic__img {
-  box-shadow: 0 0 0 4px var(--surface), 0 0 0 6px var(--accent);
+  background: transparent;
+  box-shadow: none;
+  transition: transform var(--dur-press) ease-out;
 }
 /* Press feedback on the image, never on .sb-pic: that one carries the rail transform. */
 .sb-profile:active .sb-pic__img {
