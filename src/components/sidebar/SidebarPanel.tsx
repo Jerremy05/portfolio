@@ -1,6 +1,6 @@
 import { useRef, type PointerEvent, type ReactNode } from 'react'
 import { Link } from 'react-router'
-import { SealCheck } from '@phosphor-icons/react'
+import { EnvelopeSimple, SealCheck } from '@phosphor-icons/react'
 import { visibility } from '@/content/visibility'
 import { site } from '@/content/site'
 import { BrandMark } from '@/components/brand/BrandMark'
@@ -72,6 +72,11 @@ export function SidebarPanel({ variant, collapsed = false, onNavigate, onHoverCh
             {site.role}
           </span>
         </Link>
+
+        <a className="sb-email sb-fade" href={`mailto:${site.email}`}>
+          <EnvelopeSimple size={16} aria-hidden />
+          <span>{site.email}</span>
+        </a>
 
         <SocialLinks className="sb-socials sb-fade" />
 

@@ -588,3 +588,24 @@ background: var(--surface);
     transition-duration: 1ms;
   }
 }
+
+/* Keep the direct email visible beneath the profile on desktop and in the phone drawer. */
+.sb-email {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 8px 4px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.sb-email svg { flex-shrink: 0; }
+.sb-email span { overflow-wrap: anywhere; }
+.sb-email:hover span { text-decoration: underline; text-underline-offset: 3px; }
+.sb-email:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+.sb-panel[data-collapsed='true'] .sb-email { visibility: hidden; pointer-events: none; }
