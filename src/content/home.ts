@@ -26,8 +26,8 @@ import {
 export const homeHero = {
   headlineThin: 'Less busywork.',
   headlineBold: 'More business moving.',
-  subhead: 'I help businesses build AI agents and automated workflows that connect their tools, reduce repetitive work, and save time. From answering customer questions and following up with leads to booking appointments and organizing daily operations, I create systems that keep information organized and tasks moving.',
-  statement: 'With less manual work and fewer missed handoffs, your team can spend more time helping customers and growing the business.',
+  subhead: 'I build AI agents and automated workflows that connect your tools and reduce repetitive work. From customer questions and lead follow-ups to appointment booking and daily operations, I create systems that keep tasks moving.',
+  statement: 'Your team spends less time on manual work and more time helping customers and growing the business.',
   cta: { label: 'Get in touch', to: '/#contact' },
 }
 
