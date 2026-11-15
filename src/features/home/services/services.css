@@ -47,7 +47,7 @@
   transform-origin: 0 50%;
 }
 .sv__title {
-  display: grid;
+  display: block;
   margin: 0;
   font-size: clamp(2.2rem, 7cqi, 6rem);
   font-weight: 100;
