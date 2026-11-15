@@ -1,6 +1,6 @@
 import type { Faq } from './schema'
 
-/** The questions people ask before they write. Pages pick the ones that answer their own objection. */
+/** Common questions about services, booking a discovery call, and starting by email. */
 export const faqs = {
   whatYouBuild: {
     question: 'What do you actually build?',
@@ -18,9 +18,21 @@ export const faqs = {
     question: 'How much do you charge?',
     answer: 'I’ll provide a quote after learning what you want to automate, which apps are involved, and what the project needs. I’ll confirm the scope and cost before starting; ongoing support can be quoted separately.',
   },
+  bookCall: {
+    question: 'How do I book a discovery call?',
+    answer: 'Choose an available time in the calendar under “Talk on a live call,” then follow Google Calendar’s booking steps to confirm. Check the booking details for how to join. You don’t need to send an email first.',
+  },
+  prepareCall: {
+    question: 'What should I prepare for the call?',
+    answer: 'Bring one task or workflow you want to improve, the tools you use, and where things get slow or repetitive. We’ll talk through your current process and what a useful outcome would look like. You don’t need a technical plan.',
+  },
   afterWrite: {
-    question: 'What happens after I write?',
-    answer: 'I’ll review your message and reply with any follow-up questions or a practical next step. If the project is a fit, we’ll agree on the scope, timing, and cost before work begins.',
+    question: 'Can I start by email instead of booking a call?',
+    answer: 'Yes. Use “Prefer to write first?” to share a short project note. The form opens your email app with the message prepared; press send there to send it. I’ll review your note and reply with questions or a practical next step. A call isn’t required to start the conversation.',
+  },
+  nextStep: {
+    question: 'What happens after the call or email conversation?',
+    answer: 'If the project is a fit, we’ll agree on the scope, timing, and cost before work begins. The first conversation helps clarify what you need; booking a call doesn’t start a project automatically.',
   },
 } satisfies Record<string, Faq>
 
