@@ -1,3 +1,5 @@
+import { projectTechnical } from './project-technical'
+
 /** Client-friendly illustrations shared by the portfolio routes and standalone demos. */
 export const WORKFLOW_VIEWER_PATH = '/scripts/illustration-viewer.js'
 export const WORKFLOW_STYLESHEET_PATH = '/styles/workflow-illustration.css'
@@ -83,6 +85,14 @@ export function withWorkflowIllustration(source: string, id: string): string {
   const illustration = workflowIllustrations[id]
   if (!illustration || source.includes('id="workflow-illustration"')) return source
   const title = escapeHtml(illustration.title)
+  const technical = projectTechnical[id] ?? []
+  const disclosure = technical.length ? `
+        <details class="workflow-technical">
+          <summary>Technical explanation<span aria-hidden="true" class="workflow-technical__toggle">+</span></summary>
+          <div class="workflow-technical__content">
+            ${technical.map((step) => `<h3>${escapeHtml(step.title)}</h3><p>${escapeHtml(step.body)}</p>`).join('\n')}
+          </div>
+        </details>` : ''
   const section = `
       <section class="panel workflow-illustration" id="workflow-illustration" aria-labelledby="workflow-illustration-title">
         <p class="eyebrow">Workflow overview</p>
@@ -95,6 +105,7 @@ export function withWorkflowIllustration(source: string, id: string): string {
           </button>
           <figcaption class="workflow-illustration__caption">${escapeHtml(illustration.summary)}</figcaption>
         </figure>
+        ${disclosure}
       </section>`
   return source
     .replace('</head>', `    <link rel="stylesheet" href="${WORKFLOW_STYLESHEET_PATH}" />\n  </head>`)

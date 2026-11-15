@@ -101,3 +101,14 @@
   .illustration-viewer__title { width: 100%; font-size: 14px; }
   .illustration-viewer__controls { width: 100%; justify-content: space-between; }
 }
+
+/* Optional implementation detail, shared by portfolio routes and standalone demos. */
+.workflow-technical { margin-top: 24px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface-2); }
+.workflow-technical > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; padding: 16px 20px; list-style: none; cursor: pointer; color: var(--ink); font: inherit; font-weight: 600; }
+.workflow-technical > summary::-webkit-details-marker { display: none; }
+.workflow-technical > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
+.workflow-technical__toggle { font-size: 24px; line-height: 1; }
+.workflow-technical[open] .workflow-technical__toggle { transform: rotate(45deg); }
+.workflow-technical__content { padding: 0 20px 20px; border-top: 1px solid var(--line); }
+.workflow-technical__content h3 { margin: 20px 0 8px; color: var(--ink); font-size: 17px; line-height: 1.4; font-weight: 600; }
+.workflow-technical__content p { margin: 0; max-width: 80ch; color: var(--ink-2); font-size: 15px; line-height: 1.7; overflow-wrap: anywhere; }
