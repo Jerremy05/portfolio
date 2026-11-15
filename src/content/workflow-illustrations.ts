@@ -1,6 +1,7 @@
 import { projectTechnical } from './project-technical'
 
 /** Client-friendly illustrations shared by the portfolio routes and standalone demos. */
+export const STANDALONE_THEME_PATH = '/styles/standalone-demo.css'
 export const WORKFLOW_VIEWER_PATH = '/scripts/illustration-viewer.js'
 export const WORKFLOW_STYLESHEET_PATH = '/styles/workflow-illustration.css'
 
@@ -108,7 +109,8 @@ export function withWorkflowIllustration(source: string, id: string): string {
         ${disclosure}
       </section>`
   return source
-    .replace('</head>', `    <link rel="stylesheet" href="${WORKFLOW_STYLESHEET_PATH}" />\n  </head>`)
+    .replace('<body>', '<body class="standalone-demo">')
+    .replace('</head>', `    <link rel="stylesheet" href="${WORKFLOW_STYLESHEET_PATH}" />\n    <link rel="stylesheet" href="${STANDALONE_THEME_PATH}" />\n    <script src="/scripts/demo-theme.js"></script>\n  </head>`)
     .replace('</header>', `</header>\n${section}`)
     .replace('</body>', `    <script src="${WORKFLOW_VIEWER_PATH}" async></script>\n  </body>`)
 }
