@@ -153,8 +153,6 @@ background: var(--surface);
   border-radius: 12px;
   object-fit: cover;
   background: #fff;
-  /* Lighting correction only: use the original photograph without facial regeneration. */
-  filter: brightness(1.025) contrast(1.035);
   box-shadow: 0 0 0 4px var(--surface);
   transition: box-shadow 180ms ease, transform var(--dur-press) ease-out;
 }
