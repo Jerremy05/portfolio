@@ -1,6 +1,6 @@
 import type { FocusEvent, MouseEvent, PointerEvent } from 'react'
 import { Link, NavLink, useLocation } from 'react-router'
-import { ArrowUpRight, Moon } from '@phosphor-icons/react'
+import { ArrowUpRight, MoonStars } from '@phosphor-icons/react'
 import { NAV_GROUPS, navEntries, navTarget, pages, type NavEntry } from '@/app/routes'
 import { useSectionInView } from '@/hooks/use-section-in-view'
 import { useTheme } from '@/hooks/use-theme'
@@ -178,7 +178,7 @@ export function SidebarNav({ collapsed, onNavigate, onHoverChange }: Props) {
               onClick={onThemeClick}
             >
               <span className="sb-item__icon">
-                <Moon size={20} weight={THEME_ID === hoverId ? 'fill' : 'regular'} aria-hidden />
+                <MoonStars size={20} weight={THEME_ID === hoverId ? 'fill' : 'regular'} aria-hidden />
               </span>
               <span className="sb-item__label sb-fade">Dark mode</span>
               <span className="sb-switch sb-fade" aria-hidden />

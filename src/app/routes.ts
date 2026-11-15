@@ -1,5 +1,5 @@
 import type { Icon } from '@phosphor-icons/react'
-import { Briefcase, Compass, Cube, Envelope, FileText, House, ShieldCheck, Stack, User } from '@phosphor-icons/react'
+import { SquaresFour, Compass, Cube, ChatCircleText, FileText, HouseLine, ShieldCheck, FlowArrow, IdentificationCard } from '@phosphor-icons/react'
 import { visibility } from '@/content/visibility'
 import { workCount } from '@/content/work'
 import { externalLinks, site } from '@/content/site'
@@ -63,7 +63,7 @@ export const pages: PageRoute[] = [
     label: 'Home',
     title: `${SUFFIX} | AI Automation Specialist`,
     description: 'AI-powered workflows that connect your tools, automate repetitive tasks, and improve lead follow-up and appointment booking.',
-    icon: House,
+    icon: HouseLine,
     group: 'menu',
   },
   {
@@ -74,7 +74,7 @@ export const pages: PageRoute[] = [
     label: 'Projects',
     title: `Work | ${SUFFIX}`,
     description: 'Explore AI agents, automation case studies, and HighLevel funnels.',
-    icon: Briefcase,
+    icon: SquaresFour,
     group: 'menu',
     badge: workCount,
     section: 'work',
@@ -87,7 +87,7 @@ export const pages: PageRoute[] = [
     label: 'Services',
     title: `Services | ${SUFFIX}`,
     description: 'AI assistants and agents, workflow automation, CRM, lead research, and content and document automation.',
-    icon: Stack,
+    icon: FlowArrow,
     group: 'menu',
     section: 'services',
   },
@@ -99,7 +99,7 @@ export const pages: PageRoute[] = [
     label: 'About',
     title: `About ${SUFFIX}`,
     description: 'Meet Jerremy and learn how he builds practical automations.',
-    icon: User,
+    icon: IdentificationCard,
     group: 'menu',
     section: 'about',
   },
@@ -133,7 +133,7 @@ export const pages: PageRoute[] = [
     label: 'Contact',
     title: `Contact | ${SUFFIX}`,
     description: 'Discuss your project or a task you want to automate.',
-    icon: Envelope,
+    icon: ChatCircleText,
     group: 'general',
     section: 'contact',
   },
