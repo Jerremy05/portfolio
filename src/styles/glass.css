@@ -2,7 +2,7 @@
    Background imagery supplies the theme color; the surface has no color gradient. */
 :root {
   --glass-fill: rgb(255 255 255 / .14);
-  --glass-edge: rgb(255 255 255 / 0.099);
+  --glass-edge: rgb(64 96 55 / .16);
   --glass-highlight: rgb(255 255 255 / 0.279);
   --glass-inner: rgb(255 255 255 / 0.108) 0 39px 56px -36px inset,
     rgb(255 255 255 / 0.162) 0 7px 11px -4px inset,
@@ -10,7 +10,7 @@
     rgb(235 251 222 / 0.099) 0 98px 100px -48px inset,
     rgb(255 255 255 / 0.081) 0 4px 18px inset,
     rgb(255 255 255 / 0.054) 0 1px 40px inset;
-  --glass-shadow: 0 14px 40px -24px rgb(29 61 33 / .24);
+  --glass-shadow: 0 2px 5px rgb(29 61 33 / .08), 0 10px 24px -10px rgb(29 61 33 / .22), 0 26px 48px -22px rgb(29 61 33 / .26);
 }
 :root[data-theme='dark'] {
   --glass-fill: rgb(225 244 214 / .035);
