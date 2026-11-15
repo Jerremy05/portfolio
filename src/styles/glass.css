@@ -1,8 +1,6 @@
-/* Liquid Glass-inspired surfaces: translucent material, curved reflections, and bright rims. */
+/* Clear glass: uniform translucent surfaces, background blur, and subtle edge reflections. */
 :root {
-  --glass-fill: rgb(245 250 241 / .72);
-  --glass-top: rgb(255 255 255 / .64);
-  --glass-bottom: rgb(210 229 201 / .08);
+  --glass-fill: rgb(255 255 255 / .62);
   --glass-edge: rgb(255 255 255 / .62);
   --glass-highlight: rgb(255 255 255 / .82);
   --glass-reflection: rgb(255 255 255 / .3);
@@ -10,9 +8,7 @@
   --glass-shadow: 0 5px 12px -6px rgb(30 65 37 / .16), 0 24px 55px -26px rgb(30 65 37 / .3);
 }
 :root[data-theme='dark'] {
-  --glass-fill: rgb(28 38 31 / .8);
-  --glass-top: rgb(232 246 226 / .17);
-  --glass-bottom: rgb(13 27 18 / .12);
+  --glass-fill: rgb(25 28 26 / .72);
   --glass-edge: rgb(225 244 216 / .23);
   --glass-highlight: rgb(246 255 240 / .38);
   --glass-reflection: rgb(236 250 230 / .07);
@@ -31,13 +27,9 @@
   .app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
   .app .ab__certificates .ab__cred,
   .app .case-study .panel {
-    background:
-      radial-gradient(ellipse at 0% 0%, var(--glass-top), transparent 52%),
-      radial-gradient(ellipse at 100% 100%, var(--glass-reflection), transparent 48%),
-      linear-gradient(135deg, transparent 25%, var(--glass-bottom) 75%),
-      var(--glass-fill);
-    -webkit-backdrop-filter: blur(24px) saturate(155%);
-    backdrop-filter: blur(24px) saturate(155%);
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: blur(24px) saturate(110%);
+    backdrop-filter: blur(24px) saturate(110%);
   }
 }
 /* The deck still lifts forward; the frost itself does not animate. */
@@ -51,8 +43,8 @@
   .app :is(.sb-panel, .wb__tile, .sv__card, .ct-booking, .ct-panel, .ct-plate, .sh__panel, .sh__link, .certificate-preview, .workflow-technical),
   .app .ab__certificates .ab__cred,
   .app .case-study .panel {
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(110%);
+    backdrop-filter: blur(14px) saturate(110%);
   }
 }
 @media (prefers-reduced-transparency: reduce), (forced-colors: active) {
