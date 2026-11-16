@@ -8,7 +8,8 @@
   color-scheme: light;
 
   /* Surfaces */
-  --bg: #F0F3E8;
+  --bg: #E4ECDD;
+  --background-veil: 74%;
   --surface: #F9FBF5;
   --surface-2: #E2EBDD;
   --surface-3: #CBDCC5;
@@ -94,6 +95,7 @@
 
   /* Surfaces */
   --bg: #171d18;
+  --background-veil: 84%;
   --surface: #222b23;
   --surface-2: #2d382e;
   --surface-3: #3b4839;
