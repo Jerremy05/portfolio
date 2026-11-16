@@ -48,14 +48,16 @@
   z-index: 1;
   margin: 0;
   max-width: 16ch;
+  font-family: var(--font-sans);
   font-size: clamp(28px, 3.7cqi, 48px);
-  font-weight: 650;
+  font-weight: 100;
+  text-transform: uppercase;
   line-height: 1.08;
   letter-spacing: -0.04em;
 }
 .ab__lead > span {
-  color: var(--ink-3);
-  font-weight: 300;
+  color: var(--ink);
+  font-weight: 700;
 }
 .ab__pic {
   position: absolute;
